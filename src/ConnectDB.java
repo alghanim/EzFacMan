@@ -14,8 +14,8 @@ import java.sql.SQLException;
  * @author Ali
  */
 public class ConnectDB {
-    private static final String UserName = "tud16508";
-    private static final String Password = "auze3Eih";
+    private static final String UserName = ""; // add your temple username
+    private static final String Password = "";// babyhuey password
     private static final String ConnectionString = 
             "jdbc:mysql://babyhuey.cis.temple.edu:3306/team4";
    
