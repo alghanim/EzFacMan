@@ -5,11 +5,7 @@
  */
 
 
-/*
- *Ali Al-Ghanim
- *CIS 4331
- *tud16508@temple.edu
- */
+
 public class building {
 
     private String building_name;
