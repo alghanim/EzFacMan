@@ -280,9 +280,6 @@
           <Color id="Default Cursor"/>
         </Property>
       </Properties>
-      <BindingProperties>
-        <BindingProperty name="foreground" source="jComboBox1" target="deptColorChooser" targetPath="foreground" updateStrategy="0" immediately="false"/>
-      </BindingProperties>
     </Component>
     <Component class="javax.swing.JMenuItem" name="changeDeptColor">
       <Properties>

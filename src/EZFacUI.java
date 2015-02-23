@@ -3,6 +3,7 @@ import java.awt.Color;
 import static java.awt.Color.white;
 import javax.swing.JFileChooser;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -485,8 +486,11 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
     mapChooser = new javax.swing.JFileChooser();
+    mapChooser.removeChoosableFileFilter(mapChooser.getAcceptAllFileFilter());
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & SVG", "pdf", "svg");
+    mapChooser.addChoosableFileFilter(filter);
     int returnVal = mapChooser.showOpenDialog(this);
-  //  mapChooser.setVisible(true);
+
     
     }//GEN-LAST:event_addNewMapActionPerformed
 
