@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 
-
-
 public class building {
 
     private String building_name;
@@ -35,7 +33,5 @@ public class building {
     public void setCampus_name(String campus_name) {
         this.campus_name = campus_name;
     }
-
-    
 
 }

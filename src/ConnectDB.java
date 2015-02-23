@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,21 +13,15 @@ import java.sql.SQLException;
  * @author Ali
  */
 public class ConnectDB {
-    private static final String UserName = ""; // add your temple username
-    private static final String Password = "";// babyhuey password
-    private static final String ConnectionString = 
-            "jdbc:mysql://babyhuey.cis.temple.edu:3306/team4";
-   
-    
-    public static Connection getConnection() throws SQLException, ClassNotFoundException
-   
-    {
-        
-        
+
+    private static final String ConnectionString
+            = "jdbc:mysql://babyhuey.cis.temple.edu:3306/team4";
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+
         Class.forName("com.mysql.jdbc.Driver");
-      // Setup the connection with the DB
-      return DriverManager
-          .getConnection(ConnectionString
-              , UserName,Password);
+        // Setup the connection with the DB
+        return DriverManager
+                .getConnection("jdbc:mysql://babyhuey.cis.temple.edu:3306/team4", LoginScreen.jTextField1.getText(), LoginScreen.jPasswordField1.getText());
     }
 }

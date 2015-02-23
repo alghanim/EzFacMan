@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  *
  * @author mikem_000
@@ -14,7 +15,7 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     public EZFacUI() {
         initComponents();
-        
+
         // first commit
     }
 
@@ -439,7 +440,7 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
         jFrame1.setVisible(true);
-        
+
     }//GEN-LAST:event_mainPanelMouseClicked
 
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
@@ -501,7 +502,7 @@ public class EZFacUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginScreen().setVisible(true);
-                new EZFacUI().setVisible(true);
+               
             }
         });
     }

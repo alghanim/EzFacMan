@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,6 +15,7 @@ import java.sql.Statement;
  * @author Ali
  */
 public class buildingManager {
+
     public static void displayAllBuildings() throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM building";
@@ -30,13 +30,13 @@ public class buildingManager {
             stmt = conn.createStatement();// creating the statement that is already has its value
             rs = stmt.executeQuery(sql); // excuting the statement
 
-           
-            while (rs.next()) { 
+            while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
+              
                 bf.append("campus name: " + rs.getString("campus_name") + "\n");
                 bf.append("building code: " + rs.getInt("building_code") + " \n");
                 bf.append("building name: " + rs.getString("building_name") + "\n");
-               
+
                 bf.append("---------------------");
 
                 System.out.println(bf.toString());
