@@ -1,3 +1,9 @@
+
+import java.awt.Color;
+import static java.awt.Color.white;
+import javax.swing.JFileChooser;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -51,10 +57,11 @@ public class EZFacUI extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jColorChooser1 = new javax.swing.JColorChooser();
+        deptColorChooser = new javax.swing.JColorChooser();
         changeDeptColor = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        mapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         buildingDropdown = new javax.swing.JComboBox();
         floorDropdown = new javax.swing.JComboBox();
@@ -238,11 +245,15 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        deptColorChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         changeDeptColor.setText("jMenuItem1");
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
+
+        mapChooser.setAccessory(addNewMap);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -322,7 +333,7 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGap(184, 184, 184)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(spreadsheetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
+                        .addComponent(spreadsheetPanel)
                         .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(326, 326, 326)
@@ -340,7 +351,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(occupancy)
                         .addGap(10, 10, 10)
-                        .addComponent(jComboBox4, 0, 114, Short.MAX_VALUE)
+                        .addComponent(jComboBox4, 0, 1, Short.MAX_VALUE)
                         .addGap(77, 77, 77))))
         );
         mainPanelLayout.setVerticalGroup(
@@ -386,6 +397,11 @@ public class EZFacUI extends javax.swing.JFrame {
         settingsButton.setText("Settings");
 
         modDeptColor.setText("Change Department Color");
+        modDeptColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modDeptColorActionPerformed(evt);
+            }
+        });
         settingsButton.add(modDeptColor);
 
         resetDeptColors.setText("Revert to Default Colors");
@@ -415,7 +431,7 @@ public class EZFacUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(636, 636, 636)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(33, 33, 33))
         );
@@ -468,7 +484,29 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
+    mapChooser = new javax.swing.JFileChooser();
+    int returnVal = mapChooser.showOpenDialog(this);
+  //  mapChooser.setVisible(true);
+    
     }//GEN-LAST:event_addNewMapActionPerformed
+
+    private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
+        deptColorChooser = new javax.swing.JColorChooser();
+                AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
+    for (int i = 0; i < oldPanels.length; i++) {
+      String clsName = oldPanels[i].getClass().getName();
+       if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
+        deptColorChooser.removeChooserPanel(oldPanels[i]);
+      } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
+        deptColorChooser.removeChooserPanel(oldPanels[i]);
+      }
+        else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
+        deptColorChooser.removeChooserPanel(oldPanels[i]);
+                }
+    }
+        Color newColor = deptColorChooser.showDialog(this,"Choose a Department Color",white);
+    
+    }//GEN-LAST:event_modDeptColorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,12 +553,12 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JComboBox campusDropdown;
     private javax.swing.JLabel campusLabel;
     private javax.swing.JMenuItem changeDeptColor;
+    private javax.swing.JColorChooser deptColorChooser;
     private javax.swing.JMenu fileButton;
     private javax.swing.JComboBox floorDropdown;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JMenu helpButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel10;
@@ -547,6 +585,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel mainPanel;
+    public javax.swing.JFileChooser mapChooser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem modDeptColor;
     private javax.swing.JLabel occupancy;
