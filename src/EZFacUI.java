@@ -271,10 +271,13 @@ public class EZFacUI extends javax.swing.JFrame {
         pdfMapChooser.addChoosableFileFilter(filter);
         pdfMapChooser.setAccessory(addNewMap);
 
-        quitConfirmation.setLocationRelativeTo(null);
+        quitConfirmation.setTitle("Quit Confirmation");
         quitConfirmation.setAlwaysOnTop(true);
         quitConfirmation.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         quitConfirmation.setMinimumSize(new java.awt.Dimension(500, 300));
+        quitConfirmation.setResizable(false);
+        quitConfirmation.setType(java.awt.Window.Type.POPUP);
+        quitConfirmation.setLocationRelativeTo(null);
 
         quitConfirmYes.setText("Yes");
         quitConfirmYes.addActionListener(new java.awt.event.ActionListener() {
@@ -405,6 +408,11 @@ public class EZFacUI extends javax.swing.JFrame {
         FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter("XLS", "xls");
         xlsMapChooser.addChoosableFileFilter(filter);
         xlsMapChooser.setAccessory(addNewMap);
+        xlsMapChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xlsMapChooserActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -665,12 +673,16 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
         // TODO add your handling code here:
-        int returnVal1 = pdfMapChooser.showOpenDialog(this);
+        int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapPDFActionPerformed
 
     private void addMapXLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapXLSActionPerformed
-        int returnVal2 = xlsMapChooser.showOpenDialog(this);
+        int returnVal2 = xlsMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapXLSActionPerformed
+
+    private void xlsMapChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xlsMapChooserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xlsMapChooserActionPerformed
 
     /**
      * @param args the command line arguments

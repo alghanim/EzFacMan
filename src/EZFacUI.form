@@ -308,6 +308,7 @@
     </Component>
     <Container class="javax.swing.JDialog" name="quitConfirmation">
       <Properties>
+        <Property name="title" type="java.lang.String" value="Quit Confirmation"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="18" style="0"/>
@@ -315,9 +316,13 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[500, 300]"/>
         </Property>
+        <Property name="resizable" type="boolean" value="false"/>
+        <Property name="type" type="java.awt.Window$Type" editor="org.netbeans.modules.form.editors.EnumEditor">
+          <Value id="POPUP"/>
+        </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="quitConfirmation.setLocationRelativeTo(null);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="quitConfirmation.setLocationRelativeTo(null);"/>
       </AuxValues>
 
       <Layout>
@@ -500,6 +505,9 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JFileChooser" name="xlsMapChooser">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xlsMapChooserActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="xlsMapChooser.removeChoosableFileFilter(xlsMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter(&quot;XLS&quot;, &quot;xls&quot;);&#xa;xlsMapChooser.addChoosableFileFilter(filter);&#xa;xlsMapChooser.setAccessory(addNewMap);"/>
       </AuxValues>
