@@ -62,19 +62,20 @@ public class EZFacUI extends javax.swing.JFrame {
         changeDeptColor = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        mapChooser = new javax.swing.JFileChooser();
+        pdfMapChooser = new javax.swing.JFileChooser();
         quitConfirmation = new javax.swing.JDialog();
         quitConfirmYes = new javax.swing.JButton();
         quitConfirmCancel = new javax.swing.JButton();
         quitConfirmQuestion = new javax.swing.JLabel();
         addNewMapFrame = new javax.swing.JFrame();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addMapPDF = new javax.swing.JButton();
+        addMapXLS = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        xlsMapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         buildingDropdown = new javax.swing.JComboBox();
         floorDropdown = new javax.swing.JComboBox();
@@ -265,8 +266,12 @@ public class EZFacUI extends javax.swing.JFrame {
 
         jMenuItem2.setText("jMenuItem2");
 
-        mapChooser.setAccessory(addNewMap);
+        pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
+        pdfMapChooser.addChoosableFileFilter(filter);
+        pdfMapChooser.setAccessory(addNewMap);
 
+        quitConfirmation.setLocationRelativeTo(null);
         quitConfirmation.setAlwaysOnTop(true);
         quitConfirmation.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         quitConfirmation.setMinimumSize(new java.awt.Dimension(500, 300));
@@ -313,9 +318,24 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGap(53, 53, 53))
         );
 
-        jButton1.setText("Choose a map (PDF)");
+        addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
+        addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 380));
+        addNewMapFrame.setResizable(false);
+        addNewMapFrame.setLocationRelativeTo(null);
 
-        jButton3.setText("Choose a spreadsheet (.xls)");
+        addMapPDF.setText("Choose a map (.pdf)");
+        addMapPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMapPDFActionPerformed(evt);
+            }
+        });
+
+        addMapXLS.setText("Choose a spreadsheet (.xls)");
+        addMapXLS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMapXLSActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Note: Make sure the map and spreadsheet correspond to the same floor");
 
@@ -334,39 +354,42 @@ public class EZFacUI extends javax.swing.JFrame {
             addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(addNewMapFrameLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addGap(95, 95, 95))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(198, 198, 198))
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(156, 156, 156)
+                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(jButton3))
+                        .addComponent(addMapXLS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(63, 63, 63))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
-                        .addComponent(jButton1))
+                        .addComponent(addMapPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(84, 84, 84))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(173, 173, 173)
-                        .addComponent(jLabel2))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(126, 126, 126))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(107, 107, 107)))
+                .addGap(234, 234, 234))
         );
         addNewMapFrameLayout.setVerticalGroup(
             addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jButton1)
+                .addComponent(addMapPDF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addComponent(jButton3)
+                .addComponent(addMapXLS)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addGap(36, 36, 36)
@@ -375,8 +398,13 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
+
+        xlsMapChooser.removeChoosableFileFilter(xlsMapChooser.getAcceptAllFileFilter());
+        FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter("XLS", "xls");
+        xlsMapChooser.addChoosableFileFilter(filter);
+        xlsMapChooser.setAccessory(addNewMap);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -601,12 +629,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-    mapChooser = new javax.swing.JFileChooser();
-    mapChooser.removeChoosableFileFilter(mapChooser.getAcceptAllFileFilter());
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
-    mapChooser.addChoosableFileFilter(filter);
-    int returnVal = mapChooser.showOpenDialog(this);
-
+   addNewMapFrame.setVisible(true);
     
     }//GEN-LAST:event_addNewMapActionPerformed
 
@@ -639,6 +662,15 @@ public class EZFacUI extends javax.swing.JFrame {
     private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
         quitConfirmation.setVisible (false);// TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmCancelActionPerformed
+
+    private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
+        // TODO add your handling code here:
+        int returnVal1 = pdfMapChooser.showOpenDialog(this);
+    }//GEN-LAST:event_addMapPDFActionPerformed
+
+    private void addMapXLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapXLSActionPerformed
+        int returnVal2 = xlsMapChooser.showOpenDialog(this);
+    }//GEN-LAST:event_addMapXLSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -679,6 +711,8 @@ public class EZFacUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutButton;
+    private javax.swing.JButton addMapPDF;
+    private javax.swing.JButton addMapXLS;
     private javax.swing.JMenuItem addNewMap;
     private javax.swing.JFrame addNewMapFrame;
     private javax.swing.JComboBox buildingDropdown;
@@ -691,9 +725,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JComboBox floorDropdown;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JMenu helpButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -715,10 +747,10 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel mainPanel;
-    public javax.swing.JFileChooser mapChooser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem modDeptColor;
     private javax.swing.JLabel occupancy;
+    private javax.swing.JFileChooser pdfMapChooser;
     private javax.swing.JMenuItem quitButton;
     private javax.swing.JButton quitConfirmCancel;
     private javax.swing.JLabel quitConfirmQuestion;
@@ -738,5 +770,6 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane spreadsheetPanel;
     private javax.swing.JTable spreadsheetTable;
     private javax.swing.JMenuItem userManualButton;
+    private javax.swing.JFileChooser xlsMapChooser;
     // End of variables declaration//GEN-END:variables
 }
