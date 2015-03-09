@@ -1,6 +1,10 @@
 
 import java.awt.Color;
+import static java.awt.Color.blue;
+import static java.awt.Color.green;
 import static java.awt.Color.white;
+import java.awt.event.WindowEvent;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -70,11 +74,11 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMapFrame = new javax.swing.JFrame();
         addMapPDF = new javax.swing.JButton();
         addMapCSV = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        cautionLabel = new javax.swing.JLabel();
         importButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        pdfName = new javax.swing.JLabel();
+        csvName = new javax.swing.JLabel();
         csvMapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         buildingDropdown = new javax.swing.JComboBox();
@@ -271,6 +275,11 @@ public class EZFacUI extends javax.swing.JFrame {
         FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter("PDF", "pdf");
         pdfMapChooser.addChoosableFileFilter(pdfFilter);
         pdfMapChooser.setAccessory(addNewMap);
+        pdfMapChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                pdfMapChooserPropertyChange(evt);
+            }
+        });
 
         quitConfirmation.setTitle("Quit Confirmation");
         quitConfirmation.setAlwaysOnTop(true);
@@ -326,6 +335,11 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 380));
         addNewMapFrame.setResizable(false);
         addNewMapFrame.setLocationRelativeTo(null);
+        addNewMapFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                addNewMapFrameWindowClosed(evt);
+            }
+        });
 
         addMapPDF.setText("Choose a map (.pdf)");
         addMapPDF.addActionListener(new java.awt.event.ActionListener() {
@@ -341,7 +355,7 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Note: Make sure the map and spreadsheet correspond to the same floor");
+        cautionLabel.setText("Note: Make sure the map and spreadsheet correspond to the same floor");
 
         importButton.setText("Import");
         importButton.addActionListener(new java.awt.event.ActionListener() {
@@ -357,10 +371,7 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("PDF Name");
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Spreadsheet Name");
+        csvName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout addNewMapFrameLayout = new javax.swing.GroupLayout(addNewMapFrame.getContentPane());
         addNewMapFrame.getContentPane().setLayout(addNewMapFrameLayout);
@@ -368,7 +379,7 @@ public class EZFacUI extends javax.swing.JFrame {
             addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cautionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(198, 198, 198))
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,11 +398,11 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGap(84, 84, 84))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(173, 173, 173)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pdfName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(126, 126, 126))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(csvName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(107, 107, 107)))
                 .addGap(234, 234, 234))
         );
@@ -401,13 +412,13 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addComponent(addMapPDF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(pdfName)
                 .addGap(29, 29, 29)
                 .addComponent(addMapCSV)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(csvName)
                 .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addComponent(cautionLabel)
                 .addGap(18, 18, 18)
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importButton)
@@ -422,6 +433,11 @@ public class EZFacUI extends javax.swing.JFrame {
         csvMapChooser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 csvMapChooserActionPerformed(evt);
+            }
+        });
+        csvMapChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                csvMapChooserPropertyChange(evt);
             }
         });
 
@@ -648,7 +664,9 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-   addNewMapFrame.setVisible(true);
+//    pdfName.setText(null);
+  //  csvName.setText(null);
+    addNewMapFrame.setVisible(true);
     
     }//GEN-LAST:event_addNewMapActionPerformed
 
@@ -700,8 +718,59 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_importButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        addNewMapFrame.setVisible (false);   
+        addNewMapFrame.dispatchEvent(new WindowEvent(addNewMapFrame, WindowEvent.WINDOW_CLOSING));
+       // pdfName.setText(null);
+     //   csvName.setText(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
+
+        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
+            JFileChooser pdfMapChooser = (JFileChooser)evt.getSource();
+            File oldFile = (File)evt.getOldValue();
+            File newFile = (File)evt.getNewValue();
+
+            // The selected file should always be the same as newFile
+            File curFile = pdfMapChooser.getSelectedFile();
+            pdfName.setText(curFile.getName());
+            pdfName.setForeground(blue);
+        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
+                evt.getPropertyName())) {
+            JFileChooser pdfMapChooser = (JFileChooser)evt.getSource();
+            File[] oldFiles = (File[])evt.getOldValue();
+            File[] newFiles = (File[])evt.getNewValue();
+
+            // Get list of selected files
+            // The selected files should always be the same as newFiles
+            File[] files = pdfMapChooser.getSelectedFiles();
+        }
+    }//GEN-LAST:event_pdfMapChooserPropertyChange
+
+    private void csvMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_csvMapChooserPropertyChange
+            if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
+        JFileChooser csvMapChooser = (JFileChooser)evt.getSource();
+        File csvOldFile = (File)evt.getOldValue();
+        File csvNewFile = (File)evt.getNewValue();
+
+        // The selected file should always be the same as newFile
+        File csvCurFile = csvMapChooser.getSelectedFile();
+        csvName.setText(csvCurFile.getName());
+        csvName.setForeground(blue);
+    } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
+            evt.getPropertyName())) {
+        JFileChooser csvMapChooser = (JFileChooser)evt.getSource();
+        File[] csvOldFiles = (File[])evt.getOldValue();
+        File[] csvNewFiles = (File[])evt.getNewValue();
+
+        // Get list of selected files
+        // The selected files should always be the same as newFiles
+        File[] csvFiles = csvMapChooser.getSelectedFiles();
+    }
+    }//GEN-LAST:event_csvMapChooserPropertyChange
+
+    private void addNewMapFrameWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_addNewMapFrameWindowClosed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addNewMapFrameWindowClosed
 
     /**
      * @param args the command line arguments
@@ -751,8 +820,10 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JComboBox campusDropdown;
     private javax.swing.JLabel campusLabel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel cautionLabel;
     private javax.swing.JMenuItem changeDeptColor;
     private javax.swing.JFileChooser csvMapChooser;
+    private javax.swing.JLabel csvName;
     private javax.swing.JColorChooser deptColorChooser;
     private javax.swing.JMenu fileButton;
     private javax.swing.JComboBox floorDropdown;
@@ -760,7 +831,6 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenu helpButton;
     private javax.swing.JButton importButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -770,11 +840,9 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -783,6 +851,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem modDeptColor;
     private javax.swing.JLabel occupancy;
     private javax.swing.JFileChooser pdfMapChooser;
+    private javax.swing.JLabel pdfName;
     private javax.swing.JMenuItem quitButton;
     private javax.swing.JButton quitConfirmCancel;
     private javax.swing.JLabel quitConfirmQuestion;
