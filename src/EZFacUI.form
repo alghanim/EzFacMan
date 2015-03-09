@@ -5,8 +5,9 @@
     <Container class="javax.swing.JFrame" name="roomPopUp">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[276, 236]"/>
+          <Dimension value="[300, 300]"/>
         </Property>
+        <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
       <Layout>
@@ -303,7 +304,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter filter = new FileNameExtensionFilter(&quot;PDF&quot;, &quot;pdf&quot;);&#xa;pdfMapChooser.addChoosableFileFilter(filter);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter(&quot;PDF&quot;, &quot;pdf&quot;);&#xa;pdfMapChooser.addChoosableFileFilter(pdfFilter);"/>
       </AuxValues>
     </Component>
     <Container class="javax.swing.JDialog" name="quitConfirmation">
@@ -407,13 +408,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Component id="jButton4" max="32767" attributes="0"/>
+                          <Component id="importButton" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="jButton5" max="32767" attributes="0"/>
+                          <Component id="cancelButton" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                          <Component id="addMapXLS" max="32767" attributes="0"/>
+                          <Component id="addMapCSV" max="32767" attributes="0"/>
                           <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -444,15 +445,15 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="addMapXLS" min="-2" max="-2" attributes="0"/>
+                  <Component id="addMapCSV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="importButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="96" max="32767" attributes="0"/>
               </Group>
@@ -468,12 +469,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapPDFActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="addMapXLS">
+        <Component class="javax.swing.JButton" name="addMapCSV">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Choose a spreadsheet (.xls)"/>
+            <Property name="text" type="java.lang.String" value="Choose a spreadsheet (.csv)"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapXLSActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapCSVActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -481,15 +482,21 @@
             <Property name="text" type="java.lang.String" value="Note: Make sure the map and spreadsheet correspond to the same floor"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="importButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Import"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -504,12 +511,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JFileChooser" name="xlsMapChooser">
+    <Component class="javax.swing.JFileChooser" name="csvMapChooser">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xlsMapChooserActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="csvMapChooserActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="xlsMapChooser.removeChoosableFileFilter(xlsMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter(&quot;XLS&quot;, &quot;xls&quot;);&#xa;xlsMapChooser.addChoosableFileFilter(filter);&#xa;xlsMapChooser.setAccessory(addNewMap);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="csvMapChooser.removeChoosableFileFilter(csvMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter csvFilter = new FileNameExtensionFilter(&quot;CSV&quot;, &quot;csv&quot;);&#xa;csvMapChooser.addChoosableFileFilter(csvFilter);&#xa;csvMapChooser.setAccessory(addNewMap);"/>
       </AuxValues>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar">

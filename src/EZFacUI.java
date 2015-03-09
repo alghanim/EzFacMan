@@ -69,13 +69,13 @@ public class EZFacUI extends javax.swing.JFrame {
         quitConfirmQuestion = new javax.swing.JLabel();
         addNewMapFrame = new javax.swing.JFrame();
         addMapPDF = new javax.swing.JButton();
-        addMapXLS = new javax.swing.JButton();
+        addMapCSV = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        importButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        xlsMapChooser = new javax.swing.JFileChooser();
+        csvMapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         buildingDropdown = new javax.swing.JComboBox();
         floorDropdown = new javax.swing.JComboBox();
@@ -97,7 +97,8 @@ public class EZFacUI extends javax.swing.JFrame {
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        roomPopUp.setMinimumSize(new java.awt.Dimension(276, 236));
+        roomPopUp.setMinimumSize(new java.awt.Dimension(300, 300));
+        roomPopUp.setResizable(false);
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -267,8 +268,8 @@ public class EZFacUI extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF", "pdf");
-        pdfMapChooser.addChoosableFileFilter(filter);
+        FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter("PDF", "pdf");
+        pdfMapChooser.addChoosableFileFilter(pdfFilter);
         pdfMapChooser.setAccessory(addNewMap);
 
         quitConfirmation.setTitle("Quit Confirmation");
@@ -333,18 +334,28 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        addMapXLS.setText("Choose a spreadsheet (.xls)");
-        addMapXLS.addActionListener(new java.awt.event.ActionListener() {
+        addMapCSV.setText("Choose a spreadsheet (.csv)");
+        addMapCSV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMapXLSActionPerformed(evt);
+                addMapCSVActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Note: Make sure the map and spreadsheet correspond to the same floor");
 
-        jButton4.setText("Import");
+        importButton.setText("Import");
+        importButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importButtonActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Cancel");
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("PDF Name");
 
@@ -363,12 +374,12 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(importButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(156, 156, 156)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(116, 116, 116)
-                        .addComponent(addMapXLS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addMapCSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(63, 63, 63))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
@@ -392,25 +403,25 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
-                .addComponent(addMapXLS)
+                .addComponent(addMapCSV)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(importButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
 
-        xlsMapChooser.removeChoosableFileFilter(xlsMapChooser.getAcceptAllFileFilter());
-        FileNameExtensionFilter xlsFilter = new FileNameExtensionFilter("XLS", "xls");
-        xlsMapChooser.addChoosableFileFilter(filter);
-        xlsMapChooser.setAccessory(addNewMap);
-        xlsMapChooser.addActionListener(new java.awt.event.ActionListener() {
+        csvMapChooser.removeChoosableFileFilter(csvMapChooser.getAcceptAllFileFilter());
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV", "csv");
+        csvMapChooser.addChoosableFileFilter(csvFilter);
+        csvMapChooser.setAccessory(addNewMap);
+        csvMapChooser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xlsMapChooserActionPerformed(evt);
+                csvMapChooserActionPerformed(evt);
             }
         });
 
@@ -676,13 +687,21 @@ public class EZFacUI extends javax.swing.JFrame {
         int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapPDFActionPerformed
 
-    private void addMapXLSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapXLSActionPerformed
-        int returnVal2 = xlsMapChooser.showOpenDialog(EZFacUI.this);
-    }//GEN-LAST:event_addMapXLSActionPerformed
+    private void addMapCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapCSVActionPerformed
+        int returnVal2 = csvMapChooser.showOpenDialog(EZFacUI.this);
+    }//GEN-LAST:event_addMapCSVActionPerformed
 
-    private void xlsMapChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xlsMapChooserActionPerformed
+    private void csvMapChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvMapChooserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_xlsMapChooserActionPerformed
+    }//GEN-LAST:event_csvMapChooserActionPerformed
+
+    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        addNewMapFrame.setVisible (false);   
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -723,23 +742,24 @@ public class EZFacUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutButton;
+    private javax.swing.JButton addMapCSV;
     private javax.swing.JButton addMapPDF;
-    private javax.swing.JButton addMapXLS;
     private javax.swing.JMenuItem addNewMap;
     private javax.swing.JFrame addNewMapFrame;
     private javax.swing.JComboBox buildingDropdown;
     private javax.swing.JLabel buildingLabel;
     private javax.swing.JComboBox campusDropdown;
     private javax.swing.JLabel campusLabel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JMenuItem changeDeptColor;
+    private javax.swing.JFileChooser csvMapChooser;
     private javax.swing.JColorChooser deptColorChooser;
     private javax.swing.JMenu fileButton;
     private javax.swing.JComboBox floorDropdown;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JMenu helpButton;
+    private javax.swing.JButton importButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -782,6 +802,5 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane spreadsheetPanel;
     private javax.swing.JTable spreadsheetTable;
     private javax.swing.JMenuItem userManualButton;
-    private javax.swing.JFileChooser xlsMapChooser;
     // End of variables declaration//GEN-END:variables
 }
