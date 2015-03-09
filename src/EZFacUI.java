@@ -35,7 +35,7 @@ public class EZFacUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
+        roomPopUp = new javax.swing.JFrame();
         roomInfoPopup = new javax.swing.JPanel();
         roomCampus = new javax.swing.JLabel();
         roomBuildingName = new javax.swing.JLabel();
@@ -62,11 +62,20 @@ public class EZFacUI extends javax.swing.JFrame {
         changeDeptColor = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        mapChooser = new javax.swing.JFileChooser();
+        pdfMapChooser = new javax.swing.JFileChooser();
         quitConfirmation = new javax.swing.JDialog();
         quitConfirmYes = new javax.swing.JButton();
         quitConfirmCancel = new javax.swing.JButton();
         quitConfirmQuestion = new javax.swing.JLabel();
+        addNewMapFrame = new javax.swing.JFrame();
+        addMapPDF = new javax.swing.JButton();
+        addMapCSV = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        importButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        csvMapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         buildingDropdown = new javax.swing.JComboBox();
         floorDropdown = new javax.swing.JComboBox();
@@ -88,7 +97,8 @@ public class EZFacUI extends javax.swing.JFrame {
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        jFrame1.setMinimumSize(new java.awt.Dimension(276, 236));
+        roomPopUp.setMinimumSize(new java.awt.Dimension(300, 300));
+        roomPopUp.setResizable(false);
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -234,17 +244,17 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+        javax.swing.GroupLayout roomPopUpLayout = new javax.swing.GroupLayout(roomPopUp.getContentPane());
+        roomPopUp.getContentPane().setLayout(roomPopUpLayout);
+        roomPopUpLayout.setHorizontalGroup(
+            roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomPopUpLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(roomInfoPopup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
+        roomPopUpLayout.setVerticalGroup(
+            roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomPopUpLayout.createSequentialGroup()
                 .addComponent(roomInfoPopup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -257,11 +267,18 @@ public class EZFacUI extends javax.swing.JFrame {
 
         jMenuItem2.setText("jMenuItem2");
 
-        mapChooser.setAccessory(addNewMap);
+        pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());
+        FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter("PDF", "pdf");
+        pdfMapChooser.addChoosableFileFilter(pdfFilter);
+        pdfMapChooser.setAccessory(addNewMap);
 
+        quitConfirmation.setTitle("Quit Confirmation");
         quitConfirmation.setAlwaysOnTop(true);
         quitConfirmation.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         quitConfirmation.setMinimumSize(new java.awt.Dimension(500, 300));
+        quitConfirmation.setResizable(false);
+        quitConfirmation.setType(java.awt.Window.Type.POPUP);
+        quitConfirmation.setLocationRelativeTo(null);
 
         quitConfirmYes.setText("Yes");
         quitConfirmYes.addActionListener(new java.awt.event.ActionListener() {
@@ -304,6 +321,109 @@ public class EZFacUI extends javax.swing.JFrame {
                     .addComponent(quitConfirmCancel))
                 .addGap(53, 53, 53))
         );
+
+        addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
+        addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 380));
+        addNewMapFrame.setResizable(false);
+        addNewMapFrame.setLocationRelativeTo(null);
+
+        addMapPDF.setText("Choose a map (.pdf)");
+        addMapPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMapPDFActionPerformed(evt);
+            }
+        });
+
+        addMapCSV.setText("Choose a spreadsheet (.csv)");
+        addMapCSV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMapCSVActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Note: Make sure the map and spreadsheet correspond to the same floor");
+
+        importButton.setText("Import");
+        importButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importButtonActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("PDF Name");
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Spreadsheet Name");
+
+        javax.swing.GroupLayout addNewMapFrameLayout = new javax.swing.GroupLayout(addNewMapFrame.getContentPane());
+        addNewMapFrame.getContentPane().setLayout(addNewMapFrameLayout);
+        addNewMapFrameLayout.setHorizontalGroup(
+            addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(198, 198, 198))
+            .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(importButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(156, 156, 156)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(addMapCSV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(63, 63, 63))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(addMapPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(84, 84, 84))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(126, 126, 126))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(107, 107, 107)))
+                .addGap(234, 234, 234))
+        );
+        addNewMapFrameLayout.setVerticalGroup(
+            addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(addMapPDF)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(29, 29, 29)
+                .addComponent(addMapCSV)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(importButton)
+                    .addComponent(cancelButton))
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+
+        csvMapChooser.removeChoosableFileFilter(csvMapChooser.getAcceptAllFileFilter());
+        FileNameExtensionFilter csvFilter = new FileNameExtensionFilter("CSV", "csv");
+        csvMapChooser.addChoosableFileFilter(csvFilter);
+        csvMapChooser.setAccessory(addNewMap);
+        csvMapChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                csvMapChooserActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -498,7 +618,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
-        jFrame1.setVisible(true);
+        roomPopUp.setVisible(true);
 
     }//GEN-LAST:event_mainPanelMouseClicked
 
@@ -528,18 +648,13 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-    mapChooser = new javax.swing.JFileChooser();
-    mapChooser.removeChoosableFileFilter(mapChooser.getAcceptAllFileFilter());
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("PDF & SVG", "pdf", "svg");
-    mapChooser.addChoosableFileFilter(filter);
-    int returnVal = mapChooser.showOpenDialog(this);
-
+   addNewMapFrame.setVisible(true);
     
     }//GEN-LAST:event_addNewMapActionPerformed
 
     private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
         deptColorChooser = new javax.swing.JColorChooser();
-                AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
+        AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
     for (int i = 0; i < oldPanels.length; i++) {
       String clsName = oldPanels[i].getClass().getName();
        if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
@@ -566,6 +681,27 @@ public class EZFacUI extends javax.swing.JFrame {
     private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
         quitConfirmation.setVisible (false);// TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmCancelActionPerformed
+
+    private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
+        // TODO add your handling code here:
+        int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
+    }//GEN-LAST:event_addMapPDFActionPerformed
+
+    private void addMapCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapCSVActionPerformed
+        int returnVal2 = csvMapChooser.showOpenDialog(EZFacUI.this);
+    }//GEN-LAST:event_addMapCSVActionPerformed
+
+    private void csvMapChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvMapChooserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_csvMapChooserActionPerformed
+
+    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        addNewMapFrame.setVisible (false);   
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -606,19 +742,25 @@ public class EZFacUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutButton;
+    private javax.swing.JButton addMapCSV;
+    private javax.swing.JButton addMapPDF;
     private javax.swing.JMenuItem addNewMap;
+    private javax.swing.JFrame addNewMapFrame;
     private javax.swing.JComboBox buildingDropdown;
     private javax.swing.JLabel buildingLabel;
     private javax.swing.JComboBox campusDropdown;
     private javax.swing.JLabel campusLabel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JMenuItem changeDeptColor;
+    private javax.swing.JFileChooser csvMapChooser;
     private javax.swing.JColorChooser deptColorChooser;
     private javax.swing.JMenu fileButton;
     private javax.swing.JComboBox floorDropdown;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JMenu helpButton;
+    private javax.swing.JButton importButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -628,17 +770,19 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel mainPanel;
-    public javax.swing.JFileChooser mapChooser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem modDeptColor;
     private javax.swing.JLabel occupancy;
+    private javax.swing.JFileChooser pdfMapChooser;
     private javax.swing.JMenuItem quitButton;
     private javax.swing.JButton quitConfirmCancel;
     private javax.swing.JLabel quitConfirmQuestion;
@@ -652,6 +796,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel roomFloor;
     private javax.swing.JPanel roomInfoPopup;
     private javax.swing.JLabel roomNumber;
+    private javax.swing.JFrame roomPopUp;
     private javax.swing.JLabel roomType;
     private javax.swing.JMenu settingsButton;
     private javax.swing.JScrollPane spreadsheetPanel;
