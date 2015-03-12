@@ -1,7 +1,6 @@
 
 import java.awt.Color;
 import static java.awt.Color.blue;
-import static java.awt.Color.green;
 import static java.awt.Color.white;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -63,9 +62,6 @@ public class EZFacUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         deptColorChooser = new javax.swing.JColorChooser();
-        changeDeptColor = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         pdfMapChooser = new javax.swing.JFileChooser();
         quitConfirmation = new javax.swing.JDialog();
         quitConfirmYes = new javax.swing.JButton();
@@ -264,12 +260,21 @@ public class EZFacUI extends javax.swing.JFrame {
         );
 
         deptColorChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        changeDeptColor.setText("jMenuItem1");
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenuItem2.setText("jMenuItem2");
+        AbstractColorChooserPanel[] panels=deptColorChooser.getChooserPanels();
+        for(AbstractColorChooserPanel p:panels){
+            String displayName=p.getDisplayName();
+            switch (displayName) {
+                case "HSV":
+                deptColorChooser.removeChooserPanel(p);
+                break;
+                case "HSL":
+                deptColorChooser.removeChooserPanel(p);
+                break;
+                case "CMYK":
+                deptColorChooser.removeChooserPanel(p);
+                break;
+            }
+        }
 
         pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());
         FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter("PDF", "pdf");
@@ -335,11 +340,6 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 380));
         addNewMapFrame.setResizable(false);
         addNewMapFrame.setLocationRelativeTo(null);
-        addNewMapFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                addNewMapFrameWindowClosed(evt);
-            }
-        });
 
         addMapPDF.setText("Choose a map (.pdf)");
         addMapPDF.addActionListener(new java.awt.event.ActionListener() {
@@ -768,10 +768,6 @@ public class EZFacUI extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_csvMapChooserPropertyChange
 
-    private void addNewMapFrameWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_addNewMapFrameWindowClosed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addNewMapFrameWindowClosed
-
     /**
      * @param args the command line arguments
      */
@@ -810,25 +806,81 @@ public class EZFacUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    /**
+    * The button to open the about page.
+    */
     private javax.swing.JMenuItem aboutButton;
+    /**
+    * The button to launch the .csv file chooser.
+    */
     private javax.swing.JButton addMapCSV;
+    /**
+    * The button to launch the .pdf file chooser.
+    */
     private javax.swing.JButton addMapPDF;
+    /**
+    * The button to add a new map.
+    */
     private javax.swing.JMenuItem addNewMap;
+    /**
+    * The frame to import a new map.
+    */
     private javax.swing.JFrame addNewMapFrame;
+    /**
+    * This dropdown box selects a building to show on spreadsheet display.
+    */
     private javax.swing.JComboBox buildingDropdown;
+    /**
+    * The label for the building selected from the dropdown box.
+    */
     private javax.swing.JLabel buildingLabel;
+    /**
+    * This dropdown box selects a campus to show on spreadsheet display.
+    */
     private javax.swing.JComboBox campusDropdown;
+    /**
+    * The label for the campus selected from the dropdown box.
+    */
     private javax.swing.JLabel campusLabel;
+    /**
+    * The button to exit the import new map frame.
+    */
     private javax.swing.JButton cancelButton;
+    /**
+    * The label that warns user to select files corresponding to same floor.
+    */
     private javax.swing.JLabel cautionLabel;
-    private javax.swing.JMenuItem changeDeptColor;
+    /**
+    * The file chooser to choose a .csv file.
+    */
     private javax.swing.JFileChooser csvMapChooser;
+    /**
+    * The label displays the name of the .csv file selected.
+    */
     private javax.swing.JLabel csvName;
+    /**
+    * The color chooser to select a new department color.
+    */
     private javax.swing.JColorChooser deptColorChooser;
+    /**
+    * The button for the file menu.
+    */
     private javax.swing.JMenu fileButton;
+    /**
+    * This dropdown box selects a floor to show on spreadsheet display.
+    */
     private javax.swing.JComboBox floorDropdown;
+    /**
+    * The label for the floor selected from the dropdown box.
+    */
     private javax.swing.JLabel floorLabel;
+    /**
+    * The button for the help menu.
+    */
     private javax.swing.JMenu helpButton;
+    /**
+    * The button to import the selected .pdf and .csv files.
+    */
     private javax.swing.JButton importButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
@@ -844,19 +896,50 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    /**
+    * This is the panel for the main window.
+    */
     private javax.swing.JPanel mainPanel;
+    /**
+    * The menu for the main window.
+    */
     private javax.swing.JMenuBar menuBar;
+    /**
+    * The button to modify department colors.
+    */
     private javax.swing.JMenuItem modDeptColor;
     private javax.swing.JLabel occupancy;
+    /**
+    * The file chooser that selects a .pdf.
+    */
     private javax.swing.JFileChooser pdfMapChooser;
+    /**
+    * The label displays name of the .pdf file selected.
+    */
     private javax.swing.JLabel pdfName;
+    /**
+    * The button to exit the program.
+    */
     private javax.swing.JMenuItem quitButton;
+    /**
+    * The "cancel" button to exit the program.
+    */
     private javax.swing.JButton quitConfirmCancel;
+    /**
+    * The label that displays the quit confirmation question.
+    */
     private javax.swing.JLabel quitConfirmQuestion;
+    /**
+    * The "yes" button to quit the program.
+    */
     private javax.swing.JButton quitConfirmYes;
+    /**
+    * The dialog confirms that the user wants to quit.
+    */
     private javax.swing.JDialog quitConfirmation;
+    /**
+    * The button to reset department colors. =
+    */
     private javax.swing.JMenuItem resetDeptColors;
     private javax.swing.JLabel roomBuildingName;
     private javax.swing.JLabel roomCampus;
@@ -867,9 +950,18 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel roomNumber;
     private javax.swing.JFrame roomPopUp;
     private javax.swing.JLabel roomType;
+    /**
+    * The button for the settings menu.
+    */
     private javax.swing.JMenu settingsButton;
+    /**
+    * The panel that conatins the spreadsheet.
+    */
     private javax.swing.JScrollPane spreadsheetPanel;
     private javax.swing.JTable spreadsheetTable;
+    /**
+    * The button to open the user manual.
+    */
     private javax.swing.JMenuItem userManualButton;
     // End of variables declaration//GEN-END:variables
 }
