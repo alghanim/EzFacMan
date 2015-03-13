@@ -281,21 +281,10 @@
           <Color id="Default Cursor"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JMenuItem" name="changeDeptColor">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JMenuItem" name="jMenuItem1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jMenuItem1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JMenuItem" name="jMenuItem2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jMenuItem2"/>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The color chooser to select a new department color.&#xa;*/"/>
+        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="AbstractColorChooserPanel[] panels=deptColorChooser.getChooserPanels();&#xa;        for(AbstractColorChooserPanel p:panels){&#xa;            String displayName=p.getDisplayName();&#xa;            switch (displayName) {&#xa;                case &quot;HSV&quot;:&#xa;                    deptColorChooser.removeChooserPanel(p);&#xa;                    break;&#xa;                case &quot;HSL&quot;:&#xa;                    deptColorChooser.removeChooserPanel(p);&#xa;                    break;&#xa;                case &quot;CMYK&quot;:&#xa;                    deptColorChooser.removeChooserPanel(p);&#xa;                    break;&#xa;            }&#xa;}"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JFileChooser" name="pdfMapChooser">
       <Properties>
@@ -303,7 +292,11 @@
           <Connection code="addNewMap" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="pdfMapChooserPropertyChange"/>
+      </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The file chooser that selects a .pdf.&#xa; */"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="pdfMapChooser.removeChoosableFileFilter(pdfMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter pdfFilter = new FileNameExtensionFilter(&quot;PDF&quot;, &quot;pdf&quot;);&#xa;pdfMapChooser.addChoosableFileFilter(pdfFilter);"/>
       </AuxValues>
     </Component>
@@ -323,6 +316,7 @@
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The dialog confirms that the user wants to quit.&#xa; */"/>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="quitConfirmation.setLocationRelativeTo(null);"/>
       </AuxValues>
 
@@ -366,6 +360,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitConfirmYesActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The &quot;yes&quot; button to quit the program.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="quitConfirmCancel">
           <Properties>
@@ -374,11 +371,17 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitConfirmCancelActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The &quot;cancel&quot; button to exit the program.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="quitConfirmQuestion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Are you sure you want to quit?"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label that displays the quit confirmation question.&#xa; */"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
@@ -393,6 +396,7 @@
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The frame to import a new map.&#xa; */"/>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="addNewMapFrame.setLocationRelativeTo(null);"/>
       </AuxValues>
 
@@ -401,7 +405,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="cautionLabel" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -424,12 +428,12 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                          <Component id="jLabel2" max="32767" attributes="0"/>
+                          <Component id="pdfName" max="32767" attributes="0"/>
                           <EmptySpace min="126" pref="126" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="jLabel3" max="32767" attributes="0"/>
+                          <Component id="csvName" max="32767" attributes="0"/>
                           <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -443,13 +447,13 @@
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   <Component id="addMapPDF" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="pdfName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="addMapCSV" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="csvName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="cautionLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="importButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -468,6 +472,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapPDFActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to launch the .pdf file chooser.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="addMapCSV">
           <Properties>
@@ -476,11 +483,17 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapCSVActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to launch the .csv file chooser.&#xa; */"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="cautionLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Note: Make sure the map and spreadsheet correspond to the same floor"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label that warns user to select files corresponding to same floor. &#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="importButton">
           <Properties>
@@ -489,6 +502,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="importButtonActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to import the selected .pdf and .csv files.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="cancelButton">
           <Properties>
@@ -497,34 +513,47 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to exit the import new map frame.&#xa; */"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="PDF Name"/>
-          </Properties>
+        <Component class="javax.swing.JLabel" name="pdfName">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label displays name of the .pdf file selected.&#xa; */"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="csvName">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Spreadsheet Name"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label displays the name of the .csv file selected.&#xa; */"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JFileChooser" name="csvMapChooser">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="csvMapChooserActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="csvMapChooserPropertyChange"/>
       </Events>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The file chooser to choose a .csv file. &#xa; */"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="csvMapChooser.removeChoosableFileFilter(csvMapChooser.getAcceptAllFileFilter());&#xa;FileNameExtensionFilter csvFilter = new FileNameExtensionFilter(&quot;CSV&quot;, &quot;csv&quot;);&#xa;csvMapChooser.addChoosableFileFilter(csvFilter);&#xa;csvMapChooser.setAccessory(addNewMap);"/>
       </AuxValues>
     </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The menu for the main window.&#xa; */"/>
+      </AuxValues>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button for the file menu.&#xa; */"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="addNewMap">
               <Properties>
@@ -533,6 +562,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addNewMapActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to add a new map. &#xa; */"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="quitButton">
               <Properties>
@@ -541,6 +573,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to exit the program.&#xa; */"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -548,6 +583,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Settings"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button for the settings menu.&#xa; */"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="modDeptColor">
               <Properties>
@@ -556,6 +594,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modDeptColorActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to modify department colors.&#xa; */"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="resetDeptColors">
               <Properties>
@@ -564,6 +605,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetDeptColorsActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to reset department colors. =&#xa; */"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -571,11 +615,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Help"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button for the help menu.&#xa; */"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="userManualButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="User Manual"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to open the user manual.&#xa; */"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="aboutButton">
               <Properties>
@@ -584,6 +634,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aboutButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to open the about page.&#xa; */"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -638,6 +691,9 @@
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mainPanelMouseClicked"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This is the panel for the main window.&#xa; */"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -707,6 +763,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buildingDropdownActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a building to show on spreadsheet display. &#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="floorDropdown">
           <Properties>
@@ -722,6 +781,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="floorDropdownActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a floor to show on spreadsheet display.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JComboBox" name="campusDropdown">
           <Properties>
@@ -737,6 +799,9 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campusDropdownActionPerformed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a campus to show on spreadsheet display.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="floorLabel">
           <Properties>
@@ -745,6 +810,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Floor"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label for the floor selected from the dropdown box.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="campusLabel">
           <Properties>
@@ -753,6 +821,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Campus"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label for the campus selected from the dropdown box.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="buildingLabel">
           <Properties>
@@ -761,9 +832,13 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Building"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The label for the building selected from the dropdown box.&#xa; */"/>
+          </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="spreadsheetPanel">
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The panel that conatins the spreadsheet.&#xa; */"/>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
 
