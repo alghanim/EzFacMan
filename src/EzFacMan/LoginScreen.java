@@ -1,4 +1,8 @@
+package EzFacMan;
 
+
+import databaseTables.buildingManager;
+import databaseTables.RoomsManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

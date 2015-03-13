@@ -1,3 +1,5 @@
+package databaseTables;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,16 +11,15 @@ import java.sql.Statement;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ali
  */
-public class floorsManager {
-     
-    public static void displayAllfloors() throws SQLException, ClassNotFoundException {
+public class departmentManager {
 
-        String sql = "SELECT * FROM floors";
+    public static void displayAllDepartments() throws SQLException, ClassNotFoundException {
+
+        String sql = "SELECT * FROM department";
 
         Connection conn = null;
         Statement stmt = null;
@@ -33,9 +34,9 @@ public class floorsManager {
             while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
 
-                bf.append("Floor name: " + rs.getString("floor_name") + "\n");
-                bf.append("Floor Code: " + rs.getInt("floor_code") + "\n");
-                bf.append("Building Code: " + rs.getInt("building_code") + "\n");
+                bf.append("Department name: " + rs.getString("FOAPAL_name") + "\n");
+                bf.append("Department code: " + rs.getString("FOAPAL_color") + "\n");
+                bf.append("Department color:" + rs.getLong("FOAPAL_code") + "\n");
 
                 bf.append("---------------------");
 

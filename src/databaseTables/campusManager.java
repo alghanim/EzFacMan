@@ -1,8 +1,11 @@
+package databaseTables;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,11 +16,11 @@ import java.sql.Statement;
  *
  * @author Ali
  */
-public class departmentManager {
+public class campusManager {
 
-    public static void displayAllDepartments() throws SQLException, ClassNotFoundException {
+    public static void displayAllCampuses() throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM department";
+        String sql = "SELECT * FROM campus";
 
         Connection conn = null;
         Statement stmt = null;
@@ -32,9 +35,8 @@ public class departmentManager {
             while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
 
-                bf.append("Department name: " + rs.getString("FOAPAL_name") + "\n");
-                bf.append("Department code: " + rs.getString("FOAPAL_color") + "\n");
-                bf.append("Department color:" + rs.getLong("FOAPAL_code") + "\n");
+                bf.append("Room Number: " + rs.getString("campus_name") + "\n");
+                bf.append("Room Number: " + rs.getString("campus_code") + "\n");
 
                 bf.append("---------------------");
 
@@ -46,4 +48,5 @@ public class departmentManager {
             System.err.println("SQL State: " + ex.getSQLState());
         }
     }
+
 }

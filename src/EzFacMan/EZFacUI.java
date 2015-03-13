@@ -1,3 +1,5 @@
+package EzFacMan;
+
 
 import java.awt.Color;
 import static java.awt.Color.blue;
@@ -321,7 +323,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -337,7 +339,6 @@ public class EZFacUI extends javax.swing.JFrame {
         );
 
         addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
-        addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 380));
         addNewMapFrame.setResizable(false);
         addNewMapFrame.setLocationRelativeTo(null);
 
