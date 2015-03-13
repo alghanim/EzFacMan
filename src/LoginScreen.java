@@ -103,6 +103,7 @@ public class LoginScreen extends javax.swing.JFrame {
          new EZFacUI().setVisible(true);
         try {
             buildingManager.displayAllBuildings();
+            RoomsManager.displayAllRooms();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

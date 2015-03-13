@@ -1,30 +1,24 @@
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  *
  * @author Ali
  */
-public class buildingManager {
-    
-    /**
-     * Display all the buildings that are stored in the database under building table
-     * @throws SQLException
-     * @throws ClassNotFoundException 
-     */
+public class floorsManager {
+     
+    public static void displayAllfloors() throws SQLException, ClassNotFoundException {
 
-    public static void displayAllBuildings() throws SQLException, ClassNotFoundException {
-
-        String sql = "SELECT * FROM building";
+        String sql = "SELECT * FROM floors";
 
         Connection conn = null;
         Statement stmt = null;
@@ -38,10 +32,10 @@ public class buildingManager {
 
             while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
-              
-                bf.append("campus name: " + rs.getString("campus_code") + "\n");
-                bf.append("building code: " + rs.getInt("building_code") + " \n");
-                bf.append("building name: " + rs.getString("building_name") + "\n");
+
+                bf.append("Floor name: " + rs.getString("floor_name") + "\n");
+                bf.append("Floor Code: " + rs.getInt("floor_code") + "\n");
+                bf.append("Building Code: " + rs.getInt("building_code") + "\n");
 
                 bf.append("---------------------");
 

@@ -22,6 +22,6 @@ public class ConnectDB {
         Class.forName("com.mysql.jdbc.Driver");
         // Setup the connection with the DB
         return DriverManager
-                .getConnection("jdbc:mysql://babyhuey.cis.temple.edu:3306/team4", LoginScreen.jTextField1.getText(), LoginScreen.jPasswordField1.getText());
+                .getConnection("jdbc:mysql://localhost:1234/team4", LoginScreen.jTextField1.getText(), LoginScreen.jPasswordField1.getText());
     }
 }
