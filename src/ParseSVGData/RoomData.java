@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Nick
  */
 public class RoomData {
-    ArrayList<Room> roomList;
+    public ArrayList<Room> roomList;
     
     public RoomData(ArrayList<RoomNumberData> rnData, ArrayList <PathData> pdata) {
         roomList = new ArrayList();

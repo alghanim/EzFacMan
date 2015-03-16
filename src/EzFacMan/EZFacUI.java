@@ -1,6 +1,9 @@
 package EzFacMan;
 
 
+import static ParseSVGData.ParseSVGData.test;
+import ParseSVGData.RoomData;
+import ParseSVGData.SVGParser;
 import java.awt.Color;
 import static java.awt.Color.blue;
 import static java.awt.Color.white;
@@ -21,7 +24,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author mikem_000
  */
 public class EZFacUI extends javax.swing.JFrame {
-
+    File selectedFile = null;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -747,7 +751,10 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_csvMapChooserActionPerformed
 
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        // TODO add your handling code here:
+        SVGParser parser = new SVGParser(selectedFile.getPath());        
+        RoomData rooms = parser.parse();
+        
+        test(rooms.roomList);
     }//GEN-LAST:event_importButtonActionPerformed
 /**
  * Closes the addNewMapFrame dialog box.
