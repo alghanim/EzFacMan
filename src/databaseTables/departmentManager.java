@@ -1,24 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package databaseTables;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Manage SQL statements to retrieve data from department table
  *
  * @author Ali
  */
-public class buildingManager {
+public class departmentManager {
 
-    public static void displayAllBuildings() throws SQLException, ClassNotFoundException {
+    /**
+     * Display all rows and columns from Departments table
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    public static void displayAllDepartments() throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM building";
+        String sql = "SELECT * FROM department";
 
         Connection conn = null;
         Statement stmt = null;
@@ -32,10 +34,10 @@ public class buildingManager {
 
             while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
-              
-                bf.append("campus name: " + rs.getString("campus_name") + "\n");
-                bf.append("building code: " + rs.getInt("building_code") + " \n");
-                bf.append("building name: " + rs.getString("building_name") + "\n");
+
+                bf.append("Department name: " + rs.getString("FOAPAL_name") + "\n");
+                bf.append("Department code: " + rs.getString("FOAPAL_color") + "\n");
+                bf.append("Department color:" + rs.getLong("FOAPAL_code") + "\n");
 
                 bf.append("---------------------");
 

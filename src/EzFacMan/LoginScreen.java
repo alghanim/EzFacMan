@@ -1,4 +1,8 @@
+package EzFacMan;
 
+
+import databaseTables.buildingManager;
+import databaseTables.RoomsManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,6 +107,7 @@ public class LoginScreen extends javax.swing.JFrame {
          new EZFacUI().setVisible(true);
         try {
             buildingManager.displayAllBuildings();
+            RoomsManager.displayAllRooms();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
