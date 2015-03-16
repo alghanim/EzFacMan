@@ -493,13 +493,28 @@ public class EZFacUI extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Rooms number", "Department Code", "Room Type Describtio", "Square footage"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         spreadsheetPanel.setViewportView(spreadsheetTable);
+        if (spreadsheetTable.getColumnModel().getColumnCount() > 0) {
+            spreadsheetTable.getColumnModel().getColumn(0).setHeaderValue("Rooms number");
+            spreadsheetTable.getColumnModel().getColumn(1).setHeaderValue("Department Code");
+            spreadsheetTable.getColumnModel().getColumn(2).setHeaderValue("Room Type Describtio");
+            spreadsheetTable.getColumnModel().getColumn(3).setHeaderValue("Square footage");
+        }
 
         occupancy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         occupancy.setText("Ocupancy");
@@ -611,7 +626,7 @@ public class EZFacUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(636, 636, 636)
+                .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(33, 33, 33))
         );
@@ -661,32 +676,31 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         quitConfirmation.setVisible(true);
-      //  System.exit(0);// TODO add your handling code here:
+        //  System.exit(0);// TODO add your handling code here:
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
 //    pdfName.setText(null);
-  //  csvName.setText(null);
-    addNewMapFrame.setVisible(true);
-    
+        //  csvName.setText(null);
+        addNewMapFrame.setVisible(true);
+
     }//GEN-LAST:event_addNewMapActionPerformed
 
     private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
         deptColorChooser = new javax.swing.JColorChooser();
         AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
-    for (int i = 0; i < oldPanels.length; i++) {
-      String clsName = oldPanels[i].getClass().getName();
-       if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
-        deptColorChooser.removeChooserPanel(oldPanels[i]);
-      } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
-        deptColorChooser.removeChooserPanel(oldPanels[i]);
-      }
-        else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
-        deptColorChooser.removeChooserPanel(oldPanels[i]);
-                }
-    }
-        Color newColor = deptColorChooser.showDialog(this,"Choose a Department Color",white);
-    
+        for (int i = 0; i < oldPanels.length; i++) {
+            String clsName = oldPanels[i].getClass().getName();
+            if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            }
+        }
+        Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
+
     }//GEN-LAST:event_modDeptColorActionPerformed
 
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
@@ -698,7 +712,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitConfirmYesActionPerformed
 
     private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
-        quitConfirmation.setVisible (false);// TODO add your handling code here:
+        quitConfirmation.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmCancelActionPerformed
 
     private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
@@ -721,15 +735,15 @@ public class EZFacUI extends javax.swing.JFrame {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         addNewMapFrame.dispatchEvent(new WindowEvent(addNewMapFrame, WindowEvent.WINDOW_CLOSING));
        // pdfName.setText(null);
-     //   csvName.setText(null);
+        //   csvName.setText(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
 
         if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
-            JFileChooser pdfMapChooser = (JFileChooser)evt.getSource();
-            File oldFile = (File)evt.getOldValue();
-            File newFile = (File)evt.getNewValue();
+            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
+            File oldFile = (File) evt.getOldValue();
+            File newFile = (File) evt.getNewValue();
 
             // The selected file should always be the same as newFile
             File curFile = pdfMapChooser.getSelectedFile();
@@ -737,9 +751,9 @@ public class EZFacUI extends javax.swing.JFrame {
             pdfName.setForeground(blue);
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
-            JFileChooser pdfMapChooser = (JFileChooser)evt.getSource();
-            File[] oldFiles = (File[])evt.getOldValue();
-            File[] newFiles = (File[])evt.getNewValue();
+            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
+            File[] oldFiles = (File[]) evt.getOldValue();
+            File[] newFiles = (File[]) evt.getNewValue();
 
             // Get list of selected files
             // The selected files should always be the same as newFiles
@@ -748,25 +762,25 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pdfMapChooserPropertyChange
 
     private void csvMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_csvMapChooserPropertyChange
-            if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
-        JFileChooser csvMapChooser = (JFileChooser)evt.getSource();
-        File csvOldFile = (File)evt.getOldValue();
-        File csvNewFile = (File)evt.getNewValue();
+        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
+            JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
+            File csvOldFile = (File) evt.getOldValue();
+            File csvNewFile = (File) evt.getNewValue();
 
-        // The selected file should always be the same as newFile
-        File csvCurFile = csvMapChooser.getSelectedFile();
-        csvName.setText(csvCurFile.getName());
-        csvName.setForeground(blue);
-    } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
-            evt.getPropertyName())) {
-        JFileChooser csvMapChooser = (JFileChooser)evt.getSource();
-        File[] csvOldFiles = (File[])evt.getOldValue();
-        File[] csvNewFiles = (File[])evt.getNewValue();
+            // The selected file should always be the same as newFile
+            File csvCurFile = csvMapChooser.getSelectedFile();
+            csvName.setText(csvCurFile.getName());
+            csvName.setForeground(blue);
+        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
+                evt.getPropertyName())) {
+            JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
+            File[] csvOldFiles = (File[]) evt.getOldValue();
+            File[] csvNewFiles = (File[]) evt.getNewValue();
 
         // Get list of selected files
-        // The selected files should always be the same as newFiles
-        File[] csvFiles = csvMapChooser.getSelectedFiles();
-    }
+            // The selected files should always be the same as newFiles
+            File[] csvFiles = csvMapChooser.getSelectedFiles();
+        }
     }//GEN-LAST:event_csvMapChooserPropertyChange
 
     /**
@@ -801,7 +815,7 @@ public class EZFacUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginScreen().setVisible(true);
-               
+
             }
         });
     }

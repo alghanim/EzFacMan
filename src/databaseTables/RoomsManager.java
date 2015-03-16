@@ -1,15 +1,24 @@
 package databaseTables;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Manages SQL statements to retrieve the data from the database
+ *
+ * @author Ali
+ */
 public class RoomsManager {
 
-
+    /**
+     * Display the All rows and columns in Rooms table from the database
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void displayAllRooms() throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM Rooms";
@@ -26,18 +35,18 @@ public class RoomsManager {
 
             while (rs.next()) {
                 StringBuffer bf = new StringBuffer();
-              
-               // bf.append("Room Number: " + rs.getString("room_num") + "\n");
-               Rooms R = new Rooms();
-               ArrayList<String> list = new ArrayList();
-               
-               for(int i = 0; i < list.size(); i++){
-               list.add(rs.getString("room_num"));
+
+                // bf.append("Room Number: " + rs.getString("room_num") + "\n");
+                Rooms R = new Rooms();
+                ArrayList<String> list = new ArrayList();
+
+                for (int i = 0; i < list.size(); i++) {
+                    list.add(rs.getString("room_num"));
              //  R.setRoom_num(rs.getString("room_num"));
-              
-                   list.toString();
-               }
-                
+
+                    list.toString();
+                }
+
                 bf.append("---------------------");
 
                 System.out.println(bf.toString());
@@ -49,5 +58,3 @@ public class RoomsManager {
         }
     }
 }
-
-

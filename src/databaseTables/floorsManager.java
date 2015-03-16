@@ -1,6 +1,5 @@
 package databaseTables;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,13 +10,19 @@ import java.sql.Statement;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
+ * Manage SQL statements to retrieve data from Floors table
  *
  * @author Ali
  */
 public class floorsManager {
-     
+
+    /**
+     * Display all rows and columns from floors table
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void displayAllfloors() throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM floors";

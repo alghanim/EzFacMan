@@ -1,23 +1,24 @@
 package databaseTables;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
+ * Manage SQL statements to get the data from Campus table
  *
  * @author Ali
  */
 public class campusManager {
 
+    /**
+     * Display all rows and columns from Campus table
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void displayAllCampuses() throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM campus";
