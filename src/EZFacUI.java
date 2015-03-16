@@ -16,7 +16,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author mikem_000
+ * @author Mike Manalo
+ * @author Nathan Jack
+ * 
  */
 public class EZFacUI extends javax.swing.JFrame {
 
@@ -664,12 +666,17 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-//    pdfName.setText(null);
-  //  csvName.setText(null);
+
     addNewMapFrame.setVisible(true);
     
     }//GEN-LAST:event_addNewMapActionPerformed
-
+/**
+ * Creates and opens new color chooser after user clicks on Modify Department Color button.
+ * <p>
+ * Code adapted from: http://www.java2s.com/Tutorial/Java/0240__Swing/RemovingaColorChooserPanelfromaJColorChooserDialog.htm.
+ * 
+ * @param evt an event listener that listens for user to click on Modify Department Color button 
+ */
     private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
         deptColorChooser = new javax.swing.JColorChooser();
         AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
@@ -691,20 +698,35 @@ public class EZFacUI extends javax.swing.JFrame {
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aboutButtonActionPerformed
-
+/**
+ * Exits the program.
+ * @param evt An event that is triggered when user clicks yes in quit confirmation dialog 
+ */
+    
     private void quitConfirmYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmYesActionPerformed
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmYesActionPerformed
-
+/**
+ * Closes the quit confirmation dialog box.
+ * @param evt an event listener that is triggered when user clicks cancel on quit confirmation dialog
+ */
     private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
         quitConfirmation.setVisible (false);// TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmCancelActionPerformed
 
+/**
+ * Opens the .pdf file chooser to select a new map.
+ * @param evt an event listener that is triggered when user clicks on button to select .pdf. 
+ */
     private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
         // TODO add your handling code here:
         int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapPDFActionPerformed
 
+/**
+ * Opens the .csv file chooser to select a new spreadsheet.
+ * @param evt an event listener that is triggered when user clicks on button to select .csv. 
+ */    
     private void addMapCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapCSVActionPerformed
         int returnVal2 = csvMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapCSVActionPerformed
@@ -716,13 +738,20 @@ public class EZFacUI extends javax.swing.JFrame {
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_importButtonActionPerformed
-
+/**
+ * Closes the addNewMapFrame dialog box.
+ * @param evt an event listener that is triggered when user clicks cancel on addNewMapFrame dialog
+ */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         addNewMapFrame.dispatchEvent(new WindowEvent(addNewMapFrame, WindowEvent.WINDOW_CLOSING));
-       // pdfName.setText(null);
-     //   csvName.setText(null);
-    }//GEN-LAST:event_cancelButtonActionPerformed
 
+    }//GEN-LAST:event_cancelButtonActionPerformed
+/**
+ * Changes pdfName label to correspond with the name of the .pdf that user previously selected.
+ * <p> 
+ * Code adapted from: http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield. 
+ * @param evt an event listener that listens for a property change in the pdfMapChooser 
+ */
     private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
 
         if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
@@ -745,7 +774,12 @@ public class EZFacUI extends javax.swing.JFrame {
             File[] files = pdfMapChooser.getSelectedFiles();
         }
     }//GEN-LAST:event_pdfMapChooserPropertyChange
-
+/**
+ * Changes csvName label to correspond with the name of the .csv that user previously selected.
+ * <p> 
+ * Code adapted from: http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield. 
+ * @param evt an event listener that listens for a property change in the csvMapChooser 
+ */
     private void csvMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_csvMapChooserPropertyChange
             if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
         JFileChooser csvMapChooser = (JFileChooser)evt.getSource();
