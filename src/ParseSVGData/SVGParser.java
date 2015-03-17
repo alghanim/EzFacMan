@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ParseSVGData;
 
 import java.io.FileInputStream;
@@ -19,12 +13,18 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author Nick
+ * Class to parse SVG floor map
+ * 
+ * @author Nick Killion
  */
 public class SVGParser {
     Document svg;
     
+    /**
+     * Constructor for SVGParser
+     * 
+     * @param filename String representing path to filename
+     */
     public SVGParser(String filename) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -43,6 +43,10 @@ public class SVGParser {
         }
     }
     
+    /**
+     * Parse the SVG file.
+     * @return RoomData object containing parsed data
+     */
     public RoomData parse() {
         ArrayList<RoomNumberData> rnData = parseRoomNumberData();
         ArrayList<PathData> pData = parsePathData(rnData);
@@ -50,6 +54,10 @@ public class SVGParser {
         return new RoomData(rnData, pData);
     }
         
+    /**
+     * Parses the SVG file to obtain Room Numbers (text and coordinates)
+     * @return ArrayList of RoomNumberData objects
+     */
     private ArrayList<RoomNumberData> parseRoomNumberData() {
         ArrayList<RoomNumberData> rnData = new ArrayList();
         NodeList roomNumText = svg.getElementsByTagName("text");
@@ -87,6 +95,12 @@ public class SVGParser {
         return rnData;
     }
     
+    /**
+     * Parse the SVG file to obtain path data
+     * 
+     * @param rnData ArrayList of RoomNumberData obtained from parseRoomNumberData method
+     * @return ArrayList of PathData objects representing all paths that might be rooms
+     */
     private ArrayList<PathData> parsePathData(ArrayList<RoomNumberData> rnData) {
         ArrayList<PathData> pData = new ArrayList();
         NodeList paths = svg.getElementsByTagName("path");

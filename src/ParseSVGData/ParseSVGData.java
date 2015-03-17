@@ -1,27 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ParseSVGData;
  
-
-import java.io.IOException;
-import javax.xml.parsers.*;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 /**
- *
+ * Driver class to test parsing functionality
+ * 
  * @author Nick Killion
  */
 public class ParseSVGData {
 
     /**
+     * Creates SVGParser Object, to test parsing methods
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -35,7 +25,11 @@ public class ParseSVGData {
         test(rooms.roomList);
     }
     
-    
+    /**
+     * Creates Test object, to test parsing
+     * 
+     * @param rList ArrayList of Room objects
+     */
     public static void test(ArrayList<Room> rList) {
         Test test = new Test(rList);
         test.start();

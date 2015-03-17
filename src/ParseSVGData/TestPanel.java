@@ -10,12 +10,28 @@ import java.util.Random;
 import javax.swing.JPanel;
 import java.awt.Font;
 
+/**
+ * Panel for output of SVG parsing test
+ * 
+ * @author Nick Killion
+ */
 class TestPanel extends JPanel {
     ArrayList<Room> rList;
     
+    /**
+     * Constructor for TestPanel
+     * 
+     * @param rList ArrayList of Room objects to be drawn
+     */
     public TestPanel(ArrayList<Room> rList) {
         this.rList = rList;
     }
+    
+    /**
+     * Performs the drawing of test data to test panel
+     * 
+     * @param g Graphics object 
+     */
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
@@ -72,6 +88,11 @@ class TestPanel extends JPanel {
         }
     }
 
+    /**
+     * Paints the Graphics object to the panel. Overridden method
+     * 
+     * @param g Graphics Object
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

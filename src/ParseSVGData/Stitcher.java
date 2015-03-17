@@ -1,27 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ParseSVGData;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Nick
+ * Class to 'stitch' paths together. After conversion to SVG, one room may be composed of several paths.
+ * <p>
+ * This class has methods to stitch these paths, so each room is made up of one PathData object
+ * 
+ * @author Nick Killion
  */
 public class Stitcher {
     private ArrayList<PathData> rawPaths;
     private ArrayList<PathData> stitchedPaths;
     private ArrayList<RoomNumberData> rnData;
     
+    /**
+     * Constructor for Stitcher
+     * 
+     * @param pd ArrayList of PathData objects representing rooms on a floor
+     * @param rnData ArrayList of RoomNumberData objects
+     */
     public Stitcher(ArrayList<PathData> pd, ArrayList<RoomNumberData> rnData) {
         rawPaths = pd;
         this.rnData = rnData;
         stitchedPaths = new ArrayList();
     }
     
+    /**
+     * Begins stitching paths. Base method for recursive stitch method
+     * 
+     * @return ArrayList representing stitched PathData
+     */
     public ArrayList<PathData> stitch() {
         int i = 0;
         while (rawPaths.size() > 0) {
@@ -32,6 +41,11 @@ public class Stitcher {
 
     }
 
+    /**
+     * Stitch paths. Recursive part of algorithm
+     * 
+     * @param path1 The current path, will be compared to all other paths to see if stitching needs to take place
+     */
     private void innerStitch(PathData path1) {
         int i, j, k;
         boolean needToStitch = false;
@@ -146,12 +160,28 @@ public class Stitcher {
         }
     }
     
-    //maybe better would be to check slope: more vertical lines: call overlapY
-    //                                      more horizontal lines: call overlapX
+    /**
+     * Checks whether line extent overlaps (If not, no stitching need take place)
+     * 
+     * @param p1 Point 1 of Path 1
+     * @param p2 Point 2 of Path 1
+     * @param p3 Point 1 of Path 2
+     * @param p4 Point 2 of Path 2
+     * @return 
+     */
     public boolean checkLineOverlap(PointData p1, PointData p2, PointData p3, PointData p4) {
         return checkLineOverlapX(p1, p2, p3, p4);
     }
 
+    /**
+     * Checks whether horizontal line extent overlaps (If not, no stitching need take place)
+     * 
+     * @param p1 Point 1 of Path 1
+     * @param p2 Point 2 of Path 1
+     * @param p3 Point 1 of Path 2
+     * @param p4 Point 2 of Path 2
+     * @return 
+     */
     public boolean checkLineOverlapY(PointData p1, PointData p2, PointData p3, PointData p4) {
         int path1MaxX = p1.x;
         int path1MinX = p2.x;
@@ -173,6 +203,15 @@ public class Stitcher {
         return true;
     }
 
+    /**
+     * Checks whether vertical line extent overlaps (If not, no stitching need take place)
+     * 
+     * @param p1 Point 1 of Path 1
+     * @param p2 Point 2 of Path 1
+     * @param p3 Point 1 of Path 2
+     * @param p4 Point 2 of Path 2
+     * @return 
+     */
     public boolean checkLineOverlapX(PointData p1, PointData p2, PointData p3, PointData p4) {
         int path1MaxY = p1.y;
         int path1MinY = p2.y;
@@ -194,6 +233,17 @@ public class Stitcher {
         return true;
     }
 
+    /**
+     * Performs the actual 'stitching' of paths, after needToStitch is determined
+     * 
+     * @param path1 PathData for first path that needs stitching
+     * @param p1 PointData for point 1 of path1's incident edge
+     * @param p2 PointData for point 2 of path1's incident edge
+     * @param path2 PathData for second path that needs stitching
+     * @param p3 PointData for point 1 of path2's incident edge
+     * @param p4 PointData for point 2 of path2's incident edge
+     * @return 
+     */
     private PathData stitchPaths(PathData path1, PointData p1, PointData p2,
             PathData path2, PointData p3, PointData p4) {
 

@@ -13,15 +13,13 @@ import javax.swing.JFileChooser;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
+ * User Interface class for EZ-Fac program.
  *
- * @author mikem_000
+ * @author Mike Manalo
+ * @author Nathan Jack
+ * @author Nick Killion
+ * 
  */
 public class EZFacUI extends javax.swing.JFrame {
     File selectedFile = null;
