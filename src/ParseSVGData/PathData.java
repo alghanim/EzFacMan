@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ParseSVGData;
+
 import java.util.ArrayList;
 import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.PathIterator;
 
 /**
- *
- * @author tud47465
+ * Class to store data for SVG paths.
+ * <p>
+ * Class also parses raw SVG path data
+ * 
+ * @author Nick Killion
  */
 public class PathData {
     
@@ -27,7 +25,15 @@ public class PathData {
     //list of absolute path coordinates
     ArrayList<PointData> points = new ArrayList();
     
-       
+    /**
+     * Constructor for PathData class.
+     * <p>
+     * Input is based on raw data read from SVG
+     * 
+     * @param pathCoords String representation of coordinates (SVG specification)
+     * @param color String hex value (eg "123DEF")
+     * @param id SVG path id
+     */
     public PathData(String pathCoords, String color, String id) {
         this.pathCoords = pathCoords;
         this.color = color;
@@ -40,7 +46,15 @@ public class PathData {
             }
         }
     }
-    
+    /**
+     * Constructor for PathData class.
+     * <p>
+     * Input is based on ArrayList of PointData
+     * 
+     * @param p ArrayList of PointData objects
+     * @param color String hex value (eg "123DEF")
+     * @param order True if points need to be arranged into clockwise order
+     */
     public PathData(ArrayList<PointData> p, String color, boolean order) {
         this.points = p;
         this.color = color;
@@ -55,18 +69,32 @@ public class PathData {
         }
     }
     
+    /**
+     * Default constructor for PathData
+     */
     public PathData() {
         pathCoords = new String();
         color = new String();
         id = new String();
     }
     
+    /**
+     * Determine whether two paths are equal
+     * 
+     * @param p The path to be tested for equality
+     * @return True if paths are equal, false if not
+     */
     @Override
     public boolean equals(Object p) {
         PathData pd = (PathData) p;
         return (pd.points.equals(this.points) && pd.color.equals(this.color));
     }
     
+    /**
+     * Returns a string representation of the path data
+     * 
+     * @return String representation of object
+     */
     public String toString() {
         String ret = "*******Printing Path Data***********\n";
         ret += "* Id: " + id;
@@ -78,6 +106,11 @@ public class PathData {
         return ret;
     }
     
+    /**
+     * Parses raw SVG path data.
+     * <p>
+     * Absolute coordinates, placed in clockwise order
+     */
     private void parsePathData() {
         int x,y;
         String[] instructions = pathCoords.split(" ");        
@@ -115,7 +148,11 @@ public class PathData {
         }
     }
     
-    //gets all points in cw order. needed for later computation
+    /**
+     * Puts points in clockwise order.
+     * <p>
+     * This is necessary for later computation
+     */
     private void makeClockwiseOrder() {
         PointData center = getCenter();
         for (int i = 1; i < points.size(); i++) {
@@ -128,7 +165,9 @@ public class PathData {
         }
     }
     
-    //returns average of all poitns. used as center to determine cw order
+    /**
+     * Returns average of all points. Used as center to determine clockwise order
+     */
     private PointData getCenter() {
         int x = 0;
         int y = 0;
@@ -144,7 +183,14 @@ public class PathData {
         return new PointData(x,y);
     }
     
-    //determines if a is clockwise-less-than b, using center
+    /**
+     * Determines whether PointData a is clockwise-less-than PointData b.
+     * 
+     * @param a PointData object
+     * @param b PointData object
+     * @param center The average of all points. Used as center of clockwise ordering
+     * @return True only if PointData a is clockwise-less-than PointData b
+     */
     private boolean lessThan(PointData a, PointData b, PointData center) {
         //cross product
         double det = (a.x - center.x) * (b.y - center.y) - (b.x - center.x) * (a.y - center.y);
@@ -153,8 +199,12 @@ public class PathData {
         return false;
     }
     
-    //return true if path surrounds given coordinates
-    //using awt methods, to simplify things
+    /**
+     * Return true if this path surrounds point given by x, y
+     * @param x int, x coordinate
+     * @param y int, y coordinate
+     * @return True only if this path surrounds point given by x, y
+     */
     public boolean contains(int x, int y) {
         Path2D.Double path = new Path2D.Double();
         path.moveTo(points.get(0).x, points.get(0).y);

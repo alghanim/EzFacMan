@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package ParseSVGData;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Nick
+ * Representation of an EZ-Fac Room.
+ * <p>
+ * Contains ArrayList of PointData, string color, string room number, and PointData of room number's coordinates
+ * 
+ * @author Nick Killion
  */
 public class Room {
     ArrayList<PointData> points;
@@ -18,6 +15,12 @@ public class Room {
     String roomNum;
     PointData roomNumCoords;
     
+    /**
+     * Constructor for Room
+     * 
+     * @param pd PathData object for room
+     * @param rnData roomNumberData object of room
+     */
     public Room(PathData pd, RoomNumberData rnData) {
         PathData path = pd;
         color = pd.color;
@@ -26,6 +29,11 @@ public class Room {
         roomNumCoords = rnData.coords;
     }
     
+    /**
+     * Returns string representation of Room
+     * 
+     * @return string representation of Room
+     */
     public String toString() {
         String ret = roomNum;
         
