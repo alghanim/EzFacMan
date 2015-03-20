@@ -12,6 +12,10 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * User Interface class for EZ-Fac program.
@@ -325,7 +329,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -609,6 +613,11 @@ public class EZFacUI extends javax.swing.JFrame {
         helpButton.setText("Help");
 
         userManualButton.setText("User Manual");
+        userManualButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userManualButtonActionPerformed(evt);
+            }
+        });
         helpButton.add(userManualButton);
 
         aboutButton.setText("About");
@@ -710,11 +719,25 @@ public class EZFacUI extends javax.swing.JFrame {
         Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
 
     }//GEN-LAST:event_modDeptColorActionPerformed
-
-    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aboutButtonActionPerformed
 /**
+ * Opens the About .pdf using the desktop's default program.
+ * <p>
+ * Code adapted from: http://www.javabeat.net/java-open-word-document/
+
+ * @param evt listens for the user to click the About menu option
+ */
+    private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
+                File aboutFile = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
+                aboutFile.setReadOnly();
+		try {
+			//Open the file using Desktop class
+			Desktop.getDesktop().open(aboutFile);
+		}catch (IOException exception){
+			exception.printStackTrace();
+		}
+    }//GEN-LAST:event_aboutButtonActionPerformed
+
+    /**
  * Exits the program.
  * @param evt an event that is triggered when user clicks yes in quit confirmation dialog 
  */    
@@ -818,6 +841,24 @@ public class EZFacUI extends javax.swing.JFrame {
             File[] csvFiles = csvMapChooser.getSelectedFiles();
         }
     }//GEN-LAST:event_csvMapChooserPropertyChange
+/**
+ * Opens the User Manual using the desktop's default program.
+ * <p>
+ * Code adapted from: http://www.javabeat.net/java-open-word-document/
+ * 
+ * @param evt listens for the user to click the User Manual menu option
+ */
+    private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
+
+		File file = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
+                file.setReadOnly();
+		try {
+			//Open the file using Desktop class
+			Desktop.getDesktop().open(file);
+		}catch (IOException exception){
+			exception.printStackTrace();
+		}
+    }//GEN-LAST:event_userManualButtonActionPerformed
 
     /**
      * @param args the command line arguments
