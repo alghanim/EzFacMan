@@ -3,6 +3,7 @@ package EzFacMan;
 
 import databaseTables.buildingManager;
 import databaseTables.RoomsManager;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,7 +49,11 @@ public class LoginScreen extends javax.swing.JFrame {
             }
         });
 
-        passwordField.setText("Password");
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
+            }
+        });
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,19 +109,33 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
-         new EZFacUI().setVisible(true);
+        login();
+
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            login();
+        }
+        
+    }//GEN-LAST:event_passwordFieldKeyPressed
+
+    private void login(){
+        
+        new EZFacUI().setVisible(true);
         try {
             buildingManager.displayAllBuildings();
             RoomsManager.displayAllRooms();
+            dispose();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-
-    }//GEN-LAST:event_loginButtonActionPerformed
-
+    }
+    
     /**
      * @param args the command line arguments
      */
