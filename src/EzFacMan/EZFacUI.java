@@ -15,6 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * User Interface class for EZ-Fac program.
@@ -720,9 +721,10 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_modDeptColorActionPerformed
 /**
  * Opens the About .pdf using the desktop's default program.
- * @param evt listens for the user to click the About menu option
  * <p>
  * Code adapted from: http://www.javabeat.net/java-open-word-document/
+
+ * @param evt listens for the user to click the About menu option
  */
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
                 File aboutFile = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
@@ -734,7 +736,8 @@ public class EZFacUI extends javax.swing.JFrame {
 			exception.printStackTrace();
 		}
     }//GEN-LAST:event_aboutButtonActionPerformed
-/**
+
+    /**
  * Exits the program.
  * @param evt an event that is triggered when user clicks yes in quit confirmation dialog 
  */    
@@ -840,9 +843,10 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_csvMapChooserPropertyChange
 /**
  * Opens the User Manual using the desktop's default program.
- * @param evt listens for the user to click the User Manual menu option
  * <p>
  * Code adapted from: http://www.javabeat.net/java-open-word-document/
+ * 
+ * @param evt listens for the user to click the User Manual menu option
  */
     private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
 
