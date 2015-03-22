@@ -4,6 +4,9 @@ package EzFacMan;
 import static ParseSVGData.ParseSVGData.test;
 import ParseSVGData.RoomData;
 import ParseSVGData.SVGParser;
+import databaseTables.Rooms;
+import databaseTables.RoomsManager;
+import databaseTables.floorsManager;
 import java.awt.Color;
 import static java.awt.Color.blue;
 import static java.awt.Color.white;
@@ -15,6 +18,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -48,26 +53,22 @@ public class EZFacUI extends javax.swing.JFrame {
 
         roomPopUp = new javax.swing.JFrame();
         roomInfoPopup = new javax.swing.JPanel();
-        roomCampus = new javax.swing.JLabel();
-        roomBuildingName = new javax.swing.JLabel();
-        roomFloor = new javax.swing.JLabel();
-        roomNumber = new javax.swing.JLabel();
-        roomFOAPAL = new javax.swing.JLabel();
-        roomFOAPALName = new javax.swing.JLabel();
-        roomType = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        roomTypedes = new javax.swing.JLabel();
+        roomFOAPALName = new javax.swing.JLabel();
+        roomFOAPAL = new javax.swing.JLabel();
+        roomNumber = new javax.swing.JLabel();
+        departmentName = new javax.swing.JLabel();
+        roomType = new javax.swing.JLabel();
+        roomArea = new javax.swing.JLabel();
+        departmentCode = new javax.swing.JLabel();
+        roomNum = new javax.swing.JLabel();
+        roomFloor = new javax.swing.JLabel();
+        roomBuildingName = new javax.swing.JLabel();
+        roomCampus = new javax.swing.JLabel();
+        campusCode = new javax.swing.JLabel();
+        buildingName = new javax.swing.JLabel();
+        floorName = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         deptColorChooser = new javax.swing.JColorChooser();
         pdfMapChooser = new javax.swing.JFileChooser();
@@ -101,58 +102,63 @@ public class EZFacUI extends javax.swing.JFrame {
         settingsButton = new javax.swing.JMenu();
         modDeptColor = new javax.swing.JMenuItem();
         resetDeptColors = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         helpButton = new javax.swing.JMenu();
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        roomPopUp.setMinimumSize(new java.awt.Dimension(300, 300));
-        roomPopUp.setResizable(false);
+        roomPopUp.setMinimumSize(new java.awt.Dimension(500, 500));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
-        roomCampus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        roomCampus.setText("Campus: ");
+        javax.swing.GroupLayout roomInfoPopupLayout = new javax.swing.GroupLayout(roomInfoPopup);
+        roomInfoPopup.setLayout(roomInfoPopupLayout);
+        roomInfoPopupLayout.setHorizontalGroup(
+            roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        roomInfoPopupLayout.setVerticalGroup(
+            roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
-        roomBuildingName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        roomBuildingName.setText("Building Name: ");
+        jLabel5.setText("Room Area: ");
 
-        roomFloor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        roomFloor.setText("Floor: ");
+        roomTypedes.setText("Room Type: ");
+
+        roomFOAPALName.setText("FOAPAL Name: ");
+
+        roomFOAPAL.setText("FOAPAL: ");
 
         roomNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         roomNumber.setText("Room Number: ");
 
-        roomFOAPAL.setText("FOAPAL: ");
+        departmentName.setText("CHP:Ctr for Intergenerati ");
 
-        roomFOAPALName.setText("FOAPAL Name: ");
+        roomType.setText("Office-Administration ");
 
-        roomType.setText("Room Type: ");
+        roomArea.setText("129 ");
 
-        jLabel5.setText("Room Area: ");
+        departmentCode.setText("1000000920001 ");
 
-        jLabel10.setText("Action Date: ");
+        roomNum.setText("00431");
 
-        jLabel12.setText("Action Type: ");
+        roomFloor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        roomFloor.setText("Floor: ");
 
-        jLabel23.setText("MC");
+        roomBuildingName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        roomBuildingName.setText("Building Name: ");
 
-        jLabel13.setText("Ritter Hall Annex");
+        roomCampus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        roomCampus.setText("Campus: ");
 
-        jLabel19.setText("Fourth Floor");
+        campusCode.setText("MC");
 
-        jLabel20.setText("00431");
+        buildingName.setText("Ritter Hall Annex");
 
-        jLabel21.setText("1000000920001 ");
-
-        jLabel14.setText("CHP:Ctr for Intergenerati ");
-
-        jLabel16.setText("Office-Administration ");
-
-        jLabel15.setText("129 ");
-
-        jLabel17.setText("11/14 ");
-
-        jLabel18.setText("CHG FOP ");
+        floorName.setText("Fourth Floor");
 
         jButton2.setText("Select Color");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -161,110 +167,107 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout roomInfoPopupLayout = new javax.swing.GroupLayout(roomInfoPopup);
-        roomInfoPopup.setLayout(roomInfoPopupLayout);
-        roomInfoPopupLayout.setHorizontalGroup(
-            roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomInfoPopupLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(roomInfoPopupLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(roomInfoPopupLayout.createSequentialGroup()
-                        .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel10)
-                            .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(roomType)
-                                    .addComponent(roomFOAPALName)
-                                    .addComponent(roomFOAPAL)
-                                    .addGroup(roomInfoPopupLayout.createSequentialGroup()
-                                        .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(roomFloor)
-                                            .addComponent(roomCampus)
-                                            .addComponent(roomBuildingName))
-                                        .addGap(1, 1, 1)))
-                                .addComponent(roomNumber)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(roomInfoPopupLayout.createSequentialGroup()
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        roomInfoPopupLayout.setVerticalGroup(
-            roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roomInfoPopupLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomCampus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomBuildingName)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomNumber)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomFOAPAL)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomFOAPALName)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomType)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(roomInfoPopupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout roomPopUpLayout = new javax.swing.GroupLayout(roomPopUp.getContentPane());
         roomPopUp.getContentPane().setLayout(roomPopUpLayout);
         roomPopUpLayout.setHorizontalGroup(
             roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomPopUpLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(roomInfoPopup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(roomPopUpLayout.createSequentialGroup()
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(roomFOAPALName, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(departmentName, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(430, 430, 430)
+                            .addComponent(roomInfoPopup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomCampus)
+                            .addGap(84, 84, 84)
+                            .addComponent(campusCode, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomBuildingName)
+                            .addGap(42, 42, 42)
+                            .addComponent(buildingName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomFloor)
+                            .addGap(102, 102, 102)
+                            .addComponent(floorName, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomNumber)
+                            .addGap(47, 47, 47)
+                            .addComponent(roomNum, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomFOAPAL)
+                            .addGap(81, 81, 81)
+                            .addComponent(departmentCode, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(roomTypedes)
+                            .addGap(60, 60, 60)
+                            .addComponent(roomType, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(12, 12, 12)
+                            .addComponent(jLabel5)
+                            .addGap(62, 62, 62)
+                            .addComponent(roomArea, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(roomPopUpLayout.createSequentialGroup()
+                            .addGap(311, 311, 311)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 91, Short.MAX_VALUE))
         );
         roomPopUpLayout.setVerticalGroup(
             roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomPopUpLayout.createSequentialGroup()
+            .addGroup(roomPopUpLayout.createSequentialGroup()
                 .addComponent(roomInfoPopup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roomCampus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(campusCode)))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(roomBuildingName))
+                    .addComponent(buildingName))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(roomFloor))
+                    .addComponent(floorName))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(roomNumber))
+                    .addComponent(roomNum))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roomFOAPAL)
+                    .addComponent(departmentCode))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roomFOAPALName)
+                    .addComponent(departmentName))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(roomTypedes)
+                    .addComponent(roomType))
+                .addGap(6, 6, 6)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(roomArea))
+                .addGap(55, 55, 55)
+                .addComponent(jButton2))
         );
 
         deptColorChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -329,7 +332,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -610,6 +613,21 @@ public class EZFacUI extends javax.swing.JFrame {
 
         menuBar.add(settingsButton);
 
+        jMenu1.setText("Search");
+
+        jMenuItem1.setText("by Room Number");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("by Comment");
+        jMenu1.add(jMenuItem2);
+
+        menuBar.add(jMenu1);
+
         helpButton.setText("Help");
 
         userManualButton.setText("User Manual");
@@ -661,6 +679,28 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
+       
+       
+       
+       try {
+         
+           Rooms RoomsObject = RoomsManager.displayCertainRooms();
+           
+             roomNum.setText(RoomsObject.getRoom_num());
+             departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
+             roomType.setText(RoomsObject.getRoom_type_des());
+             floorName.setText(RoomsObject.getFloor_name());
+             departmentName.setText(RoomsObject.getFOAPAL_name());
+           
+             
+             
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
         roomPopUp.setVisible(true);
 
     }//GEN-LAST:event_mainPanelMouseClicked
@@ -668,10 +708,6 @@ public class EZFacUI extends javax.swing.JFrame {
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buildingDropdownActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
@@ -860,42 +896,26 @@ public class EZFacUI extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_userManualButtonActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         SearchPanel S = null;
+        try {
+            S = new SearchPanel();
+        } catch (SQLException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         S.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EZFacUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EZFacUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EZFacUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EZFacUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginScreen().setVisible(true);
-
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     /**
@@ -926,6 +946,8 @@ public class EZFacUI extends javax.swing.JFrame {
     * The label for the building selected from the dropdown box.
     */
     private javax.swing.JLabel buildingLabel;
+    private javax.swing.JLabel buildingName;
+    private javax.swing.JLabel campusCode;
     /**
     * This dropdown box selects a campus to show on spreadsheet display.
     */
@@ -950,6 +972,8 @@ public class EZFacUI extends javax.swing.JFrame {
     * The label displays the name of the .csv file selected.
     */
     private javax.swing.JLabel csvName;
+    private javax.swing.JLabel departmentCode;
+    public static javax.swing.JLabel departmentName;
     /**
     * The color chooser to select a new department color.
     */
@@ -966,6 +990,7 @@ public class EZFacUI extends javax.swing.JFrame {
     * The label for the floor selected from the dropdown box.
     */
     private javax.swing.JLabel floorLabel;
+    private javax.swing.JLabel floorName;
     /**
     * The button for the help menu.
     */
@@ -975,19 +1000,10 @@ public class EZFacUI extends javax.swing.JFrame {
     */
     private javax.swing.JButton importButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     /**
     * This is the panel for the main window.
     */
@@ -1033,15 +1049,18 @@ public class EZFacUI extends javax.swing.JFrame {
     * The button to reset department colors. =
     */
     private javax.swing.JMenuItem resetDeptColors;
+    private javax.swing.JLabel roomArea;
     private javax.swing.JLabel roomBuildingName;
     private javax.swing.JLabel roomCampus;
     private javax.swing.JLabel roomFOAPAL;
     private javax.swing.JLabel roomFOAPALName;
     private javax.swing.JLabel roomFloor;
     private javax.swing.JPanel roomInfoPopup;
+    private javax.swing.JLabel roomNum;
     private javax.swing.JLabel roomNumber;
     private javax.swing.JFrame roomPopUp;
     private javax.swing.JLabel roomType;
+    private javax.swing.JLabel roomTypedes;
     /**
     * The button for the settings menu.
     */

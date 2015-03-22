@@ -33,6 +33,6 @@ public class ConnectDB {
         Class.forName("com.mysql.jdbc.Driver");
 
         return DriverManager
-                .getConnection("jdbc:mysql://localhost:1234/team4", LoginScreen.jTextField1.getText(), LoginScreen.jPasswordField1.getText());
+                .getConnection("jdbc:mysql://localhost:1234/team4", LoginScreen.usernameField.getText(), LoginScreen.passwordField.getText());
     }
 }

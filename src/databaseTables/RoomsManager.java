@@ -1,10 +1,13 @@
 package databaseTables;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
+import EzFacMan.EZFacUI;
 
 /**
  * Manages SQL statements to retrieve the data from the database
@@ -19,42 +22,53 @@ public class RoomsManager {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public static void displayAllRooms() throws SQLException, ClassNotFoundException {
+    public static Rooms displayCertainRooms() throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM Rooms";
+        String sql = "select building_code,room_num,Rooms.FOAPAL_code,room_type_des,"
+                    + "room_area_sqft,comments, department.FOAPAL_name from Rooms "
+                    + "inner join department on Rooms.FOAPAL_code = department.FOAPAL_code"
+                + " where room_num = 'P102A' and building_code = 48";
 
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
+        Scanner s = new Scanner(System.in);
+       // String rNumber = s.next();
+       // int bCode = s.nextInt();
 
         try {
 
             conn = ConnectDB.getConnection();// creating the connection
-            stmt = conn.createStatement();// creating the statement that is already has its value
-            rs = stmt.executeQuery(sql); // excuting the statement
+            pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
+         //   pstmt.setString(1, rNumber);
+         //   pstmt.setInt(2, bCode);
+            rs = pstmt.executeQuery(); // excuting the statement
 
-            while (rs.next()) {
-                StringBuffer bf = new StringBuffer();
+            if (rs.next()) {
 
-                // bf.append("Room Number: " + rs.getString("room_num") + "\n");
                 Rooms R = new Rooms();
-                ArrayList<String> list = new ArrayList();
+                department d = new department();
 
-                for (int i = 0; i < list.size(); i++) {
-                    list.add(rs.getString("room_num"));
-             //  R.setRoom_num(rs.getString("room_num"));
+                R.setRoom_num(rs.getString("room_num"));
+                R.setRoom_area_sqft(rs.getInt("room_area_sqft"));
+                R.setBuilding_code(rs.getInt("building_code"));
+                R.setFOAPAL_code(rs.getLong("FOAPAL_code"));
+                R.setRoom_type_des(rs.getString("room_type_des"));
+                R.setFOAPAL_name(rs.getString("FOAPAL_name"));
 
-                    list.toString();
-                }
+               
 
-                bf.append("---------------------");
-
-                System.out.println(bf.toString());
+                return R;
+            } else {
+                return null;
             }
-        } catch (SQLException ex) {
-            System.err.println("Error Message: " + ex.getMessage());
-            System.err.println("Error Code: " + ex.getErrorCode());
-            System.err.println("SQL State: " + ex.getSQLState());
+        } catch (SQLException e) {
+            System.err.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
         }
     }
 }

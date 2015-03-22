@@ -1,5 +1,7 @@
 package databaseTables;
 
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,6 +12,15 @@ public class building {
     private String building_name;
     private int building_code;
     private String campus_name;
+    private ArrayList allbuildings = new ArrayList<String>();
+
+    public ArrayList getAllbuildings() {
+        return allbuildings;
+    }
+
+    public void setAllbuildings(ArrayList allbuildings) {
+        this.allbuildings = allbuildings;
+    }
 
     /**
      *

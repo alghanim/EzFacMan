@@ -8,6 +8,15 @@ public class Rooms {
     private Long FOAPAL_code;
     private String room_type_des;
     private int room_area_sqft;
+    private String FOAPAL_name;
+
+    public String getFOAPAL_name() {
+        return FOAPAL_name;
+    }
+
+    public void setFOAPAL_name(String FOAPAL_name) {
+        this.FOAPAL_name = FOAPAL_name;
+    }
 
     /**
      * get the Room number

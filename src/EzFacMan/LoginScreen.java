@@ -1,6 +1,7 @@
 package EzFacMan;
 
 
+import databaseTables.Rooms;
 import databaseTables.buildingManager;
 import databaseTables.RoomsManager;
 import java.awt.event.KeyEvent;
@@ -109,31 +110,35 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         
-        login();
+        try {
+            login();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
 
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            login();
+            try {
+                login();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }//GEN-LAST:event_passwordFieldKeyPressed
 
-    private void login(){
+    private void login() throws SQLException, ClassNotFoundException{
         
-        new EZFacUI().setVisible(true);
-        try {
-            buildingManager.displayAllBuildings();
-            RoomsManager.displayAllRooms();
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+        EZFacUI ez = new EZFacUI();
+        ez.setVisible(true);
+        dispose();
     }
     
     /**

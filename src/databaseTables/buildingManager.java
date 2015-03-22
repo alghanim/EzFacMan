@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,9 +25,10 @@ public class buildingManager {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public static void displayAllBuildings() throws SQLException, ClassNotFoundException {
+    public static building displayAllBuildings() throws SQLException, ClassNotFoundException {
 
-        String sql = "SELECT * FROM building";
+        building b = new building();
+        String sql = "select distinct building_name from building";
 
         Connection conn = null;
         Statement stmt = null;
@@ -37,22 +39,19 @@ public class buildingManager {
             conn = ConnectDB.getConnection();// creating the connection
             stmt = conn.createStatement();// creating the statement that is already has its value
             rs = stmt.executeQuery(sql); // excuting the statement
-
+ArrayList list = new ArrayList<String>();
             while (rs.next()) {
-                StringBuffer bf = new StringBuffer();
 
-                bf.append("campus name: " + rs.getString("campus_code") + "\n");
-                bf.append("building code: " + rs.getInt("building_code") + " \n");
-                bf.append("building name: " + rs.getString("building_name") + "\n");
+                list.add(rs.getString("building_name"));
 
-                bf.append("---------------------");
-
-                System.out.println(bf.toString());
             }
+            b.setAllbuildings(list);
         } catch (SQLException ex) {
             System.err.println("Error Message: " + ex.getMessage());
             System.err.println("Error Code: " + ex.getErrorCode());
             System.err.println("SQL State: " + ex.getSQLState());
         }
+        return b;
     }
+
 }
