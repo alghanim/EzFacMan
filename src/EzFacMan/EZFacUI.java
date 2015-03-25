@@ -95,6 +95,7 @@ public class EZFacUI extends javax.swing.JFrame {
         spreadsheetPanel = new javax.swing.JScrollPane();
         spreadsheetTable = new javax.swing.JTable();
         occupancy = new javax.swing.JLabel();
+        mapDisplay = new EzFacMan.MapPanel();
         menuBar = new javax.swing.JMenuBar();
         fileButton = new javax.swing.JMenu();
         addNewMap = new javax.swing.JMenuItem();
@@ -332,7 +333,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -528,6 +529,17 @@ public class EZFacUI extends javax.swing.JFrame {
         occupancy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         occupancy.setText("Ocupancy");
 
+        javax.swing.GroupLayout mapDisplayLayout = new javax.swing.GroupLayout(mapDisplay);
+        mapDisplay.setLayout(mapDisplayLayout);
+        mapDisplayLayout.setHorizontalGroup(
+            mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        mapDisplayLayout.setVerticalGroup(
+            mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 406, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -554,11 +566,13 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(occupancy)
                         .addGap(77, 88, Short.MAX_VALUE))))
+            .addComponent(mapDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(417, 417, 417)
+                .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(occupancy)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1008,6 +1022,7 @@ public class EZFacUI extends javax.swing.JFrame {
     * This is the panel for the main window.
     */
     private javax.swing.JPanel mainPanel;
+    private EzFacMan.MapPanel mapDisplay;
     /**
     * The menu for the main window.
     */
@@ -1056,7 +1071,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JLabel roomFOAPALName;
     private javax.swing.JLabel roomFloor;
     private javax.swing.JPanel roomInfoPopup;
-    private javax.swing.JLabel roomNum;
+    public static javax.swing.JLabel roomNum;
     private javax.swing.JLabel roomNumber;
     private javax.swing.JFrame roomPopUp;
     private javax.swing.JLabel roomType;
