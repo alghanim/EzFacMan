@@ -1,21 +1,18 @@
 package EzFacMan;
 
 
-import static ParseSVGData.ParseSVGData.test;
-import ParseSVGData.RoomData;
 import ParseSVGData.SVGParser;
 import databaseTables.Rooms;
 import databaseTables.RoomsManager;
-import databaseTables.floorsManager;
 import java.awt.Color;
 import static java.awt.Color.blue;
 import static java.awt.Color.white;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Desktop;
+import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -822,10 +819,13 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_csvMapChooserActionPerformed
 
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        SVGParser parser = new SVGParser(selectedFile.getPath());        
-        RoomData rooms = parser.parse();
+        SVGParser parser = new SVGParser(selectedFile.getPath());  
+        mapDisplay.setRoomList(parser.parse());
+        mapDisplay.setVisible(true);
         
-        test(rooms.roomList);
+        Graphics g = mapDisplay.getGraphics();
+        g.setColor(Color.blue);
+        mapDisplay.repaint();
     }//GEN-LAST:event_importButtonActionPerformed
 /**
  * Closes the addNewMapFrame dialog box.
@@ -851,6 +851,7 @@ public class EZFacUI extends javax.swing.JFrame {
 
             // The selected file should always be the same as newFile
             File curFile = pdfMapChooser.getSelectedFile();
+            selectedFile = curFile;
             pdfName.setText(curFile.getName());
             pdfName.setForeground(blue);
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(

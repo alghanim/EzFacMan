@@ -43,7 +43,6 @@ public class MapPanel extends JPanel implements Serializable {
         if (rList != null) {
             Dimension size = getSize();
             Insets insets = getInsets();
-            System.out.println("asfjapsfjip;sdf");
             int w = size.width - insets.left - insets.right;
             int h = size.height - insets.top - insets.bottom;
 
