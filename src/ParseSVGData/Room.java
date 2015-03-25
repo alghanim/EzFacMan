@@ -10,10 +10,10 @@ import java.util.ArrayList;
  * @author Nick Killion
  */
 public class Room {
-    ArrayList<PointData> points;
-    String color;
-    String roomNum;
-    PointData roomNumCoords;
+    public ArrayList<PointData> points;
+    public String color;
+    public String roomNum;
+    public PointData roomNumCoords;
     
     /**
      * Constructor for Room
