@@ -1,6 +1,7 @@
 package ParseSVGData;
  
 import java.util.ArrayList;
+import java.io.*;
 
 /**
  * Driver class to test parsing functionality
@@ -21,6 +22,7 @@ public class ParseSVGData {
         
         SVGParser parser = new SVGParser(filename);        
         RoomData rooms = parser.parse();
+
         
         test(rooms.roomList);
     }
