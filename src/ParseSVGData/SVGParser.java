@@ -1,8 +1,11 @@
 package ParseSVGData;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -21,16 +24,21 @@ public class SVGParser {
     Document svg;
     
     /**
-     * Constructor for SVGParser
+     * Constructor for SVGParser. Takes a PDF, converts to SVG, parses it
      * 
      * @param filename String representing path to filename
      */
-    public SVGParser(String filename) {
+    public SVGParser(String inFile) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             
-            svg = builder.parse(new FileInputStream(filename));
+            String file = new String();
+            
+            if (inFile.toLowerCase().endsWith("pdf"))
+                file = pdfToSvg(inFile);
+            
+            svg = builder.parse(new FileInputStream(file));
             
         } catch (FactoryConfigurationError e) {
             System.err.println("unable to get a document builder factory");
@@ -52,6 +60,33 @@ public class SVGParser {
         ArrayList<PathData> pData = parsePathData(rnData);
         
         return new RoomData(rnData, pData);
+    }
+    
+    private String pdfToSvg(String filename) {
+        String svgFileName = filename.substring(0, filename.length() - 3).concat("svg");
+        String inkscapeInstallLoc, sysCall;
+        if (!new File(svgFileName).exists()) {            
+            inkscapeInstallLoc = new String("C:\\Program Files\\Inkscape");
+            
+            
+            sysCall = new String("cmd /c start cmd.exe /K \"cd " + inkscapeInstallLoc + 
+                        " && inkscape -l \"" + svgFileName + "\" " +
+                        "\"" + filename + "\"");
+            
+            System.out.println(sysCall);
+            
+            try {
+                Process p = Runtime.getRuntime().exec(sysCall);
+                p.waitFor();
+                p.destroy();
+            } catch (IOException ex) {
+                Logger.getLogger(SVGParser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                
+            }
+        }
+        
+        return svgFileName;
     }
         
     /**
