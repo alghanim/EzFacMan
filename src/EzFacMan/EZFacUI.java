@@ -13,6 +13,7 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Desktop;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -35,7 +36,8 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     public EZFacUI() {
         initComponents();
-
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass()
+                .getResource("/Images/CornerIcon.png")));
         // first commit
     }
 
@@ -330,7 +332,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -530,11 +532,11 @@ public class EZFacUI extends javax.swing.JFrame {
         mapDisplay.setLayout(mapDisplayLayout);
         mapDisplayLayout.setHorizontalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1062, Short.MAX_VALUE)
         );
         mapDisplayLayout.setVerticalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addGap(0, 403, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -563,13 +565,15 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(occupancy)
                         .addGap(77, 88, Short.MAX_VALUE))))
-            .addComponent(mapDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(occupancy)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -679,6 +683,7 @@ public class EZFacUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void campusDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropdownActionPerformed
@@ -826,6 +831,7 @@ public class EZFacUI extends javax.swing.JFrame {
         Graphics g = mapDisplay.getGraphics();
         g.setColor(Color.blue);
         mapDisplay.repaint();
+        
     }//GEN-LAST:event_importButtonActionPerformed
 /**
  * Closes the addNewMapFrame dialog box.
