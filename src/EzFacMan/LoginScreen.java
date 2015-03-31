@@ -1,10 +1,12 @@
 package EzFacMan;
 
-
+import databaseTables.ConnectDB;
 import databaseTables.Rooms;
 import databaseTables.buildingManager;
 import databaseTables.RoomsManager;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,8 @@ public class LoginScreen extends javax.swing.JFrame {
      */
     public LoginScreen() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass()
+                .getResource("/Images/CornerIcon.png")));
     }
 
     /**
@@ -36,11 +40,69 @@ public class LoginScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ErrorBox = new javax.swing.JDialog();
+        ErrorPanel = new javax.swing.JPanel();
+        setLocationRelativeTo(null);
+        OkButton = new javax.swing.JButton();
+        ErrorText = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        ErrorBox.setMaximumSize(new java.awt.Dimension(270, 130));
+        ErrorBox.setMinimumSize(new java.awt.Dimension(270, 130));
+        ErrorBox.setPreferredSize(new java.awt.Dimension(270, 130));
+        ErrorBox.setResizable(false);
+
+        ErrorPanel.setMinimumSize(new java.awt.Dimension(270, 130));
+
+        OkButton.setText("Ok");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
+
+        ErrorText.setText("Username or password was incorrect");
+
+        javax.swing.GroupLayout ErrorPanelLayout = new javax.swing.GroupLayout(ErrorPanel);
+        ErrorPanel.setLayout(ErrorPanelLayout);
+        ErrorPanelLayout.setHorizontalGroup(
+            ErrorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorPanelLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(OkButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ErrorPanelLayout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(ErrorText)
+                .addGap(27, 27, 27))
+        );
+        ErrorPanelLayout.setVerticalGroup(
+            ErrorPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ErrorPanelLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(ErrorText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(OkButton)
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ErrorBoxLayout = new javax.swing.GroupLayout(ErrorBox.getContentPane());
+        ErrorBox.getContentPane().setLayout(ErrorBoxLayout);
+        ErrorBoxLayout.setHorizontalGroup(
+            ErrorBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ErrorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        ErrorBoxLayout.setVerticalGroup(
+            ErrorBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ErrorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        setLocationRelativeTo(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +129,8 @@ public class LoginScreen extends javax.swing.JFrame {
 
         passwordLabel.setText("Password");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/EzFacIcon.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,16 +143,21 @@ public class LoginScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usernameField)
+                    .addComponent(passwordField)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(loginButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                        .addGap(0, 39, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(212, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(usernameLabel))
@@ -102,6 +171,7 @@ public class LoginScreen extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
@@ -109,12 +179,14 @@ public class LoginScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+
         try {
             login();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -122,25 +194,41 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
 
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 login();
             } catch (SQLException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
     }//GEN-LAST:event_passwordFieldKeyPressed
 
-    private void login() throws SQLException, ClassNotFoundException{
-        
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+        ErrorBox.dispose();
+    }//GEN-LAST:event_OkButtonActionPerformed
+
+    private void login() throws SQLException, ClassNotFoundException, Exception {
         EZFacUI ez = new EZFacUI();
-        ez.setVisible(true);
-        dispose();
+        Boolean test = true;
+
+        try{
+            ConnectDB.isValidConnection(ConnectDB.getConnection(), "mysql");
+        }catch(SQLException e){
+            ErrorBox.setLocationRelativeTo(null);
+            ErrorBox.setVisible(true);
+            test = false;
+        }
+        if (test) {
+            ez.setVisible(true);
+            dispose();
+        } 
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -177,6 +265,11 @@ public class LoginScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog ErrorBox;
+    private javax.swing.JPanel ErrorPanel;
+    private javax.swing.JLabel ErrorText;
+    private javax.swing.JButton OkButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
     public static javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
