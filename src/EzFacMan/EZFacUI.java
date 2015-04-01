@@ -1,9 +1,8 @@
 package EzFacMan;
 
-
 import ParseSVGData.SVGParser;
-import databaseTables.Rooms;
-import databaseTables.RoomsManager;
+import databaseTables.*;
+
 import java.awt.Color;
 import static java.awt.Color.blue;
 import static java.awt.Color.white;
@@ -17,8 +16,10 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * User Interface class for EZ-Fac program.
@@ -26,19 +27,46 @@ import java.util.logging.Logger;
  * @author Mike Manalo
  * @author Nathan Jack
  * @author Nick Killion
- * 
+ *
  */
 public class EZFacUI extends javax.swing.JFrame {
+
     File selectedFile = null;
-    
+    public ArrayList<String> allcampuses = new ArrayList<String>();
+    private ArrayList<String> allbuildings = new ArrayList<String>();
+    private ArrayList<String> allfloors = new ArrayList<String>();
+    public String dBuilding;
+    public static String dCampus;
+    public String dFloor;
+    floors f = floorsManager.displayAllfloors();
+    campus c = campusManager.displayAllCampuses();
+    building b = buildingManager.displayAllBuildings();
+
     /**
      * Creates new form NewJFrame
+     *
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public EZFacUI() {
+    public EZFacUI() throws SQLException, ClassNotFoundException {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass()
                 .getResource("/Images/CornerIcon.png")));
-        // first commit
+        allfloors.addAll(f.getAllFloors());
+        allcampuses.addAll(c.getAllcampuses());
+        allbuildings.addAll(b.getAllbuildings());
+        allfloors.stream().forEach((s) -> {
+            floorDropdown.addItem(s);
+        });
+        allcampuses.stream().forEach((s) -> {
+            campusDropdown.addItem(s);
+        });
+        allbuildings.stream().forEach((s) -> {
+            buildingDropdown.addItem(s);
+        });
+        buildingDropdown.setEnabled(false);
+        floorDropdown.setEnabled(false);
+
     }
 
     /**
@@ -687,7 +715,33 @@ public class EZFacUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void campusDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropdownActionPerformed
-        // TODO add your handling code here:
+        dCampus = (String) campusDropdown.getSelectedItem();
+        String sqlString = "'" + dCampus + "'";
+
+        if (dCampus != null) {
+
+            building bb = null;
+            try {
+                buildingDropdown.removeAllItems();
+
+                bb = buildingManager.display(sqlString);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            allbuildings.removeAll(allbuildings);
+            allbuildings.addAll(bb.getAllbuildings());
+
+            allbuildings.stream().forEach((s) -> {
+                buildingDropdown.addItem(s);
+
+            });
+            buildingDropdown.setEnabled(true);
+            floorDropdown.setEnabled(false);
+
+        }
+
     }//GEN-LAST:event_campusDropdownActionPerformed
 
     private void floorDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorDropdownActionPerformed
@@ -695,21 +749,17 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
-       
-       
-       
-       try {
-         
-           Rooms RoomsObject = RoomsManager.displayCertainRooms();
-           
-             roomNum.setText(RoomsObject.getRoom_num());
-             departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
-             roomType.setText(RoomsObject.getRoom_type_des());
-             floorName.setText(RoomsObject.getFloor_name());
-             departmentName.setText(RoomsObject.getFOAPAL_name());
-           
-             
-             
+
+        try {
+
+            Rooms RoomsObject = RoomsManager.displayCertainRooms();
+
+            roomNum.setText(RoomsObject.getRoom_num());
+            departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
+            roomType.setText(RoomsObject.getRoom_type_des());
+            floorName.setText(RoomsObject.getFloor_name());
+            departmentName.setText(RoomsObject.getFOAPAL_name());
+
             dispose();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
@@ -722,7 +772,30 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mainPanelMouseClicked
 
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
-        // TODO add your handling code here:
+        dBuilding = (String) buildingDropdown.getSelectedItem();
+
+        if (dBuilding != null) {
+            floors ff = null;
+            try {
+                floorDropdown.removeAllItems();
+
+                ff = floorsManager.display(dBuilding);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            allfloors.removeAll(allfloors);
+            allfloors.addAll(ff.getAllFloors());
+
+            allfloors.stream().forEach((s) -> {
+                floorDropdown.addItem(s);
+
+            });
+
+        }
+        System.out.println(allfloors.toString());
+        floorDropdown.setEnabled(true);
     }//GEN-LAST:event_buildingDropdownActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -738,8 +811,11 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_resetDeptColorsActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
-        quitConfirmation.setVisible(true);
-        //  System.exit(0);// TODO add your handling code here:
+        int q = JOptionPane.showConfirmDialog(null, "Are you sure?", "You are quiting the program!", JOptionPane.YES_NO_OPTION);
+        if (q == 0) {
+            System.exit(0);
+        }
+
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
@@ -748,13 +824,16 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMapFrame.setVisible(true);
 
     }//GEN-LAST:event_addNewMapActionPerformed
-/**
- * Creates and opens new color chooser after user clicks on Modify Department Color button.
- * <p>
- * Code adapted from: http://www.java2s.com/Tutorial/Java/0240__Swing/RemovingaColorChooserPanelfromaJColorChooserDialog.htm.
- * 
- * @param evt an event listener that listens for user to click on Modify Department Color button 
- */
+    /**
+     * Creates and opens new color chooser after user clicks on Modify
+     * Department Color button.
+     * <p>
+     * Code adapted from:
+     * http://www.java2s.com/Tutorial/Java/0240__Swing/RemovingaColorChooserPanelfromaJColorChooserDialog.htm.
+     *
+     * @param evt an event listener that listens for user to click on Modify
+     * Department Color button
+     */
     private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
         deptColorChooser = new javax.swing.JColorChooser();
         AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
@@ -771,50 +850,58 @@ public class EZFacUI extends javax.swing.JFrame {
         Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
 
     }//GEN-LAST:event_modDeptColorActionPerformed
-/**
- * Opens the About .pdf using the desktop's default program.
- * <p>
- * Code adapted from: http://www.javabeat.net/java-open-word-document/
-
- * @param evt listens for the user to click the About menu option
- */
+    /**
+     * Opens the About .pdf using the desktop's default program.
+     * <p>
+     * Code adapted from: http://www.javabeat.net/java-open-word-document/
+     *
+     * @param evt listens for the user to click the About menu option
+     */
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-                File aboutFile = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
-                aboutFile.setReadOnly();
-		try {
-			//Open the file using Desktop class
-			Desktop.getDesktop().open(aboutFile);
-		}catch (IOException exception){
-			exception.printStackTrace();
-		}
+        File aboutFile = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
+        aboutFile.setReadOnly();
+        try {
+            //Open the file using Desktop class
+            Desktop.getDesktop().open(aboutFile);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }//GEN-LAST:event_aboutButtonActionPerformed
 
     /**
- * Exits the program.
- * @param evt an event that is triggered when user clicks yes in quit confirmation dialog 
- */    
+     * Exits the program.
+     *
+     * @param evt an event that is triggered when user clicks yes in quit
+     * confirmation dialog
+     */
     private void quitConfirmYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmYesActionPerformed
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmYesActionPerformed
-/**
- * Closes the quit confirmation dialog box.
- * @param evt an event listener that is triggered when user clicks cancel on quit confirmation dialog
- */
+    /**
+     * Closes the quit confirmation dialog box.
+     *
+     * @param evt an event listener that is triggered when user clicks cancel on
+     * quit confirmation dialog
+     */
     private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
         quitConfirmation.setVisible(false);// TODO add your handling code here:
     }//GEN-LAST:event_quitConfirmCancelActionPerformed
-/**
- * Opens the .pdf file chooser to select a new map.
- * @param evt an event listener that is triggered when user clicks on button to select .pdf. 
- */
+    /**
+     * Opens the .pdf file chooser to select a new map.
+     *
+     * @param evt an event listener that is triggered when user clicks on button
+     * to select .pdf.
+     */
     private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
         // TODO add your handling code here:
         int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapPDFActionPerformed
-/**
- * Opens the .csv file chooser to select a new spreadsheet.
- * @param evt an event listener that is triggered when user clicks on button to select .csv. 
- */    
+    /**
+     * Opens the .csv file chooser to select a new spreadsheet.
+     *
+     * @param evt an event listener that is triggered when user clicks on button
+     * to select .csv.
+     */
     private void addMapCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapCSVActionPerformed
         int returnVal2 = csvMapChooser.showOpenDialog(EZFacUI.this);
     }//GEN-LAST:event_addMapCSVActionPerformed
@@ -824,30 +911,36 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_csvMapChooserActionPerformed
 
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        SVGParser parser = new SVGParser(selectedFile.getPath());  
+        SVGParser parser = new SVGParser(selectedFile.getPath());
         mapDisplay.setRoomList(parser.parse());
         mapDisplay.setVisible(true);
-        
+
         Graphics g = mapDisplay.getGraphics();
         g.setColor(Color.blue);
         mapDisplay.repaint();
-        
+
     }//GEN-LAST:event_importButtonActionPerformed
-/**
- * Closes the addNewMapFrame dialog box.
- * @param evt an event listener that is triggered when user clicks cancel on addNewMapFrame dialog
- */
+    /**
+     * Closes the addNewMapFrame dialog box.
+     *
+     * @param evt an event listener that is triggered when user clicks cancel on
+     * addNewMapFrame dialog
+     */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         addNewMapFrame.dispatchEvent(new WindowEvent(addNewMapFrame, WindowEvent.WINDOW_CLOSING));
-       // pdfName.setText(null);
+        // pdfName.setText(null);
         //   csvName.setText(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
-/**
- * Changes pdfName label to correspond with the name of the .pdf that user previously selected.
- * <p> 
- * Code adapted from: http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield. 
- * @param evt an event listener that listens for a property change in the pdfMapChooser 
- */
+    /**
+     * Changes pdfName label to correspond with the name of the .pdf that user
+     * previously selected.
+     * <p>
+     * Code adapted from:
+     * http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield.
+     *
+     * @param evt an event listener that listens for a property change in the
+     * pdfMapChooser
+     */
     private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
 
         if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
@@ -871,12 +964,16 @@ public class EZFacUI extends javax.swing.JFrame {
             File[] files = pdfMapChooser.getSelectedFiles();
         }
     }//GEN-LAST:event_pdfMapChooserPropertyChange
-/**
- * Changes csvName label to correspond with the name of the .csv that user previously selected.
- * <p> 
- * Code adapted from: http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield. 
- * @param evt an event listener that listens for a property change in the csvMapChooser 
- */
+    /**
+     * Changes csvName label to correspond with the name of the .csv that user
+     * previously selected.
+     * <p>
+     * Code adapted from:
+     * http://stackoverflow.com/questions/8428548/java-jfilechooser-how-to-show-selected-file-in-a-textfield.
+     *
+     * @param evt an event listener that listens for a property change in the
+     * csvMapChooser
+     */
     private void csvMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_csvMapChooserPropertyChange
         if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
             JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
@@ -893,28 +990,28 @@ public class EZFacUI extends javax.swing.JFrame {
             File[] csvOldFiles = (File[]) evt.getOldValue();
             File[] csvNewFiles = (File[]) evt.getNewValue();
 
-        // Get list of selected files
+            // Get list of selected files
             // The selected files should always be the same as newFiles
             File[] csvFiles = csvMapChooser.getSelectedFiles();
         }
     }//GEN-LAST:event_csvMapChooserPropertyChange
-/**
- * Opens the User Manual using the desktop's default program.
- * <p>
- * Code adapted from: http://www.javabeat.net/java-open-word-document/
- * 
- * @param evt listens for the user to click the User Manual menu option
- */
+    /**
+     * Opens the User Manual using the desktop's default program.
+     * <p>
+     * Code adapted from: http://www.javabeat.net/java-open-word-document/
+     *
+     * @param evt listens for the user to click the User Manual menu option
+     */
     private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
 
-		File file = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
-                file.setReadOnly();
-		try {
-			//Open the file using Desktop class
-			Desktop.getDesktop().open(file);
-		}catch (IOException exception){
-			exception.printStackTrace();
-		}
+        File file = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
+        file.setReadOnly();
+        try {
+            //Open the file using Desktop class
+            Desktop.getDesktop().open(file);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }//GEN-LAST:event_userManualButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -922,7 +1019,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         SearchPanel S = null;
+        SearchPanel S = null;
         try {
             S = new SearchPanel();
         } catch (SQLException ex) {
@@ -930,13 +1027,12 @@ public class EZFacUI extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-         S.setVisible(true);
+        S.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     /**

@@ -39,7 +39,7 @@ public class buildingManager {
             conn = ConnectDB.getConnection();// creating the connection
             stmt = conn.createStatement();// creating the statement that is already has its value
             rs = stmt.executeQuery(sql); // excuting the statement
-ArrayList list = new ArrayList<String>();
+            ArrayList list = new ArrayList<String>();
             while (rs.next()) {
 
                 list.add(rs.getString("building_name"));
@@ -54,4 +54,37 @@ ArrayList list = new ArrayList<String>();
         return b;
     }
 
+    public static building display(String dCampus) throws ClassNotFoundException {
+        String sql;
+        building b = new building();
+        if (dCampus != null) {
+            sql = "select distinct building_name from building where campus_code = 'MC'";
+        } else {
+
+            sql = "select distinct building_name from building";
+        }
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = ConnectDB.getConnection();// creating the connection
+            stmt = conn.createStatement();// creating the statement that is already has its value
+            rs = stmt.executeQuery(sql); // excuting the statement
+            ArrayList list = new ArrayList<String>();
+            while (rs.next()) {
+
+                list.add(rs.getString("building_name"));
+
+            }
+            b.setAllbuildings(list);
+        } catch (SQLException ex) {
+            System.err.println("Error Message: " + ex.getMessage());
+            System.err.println("Error Code: " + ex.getErrorCode());
+            System.err.println("SQL State: " + ex.getSQLState());
+        }
+        return b;
+
+    }
 }
