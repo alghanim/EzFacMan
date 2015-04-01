@@ -98,13 +98,23 @@ public class SVGParser {
         NodeList roomNumText = svg.getElementsByTagName("text");
         
         int i = 0, j = 0;
+        boolean hasDigit;
         while (roomNumText.item(i) != null) {
+            hasDigit = false;
             Node textData = roomNumText.item(i);
             String childText = textData.getTextContent();
+            
+            for (int l = 0; l < childText.length(); l++) {
+                    if (Character.isDigit(childText.charAt(l)))
+                        hasDigit = true;
+            }
+            
+            if ((!childText.contains(".") && !childText.contains(",")) && hasDigit
+                        && (childText.length() == 5  || (childText.length() == 7 && childText.contains("_")))) {
+                
+                
 
-            if ((!childText.contains(".") && !childText.contains(",")) && (childText.length() == 5  || (childText.length() == 7 && childText.contains("_")))
-                    && !childText.equals("Count") && !childText.equals("Total")) {
-
+                
                 //get values of transform attribute [0-5]. The 4th, 5th values are coordinates -- y,x
                 String[] transformValues = textData.getAttributes().getNamedItem("transform").getTextContent().split(",");
                 for (int l = 4; l <= 5; l++) {
