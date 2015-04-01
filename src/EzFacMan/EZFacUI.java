@@ -113,16 +113,14 @@ public class EZFacUI extends javax.swing.JFrame {
         csvName = new javax.swing.JLabel();
         csvMapChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
-        buildingDropdown = new javax.swing.JComboBox();
-        floorDropdown = new javax.swing.JComboBox();
-        campusDropdown = new javax.swing.JComboBox();
-        floorLabel = new javax.swing.JLabel();
-        campusLabel = new javax.swing.JLabel();
-        buildingLabel = new javax.swing.JLabel();
-        spreadsheetPanel = new javax.swing.JScrollPane();
-        spreadsheetTable = new javax.swing.JTable();
-        occupancy = new javax.swing.JLabel();
         mapDisplay = new EzFacMan.MapPanel();
+        campusLabel = new javax.swing.JLabel();
+        campusDropdown = new javax.swing.JComboBox();
+        buildingLabel = new javax.swing.JLabel();
+        buildingDropdown = new javax.swing.JComboBox();
+        floorLabel = new javax.swing.JLabel();
+        floorDropdown = new javax.swing.JComboBox();
+        occupancy = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileButton = new javax.swing.JMenu();
         addNewMap = new javax.swing.JMenuItem();
@@ -360,7 +358,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -492,21 +490,8 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        buildingDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        buildingDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ritter Hall (004)" }));
-        buildingDropdown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buildingDropdownActionPerformed(evt);
-            }
-        });
-
-        floorDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        floorDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2nd Floor" }));
-        floorDropdown.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                floorDropdownActionPerformed(evt);
-            }
-        });
+        campusLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        campusLabel.setText("Campus");
 
         campusDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         campusDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Main" }));
@@ -516,42 +501,27 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        floorLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        floorLabel.setText("Floor");
-
-        campusLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        campusLabel.setText("Campus");
-
         buildingLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         buildingLabel.setText("Building");
 
-        spreadsheetTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Rooms number", "Department Code", "Room Type Describtio", "Square footage"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Long.class, java.lang.String.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        buildingDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        buildingDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ritter Hall (004)" }));
+        buildingDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildingDropdownActionPerformed(evt);
             }
         });
-        spreadsheetPanel.setViewportView(spreadsheetTable);
-        if (spreadsheetTable.getColumnModel().getColumnCount() > 0) {
-            spreadsheetTable.getColumnModel().getColumn(0).setHeaderValue("Rooms number");
-            spreadsheetTable.getColumnModel().getColumn(1).setHeaderValue("Department Code");
-            spreadsheetTable.getColumnModel().getColumn(2).setHeaderValue("Room Type Describtio");
-            spreadsheetTable.getColumnModel().getColumn(3).setHeaderValue("Square footage");
-        }
+
+        floorLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        floorLabel.setText("Floor");
+
+        floorDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        floorDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2nd Floor" }));
+        floorDropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                floorDropdownActionPerformed(evt);
+            }
+        });
 
         occupancy.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         occupancy.setText("Ocupancy");
@@ -560,11 +530,37 @@ public class EZFacUI extends javax.swing.JFrame {
         mapDisplay.setLayout(mapDisplayLayout);
         mapDisplayLayout.setHorizontalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1062, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mapDisplayLayout.createSequentialGroup()
+                .addContainerGap(419, Short.MAX_VALUE)
+                .addComponent(campusLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buildingLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(floorLabel)
+                .addGap(10, 10, 10)
+                .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(occupancy)
+                .addContainerGap())
         );
         mapDisplayLayout.setVerticalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 403, Short.MAX_VALUE)
+            .addGroup(mapDisplayLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(occupancy)
+                    .addGroup(mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buildingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(campusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(floorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(357, 357, 357))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -572,48 +568,14 @@ public class EZFacUI extends javax.swing.JFrame {
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(spreadsheetPanel)
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addComponent(campusLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buildingLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(floorLabel)
-                        .addGap(10, 10, 10)
-                        .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(occupancy)
-                        .addGap(77, 88, Short.MAX_VALUE))))
-            .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 169, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(occupancy)
-                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buildingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(campusLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(floorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(spreadsheetPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(441, 441, 441))
         );
 
         fileButton.setText("File");
@@ -760,7 +722,7 @@ public class EZFacUI extends javax.swing.JFrame {
             floorName.setText(RoomsObject.getFloor_name());
             departmentName.setText(RoomsObject.getFOAPAL_name());
 
-            dispose();
+           dispose();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -1024,6 +986,7 @@ public class EZFacUI extends javax.swing.JFrame {
             S = new SearchPanel();
         } catch (SQLException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        S.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1183,11 +1146,6 @@ public class EZFacUI extends javax.swing.JFrame {
     * The button for the settings menu.
     */
     private javax.swing.JMenu settingsButton;
-    /**
-    * The panel that conatins the spreadsheet.
-    */
-    private javax.swing.JScrollPane spreadsheetPanel;
-    private javax.swing.JTable spreadsheetTable;
     /**
     * The button to open the user manual.
     */
