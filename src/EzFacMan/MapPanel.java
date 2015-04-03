@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
 import java.io.Serializable;
 
 /**
@@ -22,14 +21,29 @@ import java.io.Serializable;
  */
 public class MapPanel extends JPanel implements Serializable {
     
-    RoomData rList;
+    boolean isInitialized = false;
+    private RoomData rList;     //keep private! Use setRoomList()
+    int maxX, maxY;
+    PointData mapCenter, panelCenter;
+    double scale;
+    Dimension size;
+    int x1, x2, y1, y2, textX, textY;
     
     public MapPanel() {
         super();
     }
     
+    /**
+     * Initializes a list of Rooms for this MapPanel.
+     * 
+     * @param list the ArrayList of Room objects to be drawn to the MapPanel
+     */
     public void setRoomList(RoomData list) {
-        rList = list;
+        if (list != null) {
+            rList = list;
+            calculateScale();
+            isInitialized = true;
+        }
     }
     
     public RoomData getRoomList() {
@@ -40,34 +54,17 @@ public class MapPanel extends JPanel implements Serializable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        if (rList != null) {
-            Dimension size = getSize();
-            Insets insets = getInsets();
-            int w = size.width - insets.left - insets.right;
-            int h = size.height - insets.top - insets.bottom;
-
-            //need max values to change coords to fit this coord system
-            int maxX = 0;
-            int maxY = 0;
-            for (Room room : rList.roomList) {
-                for (PointData point : room.points) {
-                    if (point.x > maxX)
-                        maxX = point.x;
-                    if (point.y > maxY)
-                        maxY = point.y;
-                }
-            }
-
-            int x1, y1, x2, y2;
-            int scale = 12;
+        if (isInitialized) {
+            if (size != null && !size.equals(getSize()))
+                calculateScale();
+                
             g.setFont(new Font(null, 0, 9));
 
-            int j,k,d;
+            int j,k;
             //get and draw points
             for (Room room : rList.roomList) {
                 j = 0;
-                d = size.width;
-                k = d;
+                
                 while (j < room.points.size()) {
                     PointData p1 = room.points.get(j);
                     if (j < room.points.size()-1)
@@ -76,19 +73,73 @@ public class MapPanel extends JPanel implements Serializable {
                         k = 0;
                     PointData p2 = room.points.get(k);
 
-                    //different coord system...
-                    x1 = (maxX-p1.x)/scale;
-                    y1 = (maxY-p1.y)/scale;
-                    x2 = (maxX-p2.x)/scale;
-                    y2 = (maxY-p2.y)/scale;
-
+                    //convert to Swing coord system. Also place points at center of panel
+                    x1 = (int)((maxX-p1.x)/scale);
+                    x1 += (panelCenter.x - mapCenter.x);
+                    y1 = (int)((maxY-p1.y)/scale);
+                    y1 += (panelCenter.y - mapCenter.y);
+                    x2 = (int)((maxX-p2.x)/scale);
+                    x2 += (panelCenter.x - mapCenter.x);
+                    y2 = (int)((maxY-p2.y)/scale);
+                    y2 += (panelCenter.y - mapCenter.y);
+                    
                     g.drawLine(x1, y1, x2, y2);
 
                     j++;
                 }
+                textX = (int)((maxX-room.roomNumCoords.x)/scale);
+                textX += (panelCenter.x - mapCenter.x);
+                textY = (int)((maxY-room.roomNumCoords.y)/scale);
+                textY += (panelCenter.y - mapCenter.y);
 
-                g.drawString(room.roomNum, (maxX-room.roomNumCoords.x)/scale, (maxY-room.roomNumCoords.y)/scale);
+                g.drawString(room.roomNum, textX, textY);
+            }
+            g.setFont(new Font(null, 0, 15));
+            g.drawString("P1", size.width-5, panelCenter.y);
+            g.drawString("P2", 5, panelCenter.y);
+            g.drawString("M", mapCenter.x, mapCenter.y);
+        }
+    }
+    
+    private void getMaxCoords() {
+        for (Room room : rList.roomList) {
+            for (PointData point : room.points) {
+                if (point.x > maxX)
+                    maxX = point.x;
+                if (point.y > maxY)
+                    maxY = point.y;
             }
         }
+    }
+    
+    //also calculates center point
+    private void calculateScale() {
+        getMaxCoords();
+        size = getSize();
+        
+        int diffX = size.width - maxX;
+        int diffY = size.height - maxY;
+        
+        //unnecessarily complex conditional... refactor later?
+        if (diffY > 0 && diffX > 0) {
+            if (diffY > diffX)
+                scale = size.height/(double)maxY;
+            else
+                scale = size.width/(double)maxX;
+        }
+        else if (diffY < 0 && diffX < 0) {
+            if (diffY > diffX)
+                scale = maxY/(double)size.height;
+            else
+                scale = maxX/(double)size.width;
+        }
+        else if (diffY > diffX)
+            scale = size.height/(double)maxY;
+        else if (diffY < diffX)
+            scale = size.width/(double)maxX;
+    
+        panelCenter = new PointData((int)(size.width/2), (int)(size.height/2));
+        mapCenter = new PointData((int)(maxX/(scale * 2)), (int)(maxY/(scale * 2)));
+        
     }
 }
