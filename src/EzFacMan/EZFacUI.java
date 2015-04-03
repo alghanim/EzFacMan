@@ -781,10 +781,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_quitButtonActionPerformed
 
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-//    pdfName.setText(null);
-        //  csvName.setText(null);
         addNewMapFrame.setVisible(true);
-
     }//GEN-LAST:event_addNewMapActionPerformed
     /**
      * Creates and opens new color chooser after user clicks on Modify
@@ -913,8 +910,16 @@ public class EZFacUI extends javax.swing.JFrame {
             // The selected file should always be the same as newFile
             File curFile = pdfMapChooser.getSelectedFile();
             selectedFile = curFile;
-            pdfName.setText(curFile.getName());
-            pdfName.setForeground(blue);
+            PDFCustomFilter pdfFilter = new PDFCustomFilter();
+            if (pdfFilter.accept (selectedFile))
+            {
+                pdfName.setText(curFile.getName());
+                pdfName.setForeground(blue);
+            }
+            else
+            {
+                System.err.println("File is not a valid PDF");    
+            }
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
             JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
@@ -944,8 +949,18 @@ public class EZFacUI extends javax.swing.JFrame {
 
             // The selected file should always be the same as newFile
             File csvCurFile = csvMapChooser.getSelectedFile();
+            
+            CSVCustomFilter csvFilter = new CSVCustomFilter();
+            if (csvFilter.accept (csvCurFile))
+            {
             csvName.setText(csvCurFile.getName());
             csvName.setForeground(blue);
+            }
+            else
+            {
+                System.err.println("File is not a valid CSV");    
+            }
+
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
             JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
