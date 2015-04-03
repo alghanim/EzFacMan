@@ -28,6 +28,7 @@ public class MapPanel extends JPanel implements Serializable {
     double scale;
     Dimension size;
     int x1, x2, y1, y2, textX, textY;
+    String selectedRoom = null;
     
     public MapPanel() {
         super();
@@ -48,6 +49,14 @@ public class MapPanel extends JPanel implements Serializable {
     
     public RoomData getRoomList() {
         return rList;
+    }
+    
+    public void selectRoom(String roomNum) {
+        selectedRoom = roomNum;
+    }
+    
+    public void unSelectRoom() {
+        selectedRoom = null;
     }
     
     @Override
@@ -84,7 +93,10 @@ public class MapPanel extends JPanel implements Serializable {
                     y2 += (panelCenter.y - mapCenter.y);
                     
                     g.drawLine(x1, y1, x2, y2);
-
+                    if (selectedRoom != null && room.roomNum.equals(selectedRoom)) {
+                        g.drawLine(x1+1, y1+1, x2+1, y2+1);
+                        g.drawLine(x1-1, y1-1, x2-1, y2-1);
+                    }
                     j++;
                 }
                 textX = (int)((maxX-room.roomNumCoords.x)/scale);
@@ -95,9 +107,6 @@ public class MapPanel extends JPanel implements Serializable {
                 g.drawString(room.roomNum, textX, textY);
             }
             g.setFont(new Font(null, 0, 15));
-            g.drawString("P1", size.width-5, panelCenter.y);
-            g.drawString("P2", 5, panelCenter.y);
-            g.drawString("M", mapCenter.x, mapCenter.y);
         }
     }
     
