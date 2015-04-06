@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
  * @author Mike Manalo
  * @author Nathan Jack
  * @author Nick Killion
- *
+ * @author Ali
  */
 public class EZFacUI extends javax.swing.JFrame {
 
@@ -174,6 +174,29 @@ public class EZFacUI extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        campusCode.setText("Main Campus");
+
+        buildingName.setText("jTextField1");
+
+        floorName.setText("jTextField2");
+
+        roomNum.setText("jTextField3");
+
+        departmentCode.setText("jTextField4");
+
+        departmentName.setText("jTextField5");
+
+        roomType.setText("jTextField6");
+
+        roomArea.setText("jTextField7");
+
+        updateChange.setText("Update");
+        updateChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateChangeActionPerformed(evt);
             }
         });
 
@@ -347,7 +370,7 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addComponent(quitConfirmYes)
                         .addGap(36, 36, 36)
                         .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
                 .addGap(129, 129, 129))
         );
         quitConfirmationLayout.setVerticalGroup(
@@ -713,7 +736,7 @@ public class EZFacUI extends javax.swing.JFrame {
             floorName.setText(RoomsObject.getFloor_name());
             departmentName.setText(RoomsObject.getFOAPAL_name());
 
-           dispose();
+            //  dispose();
         } catch (SQLException ex) {
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -765,6 +788,7 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         int q = JOptionPane.showConfirmDialog(null, "Are you sure?", "You are quiting the program!", JOptionPane.YES_NO_OPTION);
+
         if (q == 0) {
             System.exit(0);
         }
@@ -808,7 +832,16 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt listens for the user to click the About menu option
      */
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        File aboutFile = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
+
+        File aboutFile = null;
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            aboutFile = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
+        } else if (os.contains("mac")) {
+            aboutFile = new File("/Users/" + System.getProperty("user.name") + "/NetBeansProjects/EzFacMan/AboutEZFac.pdf");
+        } else {
+            JOptionPane.showMessageDialog(null, "Your Operating System is not supported!", "Error!", JOptionPane.OK_OPTION);
+        }
         aboutFile.setReadOnly();
         try {
             //Open the file using Desktop class
@@ -902,14 +935,11 @@ public class EZFacUI extends javax.swing.JFrame {
             File curFile = pdfMapChooser.getSelectedFile();
             selectedFile = curFile;
             PDFCustomFilter pdfFilter = new PDFCustomFilter();
-            if (pdfFilter.accept (selectedFile))
-            {
+            if (pdfFilter.accept(selectedFile)) {
                 pdfName.setText(curFile.getName());
                 pdfName.setForeground(blue);
-            }
-            else
-            {
-                System.err.println("File is not a valid PDF");    
+            } else {
+                System.err.println("File is not a valid PDF");
             }
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
@@ -940,16 +970,13 @@ public class EZFacUI extends javax.swing.JFrame {
 
             // The selected file should always be the same as newFile
             File csvCurFile = csvMapChooser.getSelectedFile();
-            
+
             CSVCustomFilter csvFilter = new CSVCustomFilter();
-            if (csvFilter.accept (csvCurFile))
-            {
-            csvName.setText(csvCurFile.getName());
-            csvName.setForeground(blue);
-            }
-            else
-            {
-                System.err.println("File is not a valid CSV");    
+            if (csvFilter.accept(csvCurFile)) {
+                csvName.setText(csvCurFile.getName());
+                csvName.setForeground(blue);
+            } else {
+                System.err.println("File is not a valid CSV");
             }
 
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
@@ -972,7 +999,16 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
 
-        File file = new File("C:\\Users\\Nathan\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
+        File file = null;
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            file = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
+
+        } else if (os.contains("mac")) {
+            file = new File("/Users/" + System.getProperty("user.name") + "/NetBeansProjects/EzFacMan/UserManualV1.doc");
+        } else {
+            JOptionPane.showMessageDialog(null, "Your Operating System is not supported!", "Error!", JOptionPane.OK_OPTION);
+        }
         file.setReadOnly();
         try {
             //Open the file using Desktop class
@@ -992,12 +1028,16 @@ public class EZFacUI extends javax.swing.JFrame {
             S = new SearchPanel();
         } catch (SQLException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
-        S.setVisible(true);
+            S.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         S.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
+
+    }//GEN-LAST:event_updateChangeActionPerformed
 
     /**
      * @param args the command line arguments
