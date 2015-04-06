@@ -764,10 +764,11 @@ public class EZFacUI extends javax.swing.JFrame {
 
         File aboutFile = null;
         String os = System.getProperty("os.name").toLowerCase();
+        String workingDir = System.getProperty("user.dir");
         if (os.contains("win")) {
-            aboutFile = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\NetBeansProjects\\EzFacMan\\AboutEZFac.pdf");
+            aboutFile = new File(workingDir + "\\AboutEZFac.pdf");
         } else if (os.contains("mac")) {
-            aboutFile = new File("/Users/" + System.getProperty("user.name") + "/NetBeansProjects/EzFacMan/AboutEZFac.pdf");
+            aboutFile = new File(workingDir + "/AboutEZFac.pdf");
         } else {
             JOptionPane.showMessageDialog(null, "Your Operating System is not supported!", "Error!", JOptionPane.OK_OPTION);
         }
@@ -917,11 +918,12 @@ public class EZFacUI extends javax.swing.JFrame {
 
         File file = null;
         String os = System.getProperty("os.name").toLowerCase();
+        String workingDir = System.getProperty("user.dir");
         if (os.contains("win")) {
-            file = new File("C:\\Users\\" + System.getProperty("user.name") + "\\Documents\\NetBeansProjects\\EzFacMan\\UserManualV1.doc");
+            file = new File(workingDir +  "\\UserManualV1.doc");
 
         } else if (os.contains("mac")) {
-            file = new File("/Users/" + System.getProperty("user.name") + "/NetBeansProjects/EzFacMan/UserManualV1.doc");
+            file = new File(workingDir + "/UserManualV1.doc");
         } else {
             JOptionPane.showMessageDialog(null, "Your Operating System is not supported!", "Error!", JOptionPane.OK_OPTION);
         }
