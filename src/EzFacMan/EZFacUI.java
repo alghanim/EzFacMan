@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 public class EZFacUI extends javax.swing.JFrame {
 
     File selectedFile = null;
+    File csvCurFile = null;
     public ArrayList<String> allcampuses = new ArrayList<String>();
     private ArrayList<String> allbuildings = new ArrayList<String>();
     private ArrayList<String> allfloors = new ArrayList<String>();
@@ -100,10 +101,6 @@ public class EZFacUI extends javax.swing.JFrame {
         updateChange = new javax.swing.JButton();
         deptColorChooser = new javax.swing.JColorChooser();
         pdfMapChooser = new javax.swing.JFileChooser();
-        quitConfirmation = new javax.swing.JDialog();
-        quitConfirmYes = new javax.swing.JButton();
-        quitConfirmCancel = new javax.swing.JButton();
-        quitConfirmQuestion = new javax.swing.JLabel();
         addNewMapFrame = new javax.swing.JFrame();
         addMapPDF = new javax.swing.JButton();
         addMapCSV = new javax.swing.JButton();
@@ -199,24 +196,6 @@ public class EZFacUI extends javax.swing.JFrame {
                 updateChangeActionPerformed(evt);
             }
         });
-
-        campusCode.setText("Main Campus");
-
-        buildingName.setText("jTextField1");
-
-        floorName.setText("jTextField2");
-
-        roomNum.setText("jTextField3");
-
-        departmentCode.setText("jTextField4");
-
-        departmentName.setText("jTextField5");
-
-        roomType.setText("jTextField6");
-
-        roomArea.setText("jTextField7");
-
-        updateChange.setText("Update");
 
         javax.swing.GroupLayout roomPopUpLayout = new javax.swing.GroupLayout(roomPopUp.getContentPane());
         roomPopUp.getContentPane().setLayout(roomPopUpLayout);
@@ -334,56 +313,6 @@ public class EZFacUI extends javax.swing.JFrame {
                 pdfMapChooserPropertyChange(evt);
             }
         });
-
-        quitConfirmation.setTitle("Quit Confirmation");
-        quitConfirmation.setAlwaysOnTop(true);
-        quitConfirmation.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        quitConfirmation.setMinimumSize(new java.awt.Dimension(500, 300));
-        quitConfirmation.setResizable(false);
-        quitConfirmation.setType(java.awt.Window.Type.POPUP);
-        quitConfirmation.setLocationRelativeTo(null);
-
-        quitConfirmYes.setText("Yes");
-        quitConfirmYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitConfirmYesActionPerformed(evt);
-            }
-        });
-
-        quitConfirmCancel.setText("Cancel");
-        quitConfirmCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitConfirmCancelActionPerformed(evt);
-            }
-        });
-
-        quitConfirmQuestion.setText("Are you sure you want to quit?");
-
-        javax.swing.GroupLayout quitConfirmationLayout = new javax.swing.GroupLayout(quitConfirmation.getContentPane());
-        quitConfirmation.getContentPane().setLayout(quitConfirmationLayout);
-        quitConfirmationLayout.setHorizontalGroup(
-            quitConfirmationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(quitConfirmationLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addGroup(quitConfirmationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(quitConfirmationLayout.createSequentialGroup()
-                        .addComponent(quitConfirmYes)
-                        .addGap(36, 36, 36)
-                        .addComponent(quitConfirmCancel))
-                    .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, Short.MAX_VALUE))
-                .addGap(129, 129, 129))
-        );
-        quitConfirmationLayout.setVerticalGroup(
-            quitConfirmationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quitConfirmationLayout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(quitConfirmQuestion, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
-                .addGap(64, 64, 64)
-                .addGroup(quitConfirmationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quitConfirmYes)
-                    .addComponent(quitConfirmCancel))
-                .addGap(53, 53, 53))
-        );
 
         addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
         addNewMapFrame.setResizable(false);
@@ -852,25 +781,7 @@ public class EZFacUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_aboutButtonActionPerformed
 
-    /**
-     * Exits the program.
-     *
-     * @param evt an event that is triggered when user clicks yes in quit
-     * confirmation dialog
-     */
-    private void quitConfirmYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmYesActionPerformed
-        System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_quitConfirmYesActionPerformed
-    /**
-     * Closes the quit confirmation dialog box.
-     *
-     * @param evt an event listener that is triggered when user clicks cancel on
-     * quit confirmation dialog
-     */
-    private void quitConfirmCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitConfirmCancelActionPerformed
-        quitConfirmation.setVisible(false);// TODO add your handling code here:
-    }//GEN-LAST:event_quitConfirmCancelActionPerformed
-    /**
+   /**
      * Opens the .pdf file chooser to select a new map.
      *
      * @param evt an event listener that is triggered when user clicks on button
@@ -894,15 +805,31 @@ public class EZFacUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_csvMapChooserActionPerformed
 
+    
+     /**
+     * Checks that the user has selected a valid PDF and CSV and then triggers the SVGParser to display the map on the screen.
+     *
+     * @param evt an event listener that is triggered when user clicks cancel on the import button
+     */
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        SVGParser parser = new SVGParser(selectedFile.getPath());
-        mapDisplay.setRoomList(parser.parse());
-        mapDisplay.setVisible(true);
+        PDFCustomFilter pdfFilter = new PDFCustomFilter();
+        if (pdfFilter.accept(selectedFile)!=true) {
+            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
+        }
+         CSVCustomFilter csvFilter = new CSVCustomFilter();
+        if (csvFilter.accept(csvCurFile)!=true)
+        {
+            JOptionPane.showMessageDialog(null, "The file you selected is not a CSV", "Error!", JOptionPane.OK_OPTION);
+        }
+        else{
+            SVGParser parser = new SVGParser(selectedFile.getPath());
+            mapDisplay.setRoomList(parser.parse());
+            mapDisplay.setVisible(true);
 
-        Graphics g = mapDisplay.getGraphics();
-        g.setColor(Color.blue);
-        mapDisplay.repaint();
-
+            Graphics g = mapDisplay.getGraphics();
+            g.setColor(Color.blue);
+            mapDisplay.repaint();
+        }
     }//GEN-LAST:event_importButtonActionPerformed
     /**
      * Closes the addNewMapFrame dialog box.
@@ -935,13 +862,9 @@ public class EZFacUI extends javax.swing.JFrame {
             // The selected file should always be the same as newFile
             File curFile = pdfMapChooser.getSelectedFile();
             selectedFile = curFile;
-            PDFCustomFilter pdfFilter = new PDFCustomFilter();
-            if (pdfFilter.accept(selectedFile)) {
-                pdfName.setText(curFile.getName());
-                pdfName.setForeground(blue);
-            } else {
-                System.err.println("File is not a valid PDF");
-            }
+            pdfName.setText(curFile.getName());
+            pdfName.setForeground(blue);
+
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
             JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
@@ -968,17 +891,10 @@ public class EZFacUI extends javax.swing.JFrame {
             JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
             File csvOldFile = (File) evt.getOldValue();
             File csvNewFile = (File) evt.getNewValue();
+            csvCurFile = csvMapChooser.getSelectedFile();
+            csvName.setText(csvCurFile.getName());
+            csvName.setForeground(blue);
 
-            // The selected file should always be the same as newFile
-            File csvCurFile = csvMapChooser.getSelectedFile();
-
-            CSVCustomFilter csvFilter = new CSVCustomFilter();
-            if (csvFilter.accept(csvCurFile)) {
-                csvName.setText(csvCurFile.getName());
-                csvName.setForeground(blue);
-            } else {
-                System.err.println("File is not a valid CSV");
-            }
 
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
@@ -1157,22 +1073,6 @@ public class EZFacUI extends javax.swing.JFrame {
     * The button to exit the program.
     */
     private javax.swing.JMenuItem quitButton;
-    /**
-    * The "cancel" button to exit the program.
-    */
-    private javax.swing.JButton quitConfirmCancel;
-    /**
-    * The label that displays the quit confirmation question.
-    */
-    private javax.swing.JLabel quitConfirmQuestion;
-    /**
-    * The "yes" button to quit the program.
-    */
-    private javax.swing.JButton quitConfirmYes;
-    /**
-    * The dialog confirms that the user wants to quit.
-    */
-    private javax.swing.JDialog quitConfirmation;
     /**
     * The button to reset department colors. =
     */
