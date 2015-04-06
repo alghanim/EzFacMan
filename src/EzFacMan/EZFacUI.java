@@ -136,7 +136,6 @@ public class EZFacUI extends javax.swing.JFrame {
         aboutButton = new javax.swing.JMenuItem();
 
         roomPopUp.setResizable(false);
-        roomPopUp.setSize(new java.awt.Dimension(400, 350));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -200,6 +199,24 @@ public class EZFacUI extends javax.swing.JFrame {
                 updateChangeActionPerformed(evt);
             }
         });
+
+        campusCode.setText("Main Campus");
+
+        buildingName.setText("jTextField1");
+
+        floorName.setText("jTextField2");
+
+        roomNum.setText("jTextField3");
+
+        departmentCode.setText("jTextField4");
+
+        departmentName.setText("jTextField5");
+
+        roomType.setText("jTextField6");
+
+        roomArea.setText("jTextField7");
+
+        updateChange.setText("Update");
 
         javax.swing.GroupLayout roomPopUpLayout = new javax.swing.GroupLayout(roomPopUp.getContentPane());
         roomPopUp.getContentPane().setLayout(roomPopUpLayout);
@@ -479,21 +496,27 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
+        mainPanel.setAlignmentY(3.0F);
         mainPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mainPanelMouseClicked(evt);
             }
         });
 
+        mapDisplay.setBackground(new java.awt.Color(204, 204, 255));
+        mapDisplay.setAlignmentX(1.0F);
+        mapDisplay.setAlignmentY(3.0F);
+        mapDisplay.setPreferredSize(new java.awt.Dimension(1300, 700));
+
         javax.swing.GroupLayout mapDisplayLayout = new javax.swing.GroupLayout(mapDisplay);
         mapDisplay.setLayout(mapDisplayLayout);
         mapDisplayLayout.setHorizontalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 975, Short.MAX_VALUE)
+            .addGap(0, 1300, Short.MAX_VALUE)
         );
         mapDisplayLayout.setVerticalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         campusDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -551,7 +574,7 @@ public class EZFacUI extends javax.swing.JFrame {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
