@@ -22,7 +22,7 @@ public class campusManager {
     public static campus displayAllCampuses() throws SQLException, ClassNotFoundException {
         campus c = new campus();
 
-        String sql = "select distinct campus_name from campus";
+        String sql = "select distinct campus_code from campus";
 
         Connection conn = null;
         Statement stmt = null;
@@ -34,10 +34,10 @@ public class campusManager {
             stmt = conn.createStatement();// creating the statement that is already has its value
             rs = stmt.executeQuery(sql); // excuting the statement
 
-            ArrayList list = new ArrayList<String>();
+            ArrayList list = new ArrayList<>();
             while (rs.next()) {
 
-                list.add(rs.getString("campus_name"));
+                list.add(rs.getString("campus_code"));
 
             }
             c.setAllcampuses(list);

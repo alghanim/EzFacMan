@@ -11,6 +11,7 @@ import databaseTables.campus;
 import databaseTables.campusManager;
 import databaseTables.floors;
 import databaseTables.floorsManager;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -26,6 +27,10 @@ public class SearchPanel extends javax.swing.JFrame {
     private ArrayList<String> allbuildings = new ArrayList<String>();
     private ArrayList<String> allfloors = new ArrayList<String>();
 
+    public String dBuilding;
+    public static String dCampus;
+    public String dFloor;
+    
     public SearchPanel() throws SQLException, ClassNotFoundException {
 
         initComponents();
@@ -50,7 +55,6 @@ public class SearchPanel extends javax.swing.JFrame {
         for(String s: allbuildings){
             buildingDrop.addItem(s);
         }
-
     }
 
     /**
@@ -70,9 +74,17 @@ public class SearchPanel extends javax.swing.JFrame {
         campusDrop = new javax.swing.JComboBox();
         floorDrop = new javax.swing.JComboBox();
         roomInput = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(214, 214));
+
+        buildingDrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buildingDropActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Choose a building");
 
@@ -83,27 +95,61 @@ public class SearchPanel extends javax.swing.JFrame {
         jLabel4.setText("Enter Room#");
 
         campusDrop.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campusDrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campusDropActionPerformed(evt);
+            }
+        });
 
         floorDrop.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        floorDrop.setMaximumSize(new java.awt.Dimension(32765067, 65632767));
+        floorDrop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                floorDropActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Search");
+        jButton1.setActionCommand("searchButton");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        jButton2.setLabel("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(buildingDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campusDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(floorDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roomInput, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(259, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(63, 63, 63))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(39, 39, 39)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(buildingDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campusDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(floorDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(roomInput, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,11 +173,89 @@ public class SearchPanel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(roomInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(18, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void campusDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropActionPerformed
+        // TODO add your handling code here:
+              dCampus = (String) campusDrop.getSelectedItem();
+      //  String sqlString = "'" + dCampus + "'";
+
+        if (dCampus != null) {
+
+            building bb = null;
+            try {
+                buildingDrop.removeAllItems();
+
+                bb = buildingManager.display(dCampus);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            allbuildings.removeAll(allbuildings);
+            allbuildings.addAll(bb.getAllbuildings());
+
+            allbuildings.stream().forEach((s) -> {
+                buildingDrop.addItem(s);
+
+            });
+            buildingDrop.setEnabled(true);
+            floorDrop.setEnabled(false);
+
+        }
+
+    }//GEN-LAST:event_campusDropActionPerformed
+
+    private void buildingDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropActionPerformed
+        // TODO add your handling code here:
+            dBuilding = (String) buildingDrop.getSelectedItem();
+
+        if (dBuilding != null) {
+            floors ff = null;
+            try {
+                floorDrop.removeAllItems();
+
+                ff = floorsManager.display(dBuilding);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            allfloors.removeAll(allfloors);
+            allfloors.addAll(ff.getAllFloors());
+
+            allfloors.stream().forEach((s) -> {
+                floorDrop.addItem(s);
+
+            });
+
+        }
+        System.out.println(allfloors.toString());
+        floorDrop.setEnabled(true);
+    }//GEN-LAST:event_buildingDropActionPerformed
+
+    private void floorDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorDropActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_floorDropActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,6 +302,8 @@ public class SearchPanel extends javax.swing.JFrame {
     private javax.swing.JComboBox buildingDrop;
     private javax.swing.JComboBox campusDrop;
     private javax.swing.JComboBox floorDrop;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

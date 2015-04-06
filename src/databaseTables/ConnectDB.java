@@ -41,7 +41,7 @@ public class ConnectDB {
         //String password = "IJoovu9u";
 
         return DriverManager
-                .getConnection(ConnectionString, username, password);
+                .getConnection(ConnectionString, "tuc69409", "Pae9Cahz");
     }
     
     public static boolean isValidConnection(Connection conn, String dbVendor) throws Exception {
