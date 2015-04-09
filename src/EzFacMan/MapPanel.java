@@ -9,11 +9,13 @@ package EzFacMan;
 import ParseSVGData.RoomData;
 import ParseSVGData.PointData;
 import ParseSVGData.Room;
+import ParseSVGData.PathData;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.Serializable;
+
 
 /**
  *
@@ -23,15 +25,22 @@ public class MapPanel extends JPanel implements Serializable {
     
     boolean isInitialized = false;
     private RoomData rList;     //keep private! Use setRoomList()
-    int maxX, maxY;
+    int mapMaxX, mapMaxY, mapMinX, mapMinY;
     PointData mapCenter, panelCenter;
     double scale;
-    Dimension size;
+    Dimension dim;
     int x1, x2, y1, y2, textX, textY;
     String selectedRoom = null;
     
     public MapPanel() {
         super();
+
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                mouseClickEvent(evt.getX(), evt.getY());
+            }
+        });
     }
     
     /**
@@ -53,10 +62,48 @@ public class MapPanel extends JPanel implements Serializable {
     
     public void selectRoom(String roomNum) {
         selectedRoom = roomNum;
+        repaint();
     }
     
-    public void unSelectRoom() {
+    public void unselectRoom() {
         selectedRoom = null;
+        repaint();
+    }
+    
+    public String getSelectedRoom() {
+        return selectedRoom;
+    }
+    
+    public String mouseClickEvent(int x, int y) {
+        int convX = x;
+        int convY = y;
+        convX -= (panelCenter.x - mapCenter.x);
+        convX *= scale;
+        convX = mapMaxX - convX;
+       
+        convY -= (panelCenter.y - mapCenter.y);
+        convY *= scale;
+        convY = mapMaxY - convY;
+        
+        
+       
+        String roomClicked = "";
+        
+        for (Room r : rList.roomList) {
+            PathData pd = new PathData(r.points);
+            if (pd.contains(convX, convY))
+                roomClicked = r.roomNum;
+        }
+        
+        if (roomClicked.isEmpty() || roomClicked.equals(getSelectedRoom())) {
+            unselectRoom();
+        }
+        else {
+            selectRoom(roomClicked);
+        }
+        repaint();
+        
+        return roomClicked;
     }
     
     @Override
@@ -64,7 +111,7 @@ public class MapPanel extends JPanel implements Serializable {
         super.paintComponent(g);
         
         if (isInitialized) {
-            if (size != null && !size.equals(getSize()))
+            if (dim != null && !dim.equals(this.getSize()))
                 calculateScale();
                 
             g.setFont(new Font(null, 0, 9));
@@ -83,25 +130,29 @@ public class MapPanel extends JPanel implements Serializable {
                     PointData p2 = room.points.get(k);
 
                     //convert to Swing coord system. Also place points at center of panel
-                    x1 = (int)((maxX-p1.x)/scale);
+                    x1 = (int)((mapMaxX-p1.x)/scale);
                     x1 += (panelCenter.x - mapCenter.x);
-                    y1 = (int)((maxY-p1.y)/scale);
+                    y1 = (int)((mapMaxY-p1.y)/scale);
                     y1 += (panelCenter.y - mapCenter.y);
-                    x2 = (int)((maxX-p2.x)/scale);
+                    x2 = (int)((mapMaxX-p2.x)/scale);
                     x2 += (panelCenter.x - mapCenter.x);
-                    y2 = (int)((maxY-p2.y)/scale);
+                    y2 = (int)((mapMaxY-p2.y)/scale);
                     y2 += (panelCenter.y - mapCenter.y);
                     
                     g.drawLine(x1, y1, x2, y2);
                     if (selectedRoom != null && room.roomNum.equals(selectedRoom)) {
                         g.drawLine(x1+1, y1+1, x2+1, y2+1);
                         g.drawLine(x1-1, y1-1, x2-1, y2-1);
+                        g.drawLine(x1-1, y1, x2-1, y2);
+                        g.drawLine(x1-1, y1, x2-1, y2);
+                        g.drawLine(x1, y1-1, x2, y2-1);
+                        g.drawLine(x1, y1-1, x2, y2-1);
                     }
                     j++;
                 }
-                textX = (int)((maxX-room.roomNumCoords.x)/scale);
+                textX = (int)((mapMaxX-room.roomNumCoords.x)/scale);
                 textX += (panelCenter.x - mapCenter.x);
-                textY = (int)((maxY-room.roomNumCoords.y)/scale);
+                textY = (int)((mapMaxY-room.roomNumCoords.y)/scale);
                 textY += (panelCenter.y - mapCenter.y);
 
                 g.drawString(room.roomNum, textX, textY);
@@ -110,45 +161,51 @@ public class MapPanel extends JPanel implements Serializable {
         }
     }
     
-    private void getMaxCoords() {
+    private void getMinMaxCoords() {
         for (Room room : rList.roomList) {
             for (PointData point : room.points) {
-                if (point.x > maxX)
-                    maxX = point.x;
-                if (point.y > maxY)
-                    maxY = point.y;
+                if (point.x > mapMaxX)
+                    mapMaxX = point.x;
+                if (point.y > mapMaxY)
+                    mapMaxY = point.y;
+                if (point.x < mapMinX)
+                    mapMinX = point.x;
+                if (point.y < mapMinY)
+                    mapMinY = point.y;
             }
         }
     }
     
     //also calculates center point
     private void calculateScale() {
-        getMaxCoords();
-        size = getSize();
+        getMinMaxCoords();
+        dim = this.getSize();
         
-        int diffX = size.width - maxX;
-        int diffY = size.height - maxY;
+        int diffX = dim.width - mapMaxX;
+        int diffY = dim.height - mapMaxY;
         
         //unnecessarily complex conditional... refactor later?
         if (diffY > 0 && diffX > 0) {
             if (diffY > diffX)
-                scale = size.height/(double)maxY;
+                scale = dim.height/(double)mapMaxY;
             else
-                scale = size.width/(double)maxX;
+                scale = dim.width/(double)mapMaxX;
         }
         else if (diffY < 0 && diffX < 0) {
             if (diffY > diffX)
-                scale = maxY/(double)size.height;
+                scale = mapMaxY/(double)dim.height;
             else
-                scale = maxX/(double)size.width;
+                scale = mapMaxX/(double)dim.width;
         }
         else if (diffY > diffX)
-            scale = size.height/(double)maxY;
+            scale = dim.height/(double)mapMaxY;
         else if (diffY < diffX)
-            scale = size.width/(double)maxX;
+            scale = dim.width/(double)mapMaxX;
+        
+        scale += scale * .05;
     
-        panelCenter = new PointData((int)(size.width/2), (int)(size.height/2));
-        mapCenter = new PointData((int)(maxX/(scale * 2)), (int)(maxY/(scale * 2)));
+        panelCenter = new PointData((int)(dim.width/2), (int)(dim.height/2));
+        mapCenter = new PointData((int)((mapMaxX-mapMinX)/(scale * 2)), (int)((mapMaxY-mapMinY)/(scale * 2)));
         
     }
 }
