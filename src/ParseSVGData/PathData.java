@@ -21,9 +21,7 @@ public class PathData {
     public String color;
     
     public String id;
-    
-    //list of absolute path coordinates
-    ArrayList<PointData> points = new ArrayList();
+    public ArrayList<PointData> points = new ArrayList();
     
     /**
      * Constructor for PathData class.
@@ -76,6 +74,16 @@ public class PathData {
         pathCoords = new String();
         color = new String();
         id = new String();
+    }
+    
+    /**
+     * Constructor to be used by the MapPanel class. Constructs PathData object for the purpose of using the contains method.
+     * @param pd 
+     */
+    public PathData(ArrayList<PointData> pd) {
+        points = pd;
+        color = null;
+        id = null;
     }
     
     /**
