@@ -4,8 +4,16 @@
   <NonVisualComponents>
     <Container class="javax.swing.JFrame" name="roomPopUp">
       <Properties>
-        <Property name="resizable" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[450, 350]"/>
+        </Property>
+        <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[450, 339]"/>
+        </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -24,37 +32,20 @@
                               <Component id="roomFOAPALName" alignment="0" min="-2" pref="137" max="-2" attributes="0"/>
                               <Component id="roomTypedes" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="roomFloor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="roomBuildingName" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="roomCampus" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="roomArea" min="-2" max="-2" attributes="0"/>
-                              <Component id="departmentCode" min="-2" max="-2" attributes="0"/>
-                              <Component id="roomNum" min="-2" max="-2" attributes="0"/>
-                              <Component id="roomType" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="departmentName" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="buildingName" min="-2" pref="79" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="roomBuildingName" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="roomCampus" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="roomFloor" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                                          <Component id="floorName" min="-2" pref="79" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campusCode" min="-2" pref="94" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <Component id="roomArea" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="departmentCode" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="roomType" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="departmentName" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="roomNum" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="campusCode" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="buildingName" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="floorName" min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -64,7 +55,7 @@
                           <Component id="updateChange" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -129,6 +120,9 @@
               <Dimension value="[275, 225]"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -206,42 +200,69 @@
         <Component class="javax.swing.JTextField" name="campusCode">
           <Properties>
             <Property name="text" type="java.lang.String" value="Main Campus"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[180, 28]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="buildingName">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField1"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="floorName">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField2"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="roomNum">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField3"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[180, 28]"/>
+            </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="departmentCode">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField4"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="departmentName">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField5"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="roomType">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField6"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="roomArea">
           <Properties>
             <Property name="text" type="java.lang.String" value="jTextField7"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="updateChange">
           <Properties>
@@ -283,7 +304,9 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[500, 400]"/>
         </Property>
-        <Property name="resizable" type="boolean" value="false"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[500, 400]"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The frame to import a new map.&#xa; */"/>
@@ -294,62 +317,56 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                  <Component id="cautionLabel" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
+                  <Component id="pdfName" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="360" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="cautionLabel" pref="483" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="csvName" pref="33" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="341" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                          <Component id="importButton" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                          <Component id="cancelButton" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
-                          <Component id="addMapCSV" max="32767" attributes="0"/>
-                          <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="addMapCSV" min="-2" pref="334" max="-2" attributes="0"/>
+                              <Component id="addMapPDF" min="-2" pref="334" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
-                          <Component id="addMapPDF" max="32767" attributes="0"/>
-                          <EmptySpace min="84" pref="84" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-                          <Component id="pdfName" max="32767" attributes="0"/>
-                          <EmptySpace min="126" pref="126" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="csvName" max="32767" attributes="0"/>
-                          <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                          <Component id="importButton" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cancelButton" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                  <Component id="addMapPDF" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
                   <Component id="pdfName" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="addMapCSV" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="csvName" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="addMapPDF" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="cautionLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="csvName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="importButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <EmptySpace pref="123" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -357,7 +374,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="addMapPDF">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Choose a map (.pdf)"/>
+            <Property name="text" type="java.lang.String" value="Add a map (.pdf)"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapPDFActionPerformed"/>
@@ -368,7 +385,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="addMapCSV">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Choose a spreadsheet (.csv)"/>
+            <Property name="text" type="java.lang.String" value="Add a spreadsheet (.csv)"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addMapCSVActionPerformed"/>
@@ -629,6 +646,8 @@
                           <Component id="floorLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="floorDropdown" min="-2" pref="118" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="showMap" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -650,6 +669,7 @@
                       <Component id="buildingDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="floorLabel" alignment="3" max="32767" attributes="0"/>
                       <Component id="floorDropdown" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="showMap" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="mapDisplay" min="-2" max="-2" attributes="0"/>
@@ -740,6 +760,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a building to show on spreadsheet display. &#xa; */"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="floorLabel">
@@ -770,6 +791,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a floor to show on spreadsheet display.&#xa; */"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="showMap">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Show Map"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showMapActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

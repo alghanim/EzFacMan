@@ -216,17 +216,18 @@ public class LoginScreen extends javax.swing.JFrame {
         EZFacUI ez = new EZFacUI();
         Boolean test = true;
 
-        try{
+        try {
             ConnectDB.isValidConnection(ConnectDB.getConnection(), "mysql");
-        }catch(SQLException e){
+        } catch (SQLException e) {
             ErrorBox.setLocationRelativeTo(null);
             ErrorBox.setVisible(true);
             test = false;
         }
         if (test) {
+            ez.setTitle("EZ-Fac");
             ez.setVisible(true);
             dispose();
-        } 
+        }
     }
 
     /**

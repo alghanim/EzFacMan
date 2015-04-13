@@ -16,29 +16,30 @@ public class RoomsManager {
     /**
      * Display the All rows and columns in Rooms table from the database
      *
+     * @param room
+     * @param building
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public static Rooms displayCertainRooms() throws SQLException, ClassNotFoundException {
+    public static Rooms displayCertainRooms(String room, String building) throws SQLException, ClassNotFoundException {
 
-        String sql = "select building_code,room_num,Rooms.FOAPAL_code,room_type_des,"
-                    + "room_area_sqft,comments, department.FOAPAL_name from Rooms "
-                    + "inner join department on Rooms.FOAPAL_code = department.FOAPAL_code"
-                + " where room_num = 'P102A' and building_code = 48";
+        String sql = "select Rooms.building_code,Rooms.room_num,Rooms.FOAPAL_code,room_type_des,\n"
+                + "room_area_sqft,comments,floor_name, b.building_name, department.FOAPAL_name from Rooms\n"
+                + "inner join department on Rooms.FOAPAL_code = department.FOAPAL_code\n"
+                + "inner join building b on Rooms.building_code = b.building_code\n"
+                + "where room_num = '" + room + "' and b.building_name = '" + building + "'";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Scanner s = new Scanner(System.in);
-       // String rNumber = s.next();
-       // int bCode = s.nextInt();
+     
 
         try {
 
             conn = ConnectDB.getConnection();// creating the connection
             pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
-         //   pstmt.setString(1, rNumber);
-         //   pstmt.setInt(2, bCode);
+           
             rs = pstmt.executeQuery(); // excuting the statement
 
             if (rs.next()) {
@@ -52,8 +53,8 @@ public class RoomsManager {
                 R.setFOAPAL_code(rs.getLong("FOAPAL_code"));
                 R.setRoom_type_des(rs.getString("room_type_des"));
                 R.setFOAPAL_name(rs.getString("FOAPAL_name"));
-
-               
+                R.setFloor_name(rs.getString("floor_name"));
+                R.setBuilding_name(rs.getString("building_name"));
 
                 return R;
             } else {

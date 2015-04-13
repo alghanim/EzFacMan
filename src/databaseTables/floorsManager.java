@@ -63,10 +63,13 @@ public class floorsManager {
         return f;
     }
 
-    public void insertMap(String filename) throws SQLException, ClassNotFoundException, FileNotFoundException {
+    public void insertMap(String filename, String buildingName, String floorName) throws SQLException, ClassNotFoundException, FileNotFoundException {
 
         int len;
-        String query = "update floors set floor_map = ? where building_code = 3";
+        String query = "update floors f inner join building b on b.building_code = f.building_code "
+                + " set floor_map = ? "
+                + "where b.building_name = '" + buildingName + "'"
+                + " and floor_name = '" + floorName + "'";
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -87,14 +90,17 @@ public class floorsManager {
         }
     }
 
-    public void getPDFData() {
+    public void getPDFData(String buildingName, String floorName) {
 
         byte[] fileBytes;
         String query;
         Connection conn = null;
         try {
             query
-                    = "select floor_map from floors where building_code = 3";
+                    = "select floor_map from floors f \n"
+                    + "inner join building b on\n"
+                    + "b.building_code =  f.building_code\n"
+                    + "where b.building_name = '" + buildingName + "' and floor_name = '" + floorName + "'";
 
             conn = ConnectDB.getConnection();
             Statement state = conn.createStatement();
@@ -102,7 +108,7 @@ public class floorsManager {
             if (rs.next()) {
                 fileBytes = rs.getBytes(1);
                 OutputStream targetFile = new FileOutputStream(
-                        "/Users/Ali/Desktop/newtest.pdf");
+                        "/Users/Ali/Desktop/newtest38.pdf");
                 targetFile.write(fileBytes);
                 targetFile.close();
             }

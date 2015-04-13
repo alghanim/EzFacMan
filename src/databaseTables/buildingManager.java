@@ -58,7 +58,7 @@ public class buildingManager {
         String sql;
         building b = new building();
         if (dCampus != null) {
-            sql = "select distinct building_name from building where campus_code = '"+ dCampus +"'";
+            sql = "select distinct building_name from building where campus_code = " + "'" + dCampus + "'";
         } else {
 
             sql = "select distinct building_name from building";

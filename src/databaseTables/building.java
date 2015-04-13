@@ -33,7 +33,8 @@ public class building {
     /**
      * set the building name to the database
      *
-     * @param building_name
+     * @param building_name takes the name of the building from the Database and
+     * store it in building class
      */
     public void setBuilding_name(String building_name) {
         this.building_name = building_name;
