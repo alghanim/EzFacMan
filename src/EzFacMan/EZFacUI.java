@@ -134,9 +134,6 @@ public class EZFacUI extends javax.swing.JFrame {
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        roomPopUp.setPreferredSize(new java.awt.Dimension(450, 350));
-        roomPopUp.setSize(new java.awt.Dimension(450, 339));
-
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
         javax.swing.GroupLayout roomInfoPopupLayout = new javax.swing.GroupLayout(roomInfoPopup);
@@ -355,9 +352,9 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGap(360, 360, 360))
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(cautionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                .addComponent(cautionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(csvName, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(csvName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(341, 341, 341))
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -816,6 +813,17 @@ public class EZFacUI extends javax.swing.JFrame {
             Graphics g = mapDisplay.getGraphics();
             g.setColor(Color.blue);
             mapDisplay.repaint();
+
+            insertCSVFile insertcsv = new insertCSVFile();
+            //CSV file to database
+            String csvFile = csvCurFile.getPath();
+            try {
+                insertcsv.insertCSV(csvFile);
+            } catch (SQLException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_importButtonActionPerformed
     /**
