@@ -106,9 +106,9 @@ public class MapPanel extends JPanel implements Serializable {
             }
         }
 
-        if (roomClicked.isEmpty() || roomClicked.equals(getSelectedRoom())) {
+        if (roomClicked.isEmpty() || roomClicked.equals(getSelectedRoom()))
             unselectRoom();
-        } else {
+        else {
             selectRoom(roomClicked);
 
             showRoomInfo(roomClicked);
@@ -146,9 +146,7 @@ public class MapPanel extends JPanel implements Serializable {
         super.paintComponent(g);
 
         if (isInitialized) {
-            if (dim != null && !dim.equals(this.getSize())) {
-                calculateScale();
-            }
+            calculateScale();
 
             g.setFont(new Font(null, 0, 9));
 
@@ -244,7 +242,7 @@ public class MapPanel extends JPanel implements Serializable {
             scale = dim.width / (double) mapMaxX;
         }
 
-        scale += scale * .05;
+        scale *= 1.05;
 
         panelCenter = new PointData((int) (dim.width / 2), (int) (dim.height / 2));
         mapCenter = new PointData((int) ((mapMaxX - mapMinX) / (scale * 2)), (int) ((mapMaxY - mapMinY) / (scale * 2)));
