@@ -75,7 +75,7 @@ public class SVGParser {
             if (os.contains("win")) {
                 inkscapeInstallLoc = new String("C:\\Program Files\\Inkscape");
 
-                sysCall = new String("cd " + inkscapeInstallLoc
+                sysCall = new String("cmd /C cd " + inkscapeInstallLoc
                         + " && inkscape -l \"" + svgFileName + "\" "
                         + "\"" + filename + "\"");
 

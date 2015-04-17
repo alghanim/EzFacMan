@@ -95,6 +95,9 @@ public class floorsManager {
         byte[] fileBytes;
         String query;
         Connection conn = null;
+        File file = null;
+        String os = System.getProperty("os.name").toLowerCase();
+        String workingDir = System.getProperty("user.dir");
         try {
             query
                     = "select floor_map from floors f \n"
@@ -107,8 +110,7 @@ public class floorsManager {
             ResultSet rs = state.executeQuery(query);
             if (rs.next()) {
                 fileBytes = rs.getBytes(1);
-                OutputStream targetFile = new FileOutputStream(
-                        "/Users/Ali/Desktop/newtest38.pdf");
+                OutputStream targetFile = new FileOutputStream(workingDir + "\\newtest38.pdf");
                 targetFile.write(fileBytes);
                 targetFile.close();
             }

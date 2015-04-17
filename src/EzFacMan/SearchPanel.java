@@ -5,17 +5,24 @@
  */
 package EzFacMan;
 
+import static EzFacMan.EZFacUI.dBuilding;
+import ParseSVGData.SVGParser;
+import databaseTables.Rooms;
+import databaseTables.RoomsManager;
 import databaseTables.building;
 import databaseTables.buildingManager;
 import databaseTables.campus;
 import databaseTables.campusManager;
 import databaseTables.floors;
 import databaseTables.floorsManager;
+import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,11 +37,13 @@ public class SearchPanel extends javax.swing.JFrame {
     public String dBuilding;
     public static String dCampus;
     public String dFloor;
-    
-    public SearchPanel() throws SQLException, ClassNotFoundException {
+    public static EZFacUI ezFac;
+    public static MapPanel mapdisplay;
+    public SearchPanel(EZFacUI ezFacUI, MapPanel mapDis) throws SQLException, ClassNotFoundException {
 
         initComponents();
-
+        ezFac = ezFacUI;
+        mapdisplay = mapDis;
         floors f = floorsManager.displayAllfloors();
         campus c = campusManager.displayAllCampuses();
         building b = buildingManager.displayAllBuildings();
@@ -184,9 +193,37 @@ public class SearchPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
+      
+        try {
+            ezFac.campusDropdown.setSelectedItem(campusDrop.getSelectedItem());
+            ezFac.buildingDropdown.setSelectedItem(buildingDrop.getSelectedItem());
+            ezFac.floorDropdown.setSelectedItem(floorDrop.getSelectedItem());
+            ezFac.showMap.doClick();
+            dispose();
+            mapdisplay.selectRoom(roomInput.getText());
+            Rooms RoomsObject = RoomsManager.displayCertainRooms(roomInput.getText(), "Pharmacy - Allied Health");
         
-        
+            if (RoomsObject != null) {
+            ezFac.roomNum.setText(RoomsObject.getRoom_num());
+            ezFac.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
+            ezFac.roomType.setText(RoomsObject.getRoom_type_des());
+            ezFac.floorName.setText(RoomsObject.getFloor_name());
+            ezFac.departmentName.setText(RoomsObject.getFOAPAL_name());
+            ezFac.buildingName.setText(RoomsObject.getBuilding_name());
+            ezFac.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
+
+            ezFac.roomPopUp.setTitle("Room Information");
+
+            ezFac.roomPopUp.setVisible(true);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -288,7 +325,7 @@ public class SearchPanel extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new SearchPanel().setVisible(true);
+                    new SearchPanel(ezFac, mapdisplay).setVisible(true);
                 } catch (SQLException ex) {
                     Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {

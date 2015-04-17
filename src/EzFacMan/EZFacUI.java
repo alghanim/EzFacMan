@@ -937,7 +937,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         SearchPanel S = null;
         try {
-            S = new SearchPanel();
+            S = new SearchPanel(this, this.mapDisplay);
         } catch (SQLException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
             S.setVisible(true);
@@ -953,7 +953,10 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void showMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionPerformed
 
-        File fExist = new File("/Users/Ali/Desktop/newtest38.svg");
+        String os = System.getProperty("os.name").toLowerCase();
+        String workingDir = System.getProperty("user.dir");
+        
+        File fExist = new File(workingDir + "\\newtest38.svg");
         if (fExist.exists()) {
             fExist.delete();
         }
@@ -961,7 +964,7 @@ public class EZFacUI extends javax.swing.JFrame {
             floorsManager fm = new floorsManager();
 
             fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
-            SVGParser parser = new SVGParser("/Users/Ali/Desktop/newtest38.pdf");
+            SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
             mapDisplay.setRoomList(parser.parse());
             mapDisplay.setVisible(true);
 
@@ -1011,7 +1014,7 @@ public class EZFacUI extends javax.swing.JFrame {
     /**
     * This dropdown box selects a campus to show on spreadsheet display.
     */
-    private javax.swing.JComboBox campusDropdown;
+    public javax.swing.JComboBox campusDropdown;
     /**
     * The label for the campus selected from the dropdown box.
     */
@@ -1045,7 +1048,7 @@ public class EZFacUI extends javax.swing.JFrame {
     /**
     * This dropdown box selects a floor to show on spreadsheet display.
     */
-    private javax.swing.JComboBox floorDropdown;
+    public javax.swing.JComboBox floorDropdown;
     /**
     * The label for the floor selected from the dropdown box.
     */
@@ -1109,7 +1112,7 @@ public class EZFacUI extends javax.swing.JFrame {
     * The button for the settings menu.
     */
     private javax.swing.JMenu settingsButton;
-    private javax.swing.JButton showMap;
+    public javax.swing.JButton showMap;
     private javax.swing.JButton updateChange;
     /**
     * The button to open the user manual.
