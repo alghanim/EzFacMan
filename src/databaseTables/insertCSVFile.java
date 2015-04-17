@@ -65,8 +65,8 @@ public class insertCSVFile {
                     case "HSC":
                         campusname = "Health Sciences Center";
                         break;
-                    case "SERC":
-                        campusname = "Science and Engineering Resource Center";
+                    case "AC":
+                        campusname = "Ambler Campus";
                         break;
                 }
 
