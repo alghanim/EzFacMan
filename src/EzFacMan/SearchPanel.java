@@ -39,6 +39,7 @@ public class SearchPanel extends javax.swing.JFrame {
     public String dFloor;
     public static EZFacUI ezFac;
     public static MapPanel mapdisplay;
+
     public SearchPanel(EZFacUI ezFacUI, MapPanel mapDis) throws SQLException, ClassNotFoundException {
 
         initComponents();
@@ -58,10 +59,10 @@ public class SearchPanel extends javax.swing.JFrame {
         for (String s : allfloors) {
             floorDrop.addItem(s);
         }
-        for(String s: allcampuses){
+        for (String s : allcampuses) {
             campusDrop.addItem(s);
         }
-        for(String s: allbuildings){
+        for (String s : allbuildings) {
             buildingDrop.addItem(s);
         }
     }
@@ -193,7 +194,7 @@ public class SearchPanel extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-      
+
         try {
             ezFac.campusDropdown.setSelectedItem(campusDrop.getSelectedItem());
             ezFac.buildingDropdown.setSelectedItem(buildingDrop.getSelectedItem());
@@ -201,24 +202,25 @@ public class SearchPanel extends javax.swing.JFrame {
             ezFac.showMap.doClick();
             dispose();
             mapdisplay.selectRoom(roomInput.getText());
-            Rooms RoomsObject = RoomsManager.displayCertainRooms(roomInput.getText(), "Pharmacy - Allied Health");
-        
+            Rooms RoomsObject = RoomsManager.displayCertainRooms(roomInput.getText(), buildingDrop.getSelectedItem().toString());
+
+            // System.out.println(buildingDrop.getSelectedItem().toString());
             if (RoomsObject != null) {
-            ezFac.roomNum.setText(RoomsObject.getRoom_num());
-            ezFac.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
-            ezFac.roomType.setText(RoomsObject.getRoom_type_des());
-            ezFac.floorName.setText(RoomsObject.getFloor_name());
-            ezFac.departmentName.setText(RoomsObject.getFOAPAL_name());
-            ezFac.buildingName.setText(RoomsObject.getBuilding_name());
-            ezFac.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
+                ezFac.roomNum.setText(RoomsObject.getRoom_num());
+                ezFac.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
+                ezFac.roomType.setText(RoomsObject.getRoom_type_des());
+                ezFac.floorName.setText(RoomsObject.getFloor_name());
+                ezFac.departmentName.setText(RoomsObject.getFOAPAL_name());
+                ezFac.buildingName.setText(RoomsObject.getBuilding_name());
+                ezFac.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
 
-            ezFac.roomPopUp.setTitle("Room Information");
+                ezFac.roomPopUp.setTitle("Room Information");
 
-            ezFac.roomPopUp.setVisible(true);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
-        }
+                ezFac.roomPopUp.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -233,8 +235,8 @@ public class SearchPanel extends javax.swing.JFrame {
 
     private void campusDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropActionPerformed
         // TODO add your handling code here:
-              dCampus = (String) campusDrop.getSelectedItem();
-      //  String sqlString = "'" + dCampus + "'";
+        dCampus = (String) campusDrop.getSelectedItem();
+        //  String sqlString = "'" + dCampus + "'";
 
         if (dCampus != null) {
 
@@ -251,10 +253,10 @@ public class SearchPanel extends javax.swing.JFrame {
             allbuildings.removeAll(allbuildings);
             allbuildings.addAll(bb.getAllbuildings());
 
-            allbuildings.stream().forEach((s) -> {
+            for (String s : allbuildings) {
                 buildingDrop.addItem(s);
+            }
 
-            });
             buildingDrop.setEnabled(true);
             floorDrop.setEnabled(false);
 
@@ -264,7 +266,7 @@ public class SearchPanel extends javax.swing.JFrame {
 
     private void buildingDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropActionPerformed
         // TODO add your handling code here:
-            dBuilding = (String) buildingDrop.getSelectedItem();
+        dBuilding = (String) buildingDrop.getSelectedItem();
 
         if (dBuilding != null) {
             floors ff = null;
@@ -280,10 +282,11 @@ public class SearchPanel extends javax.swing.JFrame {
             allfloors.removeAll(allfloors);
             allfloors.addAll(ff.getAllFloors());
 
-            allfloors.stream().forEach((s) -> {
+            for (String s : allfloors) {
+
                 floorDrop.addItem(s);
 
-            });
+            }
 
         }
         System.out.println(allfloors.toString());

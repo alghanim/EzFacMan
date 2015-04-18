@@ -57,15 +57,16 @@ public class EZFacUI extends javax.swing.JFrame {
         allfloors.addAll(f.getAllFloors());
         allcampuses.addAll(c.getAllcampuses());
         allbuildings.addAll(b.getAllbuildings());
-        allfloors.stream().forEach((s) -> {
+
+       for(String s: allfloors) {
             floorDropdown.addItem(s);
-        });
-        allcampuses.stream().forEach((s) -> {
+        }
+        for(String s: allcampuses) {
             campusDropdown.addItem(s);
-        });
-        allbuildings.stream().forEach((s) -> {
+        }
+        for(String s: allbuildings){
             buildingDropdown.addItem(s);
-        });
+        }
         buildingDropdown.setEnabled(false);
         floorDropdown.setEnabled(false);
 
@@ -133,6 +134,8 @@ public class EZFacUI extends javax.swing.JFrame {
         helpButton = new javax.swing.JMenu();
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
+
+        roomPopUp.setMinimumSize(new java.awt.Dimension(450, 325));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -307,7 +310,6 @@ public class EZFacUI extends javax.swing.JFrame {
         });
 
         addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
-        addNewMapFrame.setPreferredSize(new java.awt.Dimension(500, 400));
         addNewMapFrame.setLocationRelativeTo(null);
 
         addMapPDF.setText("Add a map (.pdf)");
@@ -419,7 +421,6 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        mapDisplay.setBackground(new java.awt.Color(204, 204, 255));
         mapDisplay.setAlignmentX(1.0F);
         mapDisplay.setAlignmentY(3.0F);
         mapDisplay.setPreferredSize(new java.awt.Dimension(1300, 700));
@@ -636,10 +637,10 @@ public class EZFacUI extends javax.swing.JFrame {
             allbuildings.removeAll(allbuildings);
             allbuildings.addAll(bb.getAllbuildings());
 
-            allbuildings.stream().forEach((s) -> {
+            for(String s: allbuildings) {
                 buildingDropdown.addItem(s);
 
-            });
+            }
             buildingDropdown.setEnabled(true);
             floorDropdown.setEnabled(false);
 
@@ -674,10 +675,10 @@ public class EZFacUI extends javax.swing.JFrame {
             allfloors.removeAll(allfloors);
             allfloors.addAll(ff.getAllFloors());
 
-            allfloors.stream().forEach((s) -> {
+            for(String s: allfloors) {
                 floorDropdown.addItem(s);
 
-            });
+            }
 
         }
         System.out.println(allfloors.toString());
@@ -769,12 +770,16 @@ public class EZFacUI extends javax.swing.JFrame {
      * to select .pdf.
      */
     private void addMapPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMapPDFActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
 
-        JOptionPane.showMessageDialog(null, "Make sure that you Added a spreadsheat corresponds"
-                + "to the map", "Information", JOptionPane.INFORMATION_MESSAGE);
-        //  System.out.println(i);
-        int returnVal1 = pdfMapChooser.showOpenDialog(EZFacUI.this);
+            AddMap am = new AddMap();
+            am.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_addMapPDFActionPerformed
     /**
      * Opens the .csv file chooser to select a new spreadsheet.
@@ -798,21 +803,21 @@ public class EZFacUI extends javax.swing.JFrame {
      * the import button
      */
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        PDFCustomFilter pdfFilter = new PDFCustomFilter();
-        if (pdfFilter.accept(selectedFile) != true) {
-            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
-        }
+//        PDFCustomFilter pdfFilter = new PDFCustomFilter();
+//        if (pdfFilter.accept(selectedFile) != true) {
+//            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
+//        }
         CSVCustomFilter csvFilter = new CSVCustomFilter();
         if (csvFilter.accept(csvCurFile) != true) {
             JOptionPane.showMessageDialog(null, "The file you selected is not a CSV", "Error!", JOptionPane.OK_OPTION);
         } else {
-            SVGParser parser = new SVGParser(selectedFile.getPath());
-            mapDisplay.setRoomList(parser.parse());
-            mapDisplay.setVisible(true);
-
-            Graphics g = mapDisplay.getGraphics();
-            g.setColor(Color.blue);
-            mapDisplay.repaint();
+//            SVGParser parser = new SVGParser(selectedFile.getPath());
+//            mapDisplay.setRoomList(parser.parse());
+//            mapDisplay.setVisible(true);
+//
+//            Graphics g = mapDisplay.getGraphics();
+//            g.setColor(Color.blue);
+//            mapDisplay.repaint();
 
             insertCSVFile insertcsv = new insertCSVFile();
             //CSV file to database
@@ -849,27 +854,27 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
 
-        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
-            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
-            File oldFile = (File) evt.getOldValue();
-            File newFile = (File) evt.getNewValue();
-
-            // The selected file should always be the same as newFile
-            File curFile = pdfMapChooser.getSelectedFile();
-            selectedFile = curFile;
-            pdfName.setText(curFile.getName());
-            pdfName.setForeground(blue);
-
-        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
-                evt.getPropertyName())) {
-            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
-            File[] oldFiles = (File[]) evt.getOldValue();
-            File[] newFiles = (File[]) evt.getNewValue();
-
-            // Get list of selected files
-            // The selected files should always be the same as newFiles
-            File[] files = pdfMapChooser.getSelectedFiles();
-        }
+//        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
+//            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
+//            File oldFile = (File) evt.getOldValue();
+//            File newFile = (File) evt.getNewValue();
+//
+//            // The selected file should always be the same as newFile
+//            File curFile = pdfMapChooser.getSelectedFile();
+//            selectedFile = curFile;
+//            pdfName.setText(curFile.getName());
+//            pdfName.setForeground(blue);
+//
+//        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
+//                evt.getPropertyName())) {
+//            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
+//            File[] oldFiles = (File[]) evt.getOldValue();
+//            File[] newFiles = (File[]) evt.getNewValue();
+//
+//            // Get list of selected files
+//            // The selected files should always be the same as newFiles
+//            File[] files = pdfMapChooser.getSelectedFiles();
+//        }
     }//GEN-LAST:event_pdfMapChooserPropertyChange
     /**
      * Changes csvName label to correspond with the name of the .csv that user
@@ -887,9 +892,10 @@ public class EZFacUI extends javax.swing.JFrame {
             File csvOldFile = (File) evt.getOldValue();
             File csvNewFile = (File) evt.getNewValue();
             csvCurFile = csvMapChooser.getSelectedFile();
+           if(csvCurFile != null){
             csvName.setText(csvCurFile.getName());
             csvName.setForeground(blue);
-
+           }
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
             JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
