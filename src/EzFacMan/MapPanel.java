@@ -11,10 +11,12 @@ import ParseSVGData.Room;
 import ParseSVGData.PathData;
 import databaseTables.Rooms;
 import databaseTables.RoomsManager;
+import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Polygon;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -35,7 +37,6 @@ public class MapPanel extends JPanel implements Serializable {
     Dimension dim;
     int x1, x2, y1, y2, textX, textY;
     String selectedRoom = null;
-    
 
     public MapPanel() {
         super();
@@ -52,6 +53,8 @@ public class MapPanel extends JPanel implements Serializable {
                 }
             }
         });
+        
+        
     }
 
     /**
@@ -66,6 +69,7 @@ public class MapPanel extends JPanel implements Serializable {
             isInitialized = true;
         }
     }
+    
 
     public RoomData getRoomList() {
         return rList;
@@ -86,7 +90,7 @@ public class MapPanel extends JPanel implements Serializable {
     }
 
     public String mouseClickEvent(int x, int y) throws SQLException, ClassNotFoundException {
-         
+        //   EZFacUI ez = new EZFacUI();
         int convX = x;
         int convY = y;
         convX -= (panelCenter.x - mapCenter.x);
@@ -121,8 +125,7 @@ public class MapPanel extends JPanel implements Serializable {
 
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();
-        Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);
-        System.out.println(EZFacUI.dBuilding);
+        Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, "Pharmacy - Allied Health");
         if (RoomsObject != null) {
             ez.roomNum.setText(RoomsObject.getRoom_num());
             ez.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
@@ -144,17 +147,32 @@ public class MapPanel extends JPanel implements Serializable {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        g.setColor(Color.BLACK);
+        
+        int pdx, pdy;
+        
         if (isInitialized) {
             calculateScale();
 
             g.setFont(new Font(null, 0, 9));
+            Polygon p;
 
             int j, k;
             //get and draw points
             for (Room room : rList.roomList) {
                 j = 0;
-
+                p = new Polygon();
+                for (PointData pd : room.points) {
+                    pdx = (int) ((mapMaxX - pd.x) / scale);
+                    pdx += (panelCenter.x - mapCenter.x);
+                    pdy = (int) ((mapMaxY - pd.y) / scale);
+                    pdy += (panelCenter.y - mapCenter.y);
+                    p.addPoint(pdx, pdy);
+                }
+                g.setColor(new Color(Integer.decode("0x" + room.color)));
+                g.fillPolygon(p);
+                g.setColor(Color.BLACK);
+                
                 while (j < room.points.size()) {
                     PointData p1 = room.points.get(j);
                     if (j < room.points.size() - 1) {
@@ -189,7 +207,8 @@ public class MapPanel extends JPanel implements Serializable {
                 textX += (panelCenter.x - mapCenter.x);
                 textY = (int) ((mapMaxY - room.roomNumCoords.y) / scale);
                 textY += (panelCenter.y - mapCenter.y);
-
+               
+                g.setColor(Color.BLACK);
                 g.drawString(room.roomNum, textX, textY);
             }
             g.setFont(new Font(null, 0, 15));
