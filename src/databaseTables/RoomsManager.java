@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 /**
@@ -33,13 +34,12 @@ public class RoomsManager {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Scanner s = new Scanner(System.in);
-     
 
         try {
 
             conn = ConnectDB.getConnection();// creating the connection
             pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
-           
+
             rs = pstmt.executeQuery(); // excuting the statement
 
             if (rs.next()) {
@@ -70,7 +70,19 @@ public class RoomsManager {
         }
     }
 
-    public static void updateRoomInfo(String text, String text0, String text1, String text2, String text3, String text4, String text5) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void updateRoomInfo(String roomNum, String floorName,
+            String buildingName, String departmentCode,
+            String departmentName, String roomType, String roomArea) throws SQLException, ClassNotFoundException {
+       
+        String sql = "update Rooms set room_num = '"+ roomNum+"', floor_name ='"+floorName+"'";
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        conn = ConnectDB.getConnection();// creating the connection
+        stmt = conn.createStatement();// creating the statement that is already has its value
+        rs = stmt.executeQuery(sql); // excuting the statement
+
     }
 }

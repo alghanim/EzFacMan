@@ -125,7 +125,7 @@ public class MapPanel extends JPanel implements Serializable {
 
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();
-        Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, "Pharmacy - Allied Health");
+        Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);
         if (RoomsObject != null) {
             ez.roomNum.setText(RoomsObject.getRoom_num());
             ez.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());

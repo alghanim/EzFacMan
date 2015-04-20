@@ -58,13 +58,13 @@ public class EZFacUI extends javax.swing.JFrame {
         allcampuses.addAll(c.getAllcampuses());
         allbuildings.addAll(b.getAllbuildings());
 
-       for(String s: allfloors) {
+        for (String s : allfloors) {
             floorDropdown.addItem(s);
         }
-        for(String s: allcampuses) {
+        for (String s : allcampuses) {
             campusDropdown.addItem(s);
         }
-        for(String s: allbuildings){
+        for (String s : allbuildings) {
             buildingDropdown.addItem(s);
         }
         buildingDropdown.setEnabled(false);
@@ -121,6 +121,7 @@ public class EZFacUI extends javax.swing.JFrame {
         floorLabel = new javax.swing.JLabel();
         floorDropdown = new javax.swing.JComboBox();
         showMap = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         menuBar = new javax.swing.JMenuBar();
         fileButton = new javax.swing.JMenu();
         addNewMap = new javax.swing.JMenuItem();
@@ -433,7 +434,7 @@ public class EZFacUI extends javax.swing.JFrame {
         );
         mapDisplayLayout.setVerticalGroup(
             mapDisplayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 680, Short.MAX_VALUE)
         );
 
         campusDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -483,24 +484,30 @@ public class EZFacUI extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(campusLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buildingLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(floorLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(showMap))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(270, 270, 270)
+                                .addComponent(campusLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(campusDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buildingLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(buildingDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(floorLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(showMap))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -515,7 +522,9 @@ public class EZFacUI extends javax.swing.JFrame {
                     .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(showMap))
                 .addGap(18, 18, 18)
-                .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -637,7 +646,7 @@ public class EZFacUI extends javax.swing.JFrame {
             allbuildings.removeAll(allbuildings);
             allbuildings.addAll(bb.getAllbuildings());
 
-            for(String s: allbuildings) {
+            for (String s : allbuildings) {
                 buildingDropdown.addItem(s);
 
             }
@@ -675,7 +684,7 @@ public class EZFacUI extends javax.swing.JFrame {
             allfloors.removeAll(allfloors);
             allfloors.addAll(ff.getAllFloors());
 
-            for(String s: allfloors) {
+            for (String s : allfloors) {
                 floorDropdown.addItem(s);
 
             }
@@ -892,10 +901,10 @@ public class EZFacUI extends javax.swing.JFrame {
             File csvOldFile = (File) evt.getOldValue();
             File csvNewFile = (File) evt.getNewValue();
             csvCurFile = csvMapChooser.getSelectedFile();
-           if(csvCurFile != null){
-            csvName.setText(csvCurFile.getName());
-            csvName.setForeground(blue);
-           }
+            if (csvCurFile != null) {
+                csvName.setText(csvCurFile.getName());
+                csvName.setForeground(blue);
+            }
         } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
                 evt.getPropertyName())) {
             JFileChooser csvMapChooser = (JFileChooser) evt.getSource();
@@ -955,13 +964,17 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
 
+    //    RoomsManager.updateRoomInfo(roomNum.getText(), floorName.getText(), buildingName.getText(), departmentCode.getText(),
+      //          departmentName.getText(), roomType.getText(), roomArea.getText());
+     //   roomPopUp.repaint();
+       
     }//GEN-LAST:event_updateChangeActionPerformed
 
     private void showMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionPerformed
 
         String os = System.getProperty("os.name").toLowerCase();
         String workingDir = System.getProperty("user.dir");
-        
+
         File fExist = new File(workingDir + "\\newtest38.svg");
         if (fExist.exists()) {
             fExist.delete();
@@ -980,6 +993,7 @@ public class EZFacUI extends javax.swing.JFrame {
             mapDisplay.updateUI();
         }
         dBuilding = buildingDropdown.getSelectedItem().toString();
+       // jProgressBar1.
     }//GEN-LAST:event_showMapActionPerformed
 
     /**
@@ -1073,6 +1087,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JProgressBar jProgressBar1;
     /**
     * This is the panel for the main window.
     */
