@@ -1,5 +1,6 @@
 package databaseTables;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,8 +74,8 @@ public class RoomsManager {
     public static void updateRoomInfo(String roomNum, String floorName,
             String buildingName, String departmentCode,
             String departmentName, String roomType, String roomArea) throws SQLException, ClassNotFoundException {
-       
-        String sql = "update Rooms set room_num = '"+ roomNum+"', floor_name ='"+floorName+"'";
+
+        String sql = "update Rooms set room_num = '" + roomNum + "', floor_name ='" + floorName + "'";
 
         Connection conn = null;
         Statement stmt = null;
@@ -85,4 +86,6 @@ public class RoomsManager {
         rs = stmt.executeQuery(sql); // excuting the statement
 
     }
+
+    
 }

@@ -793,7 +793,7 @@
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * This dropdown box selects a floor to show on spreadsheet display.&#xa; */"/>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="showMap">

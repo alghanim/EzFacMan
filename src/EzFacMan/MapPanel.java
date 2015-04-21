@@ -11,6 +11,8 @@ import ParseSVGData.Room;
 import ParseSVGData.PathData;
 import databaseTables.Rooms;
 import databaseTables.RoomsManager;
+import databaseTables.department;
+import databaseTables.departmentManager;
 import java.awt.Color;
 import javax.swing.JPanel;
 import java.awt.Graphics;
@@ -37,7 +39,7 @@ public class MapPanel extends JPanel implements Serializable {
     Dimension dim;
     int x1, x2, y1, y2, textX, textY;
     String selectedRoom = null;
-
+    
     public MapPanel() {
         super();
 
@@ -45,7 +47,8 @@ public class MapPanel extends JPanel implements Serializable {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 try {
-                    mouseClickEvent(evt.getX(), evt.getY());
+                    if (isInitialized)
+                        mouseClickEvent(evt.getX(), evt.getY());
                 } catch (SQLException ex) {
                     Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -63,10 +66,11 @@ public class MapPanel extends JPanel implements Serializable {
      * @param list the ArrayList of Room objects to be drawn to the MapPanel
      */
     public void setRoomList(RoomData list) {
+        isInitialized = false;
         if (list != null) {
             rList = list;
             calculateScale();
-            isInitialized = true;
+            getColors();
         }
     }
     
@@ -136,8 +140,6 @@ public class MapPanel extends JPanel implements Serializable {
             ez.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
 
             ez.roomPopUp.setTitle("Room Information");
-
-            System.out.println(roomClicked);
             ez.roomPopUp.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
@@ -169,6 +171,7 @@ public class MapPanel extends JPanel implements Serializable {
                     pdy += (panelCenter.y - mapCenter.y);
                     p.addPoint(pdx, pdy);
                 }
+                
                 g.setColor(new Color(Integer.decode("0x" + room.color)));
                 g.fillPolygon(p);
                 g.setColor(Color.BLACK);
@@ -203,15 +206,17 @@ public class MapPanel extends JPanel implements Serializable {
                     }
                     j++;
                 }
+            }
+            g.setFont(new Font(null, 0, 10));
+            for (Room room : rList.roomList)
+            {
                 textX = (int) ((mapMaxX - room.roomNumCoords.x) / scale);
                 textX += (panelCenter.x - mapCenter.x);
                 textY = (int) ((mapMaxY - room.roomNumCoords.y) / scale);
                 textY += (panelCenter.y - mapCenter.y);
-               
-                g.setColor(Color.BLACK);
-                g.drawString(room.roomNum, textX, textY);
+
+                g.drawString(room.roomNum, textX, textY + 4);
             }
-            g.setFont(new Font(null, 0, 15));
         }
     }
 
@@ -266,5 +271,26 @@ public class MapPanel extends JPanel implements Serializable {
         panelCenter = new PointData((int) (dim.width / 2), (int) (dim.height / 2));
         mapCenter = new PointData((int) ((mapMaxX - mapMinX) / (scale * 2)), (int) ((mapMaxY - mapMinY) / (scale * 2)));
 
+    }
+    
+    private void getColors() {
+    
+        for (Room room : rList.roomList) {
+            try {
+                department departmentObject = departmentManager.getColor(room.roomNum , EZFacUI.dFloor , EZFacUI.dBuilding);
+                System.out.println(room.roomNum + EZFacUI.dFloor + EZFacUI.dBuilding);
+                if (departmentObject != null)
+                    room.color = departmentObject.getFOAPAL_color();
+                else
+                    room.color = "FFFFFF";
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+            isInitialized = true;
+    
     }
 }
