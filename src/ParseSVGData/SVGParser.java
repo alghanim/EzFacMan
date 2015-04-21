@@ -79,8 +79,6 @@ public class SVGParser {
                         + " && inkscape -l \"" + svgFileName + "\" "
                         + "\"" + filename + "\"");
 
-                System.out.println(sysCall);
-
             } else if (os.contains("mac")) {
 
                 inkscapeInstallLoc = new String("/Applications/Inkscape.app/Contents/Resources/bin/inkscape");
@@ -90,7 +88,6 @@ public class SVGParser {
                         + " " + filename);
 
             }
-            System.out.println(sysCall);
             try {
                 Process p = Runtime.getRuntime().exec(sysCall);
                 p.waitFor();

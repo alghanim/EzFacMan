@@ -39,7 +39,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private ArrayList<String> allfloors = new ArrayList<String>();
     public static String dBuilding;
     public static String dCampus;
-    public String dFloor;
+    public static String dFloor;
     floors f = floorsManager.displayAllfloors();
     campus c = campusManager.displayAllCampuses();
     building b = buildingManager.displayAllBuildings();
@@ -659,7 +659,7 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void floorDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorDropdownActionPerformed
 
-
+        
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
@@ -981,18 +981,17 @@ public class EZFacUI extends javax.swing.JFrame {
         }
         if (floorDropdown.getSelectedItem() != null) {
             floorsManager fm = new floorsManager();
+            dFloor = floorDropdown.getSelectedItem().toString();
+            dBuilding = buildingDropdown.getSelectedItem().toString();
 
             fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
             SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
             mapDisplay.setRoomList(parser.parse());
             mapDisplay.setVisible(true);
 
-            Graphics g = mapDisplay.getGraphics();
-            // g.setColor(Color.blue);
             mapDisplay.repaint();
             mapDisplay.updateUI();
         }
-        dBuilding = buildingDropdown.getSelectedItem().toString();
        // jProgressBar1.
     }//GEN-LAST:event_showMapActionPerformed
 
@@ -1068,7 +1067,7 @@ public class EZFacUI extends javax.swing.JFrame {
     /**
     * This dropdown box selects a floor to show on spreadsheet display.
     */
-    public javax.swing.JComboBox floorDropdown;
+    public static javax.swing.JComboBox floorDropdown;
     /**
     * The label for the floor selected from the dropdown box.
     */
