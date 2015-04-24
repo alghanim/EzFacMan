@@ -739,6 +739,8 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         }
         Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
+        System.out.println(newColor);
+                
 
     }//GEN-LAST:event_modDeptColorActionPerformed
     /**
@@ -943,7 +945,20 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_userManualButtonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        deptColorChooser = new javax.swing.JColorChooser();
+        AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
+        for (int i = 0; i < oldPanels.length; i++) {
+            String clsName = oldPanels[i].getClass().getName();
+            if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            }
+        }
+        Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
+        System.out.println(newColor);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
