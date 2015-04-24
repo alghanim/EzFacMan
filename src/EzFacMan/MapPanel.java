@@ -39,6 +39,7 @@ public class MapPanel extends JPanel implements Serializable {
     Dimension dim;
     int x1, x2, y1, y2, textX, textY;
     String selectedRoom = null;
+    String roomColor;
     
     public MapPanel() {
         super();
@@ -129,6 +130,7 @@ public class MapPanel extends JPanel implements Serializable {
 
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();
+        String color = "#ffffff";
         Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);
         if (RoomsObject != null) {
             ez.Add.setEnabled(false);
@@ -140,7 +142,9 @@ public class MapPanel extends JPanel implements Serializable {
             ez.departmentName.setText(RoomsObject.getFOAPAL_name());
             ez.buildingName.setText(RoomsObject.getBuilding_name());
             ez.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
-
+            ez.commentBox.setText(RoomsObject.getComments());
+            ez.colorPanel.setBackground(Color.decode("#" + RoomsObject.getRoom_color()));
+            
             ez.roomPopUp.setTitle("Room Information");
             ez.roomPopUp.setVisible(true);
         } else {
@@ -148,14 +152,15 @@ public class MapPanel extends JPanel implements Serializable {
             if (reply == JOptionPane.YES_OPTION) {
                 ez.updateChange.setEnabled(false);
                 ez.campusCode.setText(ez.dCampus);
+                ez.buildingName.setText(ez.dBuilding);
+                ez.floorName.setText(ez.dFloor);
                 ez.roomNum.setText(roomClicked);
                 ez.departmentCode.setText("");
                 ez.roomType.setText("");
-                ez.floorName.setText(ez.dFloor);
                 ez.departmentName.setText("");
-                ez.buildingName.setText(ez.dBuilding);
                 ez.roomArea.setText("");
-
+                ez.commentBox.setText("");
+                ez.colorPanel.setBackground(Color.decode("#" + roomColor)); //Default color for department
                 ez.roomPopUp.setTitle("Room Information");
                 ez.roomPopUp.setVisible(true);
             }
@@ -188,7 +193,7 @@ public class MapPanel extends JPanel implements Serializable {
                     p.addPoint(pdx, pdy);
                 }
                 
-                g.setColor(new Color(Integer.decode("0x" + room.color)));
+                g.setColor(new Color(Integer.decode("#" + room.color)));
                 g.fillPolygon(p);
                 g.setColor(Color.BLACK);
                 
@@ -295,8 +300,10 @@ public class MapPanel extends JPanel implements Serializable {
             try {
                 department departmentObject = departmentManager.getColor(room.roomNum , EZFacUI.dFloor , EZFacUI.dBuilding);
                 System.out.println(room.roomNum + EZFacUI.dFloor + EZFacUI.dBuilding);
-                if (departmentObject != null)
+                if (departmentObject != null) {
                     room.color = departmentObject.getFOAPAL_color();
+                    roomColor = room.color;
+                }
                 else
                     room.color = "FFFFFF";
             } catch (ClassNotFoundException ex) {
