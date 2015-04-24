@@ -101,6 +101,7 @@ public class EZFacUI extends javax.swing.JFrame {
         roomType = new javax.swing.JTextField();
         roomArea = new javax.swing.JTextField();
         updateChange = new javax.swing.JButton();
+        Add = new javax.swing.JButton();
         deptColorChooser = new javax.swing.JColorChooser();
         pdfMapChooser = new javax.swing.JFileChooser();
         addNewMapFrame = new javax.swing.JFrame();
@@ -136,7 +137,7 @@ public class EZFacUI extends javax.swing.JFrame {
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        roomPopUp.setMinimumSize(new java.awt.Dimension(450, 325));
+        roomPopUp.setMinimumSize(new java.awt.Dimension(450, 365));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -178,28 +179,21 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        campusCode.setText("Main Campus");
         campusCode.setPreferredSize(new java.awt.Dimension(180, 28));
 
-        buildingName.setText("jTextField1");
-
-        floorName.setText("jTextField2");
-
-        roomNum.setText("jTextField3");
         roomNum.setPreferredSize(new java.awt.Dimension(180, 28));
-
-        departmentCode.setText("jTextField4");
-
-        departmentName.setText("jTextField5");
-
-        roomType.setText("jTextField6");
-
-        roomArea.setText("jTextField7");
 
         updateChange.setText("Update");
         updateChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateChangeActionPerformed(evt);
+            }
+        });
+
+        Add.setText("Add");
+        Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addRoomDataActionPerformed(evt);
             }
         });
 
@@ -237,8 +231,10 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateChange)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(updateChange)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Add)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roomPopUpLayout.setVerticalGroup(
             roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,10 +244,13 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roomCampus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campusCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(roomBuildingName)
-                    .addComponent(buildingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(roomBuildingName))
+                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buildingName, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(1, 1, 1)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roomFloor)
@@ -279,7 +278,8 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(updateChange))
+                    .addComponent(updateChange)
+                    .addComponent(Add))
                 .addContainerGap())
         );
 
@@ -438,7 +438,6 @@ public class EZFacUI extends javax.swing.JFrame {
         );
 
         campusDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        campusDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Main" }));
         campusDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campusDropdownActionPerformed(evt);
@@ -452,7 +451,8 @@ public class EZFacUI extends javax.swing.JFrame {
         buildingLabel.setText("Building");
 
         buildingDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        buildingDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ritter Hall (004)" }));
+        buildingDropdown.setToolTipText("");
+        buildingDropdown.setName(""); // NOI18N
         buildingDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buildingDropdownActionPerformed(evt);
@@ -463,7 +463,6 @@ public class EZFacUI extends javax.swing.JFrame {
         floorLabel.setText("Floor");
 
         floorDropdown.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        floorDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2nd Floor" }));
         floorDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 floorDropdownActionPerformed(evt);
@@ -628,16 +627,15 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void campusDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropdownActionPerformed
         floorDropdown.setEnabled(false);
-        dCampus = (String) campusDropdown.getSelectedItem();
         // String sqlString = "'" + dCampus;
 
-        if (dCampus != null) {
+        if (campusDropdown.getSelectedItem() != null) {
 
             building bb = null;
             try {
                 buildingDropdown.removeAllItems();
 
-                bb = buildingManager.display(dCampus);
+                bb = buildingManager.display(campusDropdown.getSelectedItem().toString());
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -668,14 +666,13 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mainPanelMouseClicked
 
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
-        dBuilding = (String) buildingDropdown.getSelectedItem();
 
-        if (dBuilding != null) {
+        if (buildingDropdown.getSelectedItem() != null) {
             floors ff = null;
             try {
                 floorDropdown.removeAllItems();
 
-                ff = floorsManager.display(dBuilding);
+                ff = floorsManager.display(buildingDropdown.getSelectedItem().toString());
 
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -963,7 +960,7 @@ public class EZFacUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
-
+        this.dispose();
     //    RoomsManager.updateRoomInfo(roomNum.getText(), floorName.getText(), buildingName.getText(), departmentCode.getText(),
       //          departmentName.getText(), roomType.getText(), roomArea.getText());
      //   roomPopUp.repaint();
@@ -978,7 +975,11 @@ public class EZFacUI extends javax.swing.JFrame {
         File fExist = new File(workingDir + "\\newtest38.svg");
         if (fExist.exists()) {
             fExist.delete();
-        }
+        }        
+        
+        dCampus = (String) campusDropdown.getSelectedItem();
+        dBuilding = (String) buildingDropdown.getSelectedItem();
+        
         if (floorDropdown.getSelectedItem() != null) {
             floorsManager fm = new floorsManager();
             dFloor = floorDropdown.getSelectedItem().toString();
@@ -995,11 +996,16 @@ public class EZFacUI extends javax.swing.JFrame {
        // jProgressBar1.
     }//GEN-LAST:event_showMapActionPerformed
 
+    private void addRoomDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addRoomDataActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton Add;
     /**
     * The button to open the about page.
     */
@@ -1029,7 +1035,7 @@ public class EZFacUI extends javax.swing.JFrame {
     */
     private javax.swing.JLabel buildingLabel;
     public javax.swing.JTextField buildingName;
-    private javax.swing.JTextField campusCode;
+    public javax.swing.JTextField campusCode;
     /**
     * This dropdown box selects a campus to show on spreadsheet display.
     */
@@ -1067,7 +1073,7 @@ public class EZFacUI extends javax.swing.JFrame {
     /**
     * This dropdown box selects a floor to show on spreadsheet display.
     */
-    public static javax.swing.JComboBox floorDropdown;
+    public javax.swing.JComboBox floorDropdown;
     /**
     * The label for the floor selected from the dropdown box.
     */
@@ -1133,7 +1139,7 @@ public class EZFacUI extends javax.swing.JFrame {
     */
     private javax.swing.JMenu settingsButton;
     public javax.swing.JButton showMap;
-    private javax.swing.JButton updateChange;
+    public javax.swing.JButton updateChange;
     /**
     * The button to open the user manual.
     */

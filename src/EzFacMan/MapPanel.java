@@ -131,6 +131,8 @@ public class MapPanel extends JPanel implements Serializable {
         EZFacUI ez = new EZFacUI();
         Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);
         if (RoomsObject != null) {
+            ez.Add.setEnabled(false);
+            ez.campusCode.setText(ez.dCampus);
             ez.roomNum.setText(RoomsObject.getRoom_num());
             ez.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
             ez.roomType.setText(RoomsObject.getRoom_type_des());
@@ -142,7 +144,21 @@ public class MapPanel extends JPanel implements Serializable {
             ez.roomPopUp.setTitle("Room Information");
             ez.roomPopUp.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
+            int reply = JOptionPane.showConfirmDialog(null, "There is no room data exists. Do you still want to continue?", "No room data exists", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                ez.updateChange.setEnabled(false);
+                ez.campusCode.setText(ez.dCampus);
+                ez.roomNum.setText(roomClicked);
+                ez.departmentCode.setText("");
+                ez.roomType.setText("");
+                ez.floorName.setText(ez.dFloor);
+                ez.departmentName.setText("");
+                ez.buildingName.setText(ez.dBuilding);
+                ez.roomArea.setText("");
+
+                ez.roomPopUp.setTitle("Room Information");
+                ez.roomPopUp.setVisible(true);
+            }
         }
     }
 

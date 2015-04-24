@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -219,14 +220,18 @@ public class LoginScreen extends javax.swing.JFrame {
         try {
             ConnectDB.isValidConnection(ConnectDB.getConnection(), "mysql");
         } catch (SQLException e) {
-            ErrorBox.setLocationRelativeTo(null);
-            ErrorBox.setVisible(true);
+            //ErrorBox.setLocationRelativeTo(null);
+            //ErrorBox.setVisible(true);
             test = false;
         }
         if (test) {
-            ez.setTitle("EZ-Fac");
-            ez.setVisible(true);
-            dispose();
+            if(ConnectDB.checkifuserexists()) {
+                ez.setTitle("EZ-Fac");
+                ez.setVisible(true);
+                dispose();
+            } else   JOptionPane.showMessageDialog(null, "Username/Password incorrect", "Error!", JOptionPane.OK_OPTION);
+        } else {
+            JOptionPane.showMessageDialog(null, "Database Error", "Error!", JOptionPane.OK_OPTION);
         }
     }
 
