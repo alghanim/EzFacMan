@@ -35,15 +35,10 @@ public class ConnectDB {
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
         Class.forName("com.mysql.jdbc.Driver");
-        String username = LoginScreen.usernameField.getText();
-        //String username = "tud50428";
-        String password = new String(LoginScreen.passwordField.getPassword());
-        //String password = "IJoovu9u";
-
         return DriverManager
-                .getConnection(LocalConnectionString, "tuc69409", "Pae9Cahz");
+                .getConnection(ConnectionString, "tuc69409", "Pae9Cahz");
     }
-
+    
     public static boolean isValidConnection(Connection conn, String dbVendor) throws Exception {
 
         if (conn == null) {
@@ -98,4 +93,48 @@ public class ConnectDB {
         }
     }
 
+    public static boolean checkifuserexists() {
+        ResultSet rs = null;
+        Statement stmt = null;
+        try {
+            Connection conn = getConnection();
+            stmt = conn.createStatement();
+            if (stmt == null) {
+                return false;
+            }
+            
+            //String username = LoginScreen.usernameField.getText();
+            //String username = "tud50428";
+            String username = "tuc69409";
+            String password = "Pae9Cahz";
+            //String password = new String(LoginScreen.passwordField.getPassword());
+            //String password = "IJoovu9u";
+
+            rs = stmt.executeQuery("SELECT accessnet FROM team4.users WHERE accessnet = '" + username + "' and password = '" + password + "'");
+            if (rs == null) {
+                return false;
+            }
+
+            // connection object is valid: you were able to
+            // connect to the database and return something useful.
+            if (rs.next()) {
+                return true;
+            }
+
+            // there is no hope any more for the validity
+            // of the Connection object
+            return false;
+        } catch (Exception e) {
+            // something went wrong: connection is bad
+            return false;
+        } finally {
+            // close database resources
+            try {
+                rs.close();
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

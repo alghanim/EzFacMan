@@ -87,5 +87,23 @@ public class RoomsManager {
 
     }
 
-    
+    public static void addRoomInfo(String roomNum, String floorName,
+            String buildingName, String departmentCode,
+            String departmentName, String roomType, String roomArea) throws SQLException, ClassNotFoundException {
+
+        String sql = "insert into Rooms set room_num = '" + roomNum + "', floor_name ='" + floorName + "'";
+/*String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
+                        + "room_type_des,room_area_sqft,comments)"
+                        + "VALUES ('" + titles[4] + "','" + titles[1] + "','" + titles[3] + "','" + titles[5] + "',"
+                        + "'" + titles[7] + "','" + titles[8] + "','" + titles[9] + titles[10] + "') ON DUPLICATE KEY UPDATE FOAPAL_code = '" + titles[5] + "' room_type_des=  '" + titles[7] + "' room_area_sqft = '" + titles[8] + "';";
+*/
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        conn = ConnectDB.getConnection();// creating the connection
+        stmt = conn.createStatement();// creating the statement that is already has its value
+        rs = stmt.executeQuery(sql); // excuting the statement
+
+    }
 }
