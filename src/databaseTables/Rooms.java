@@ -10,7 +10,24 @@ public class Rooms {
     private int room_area_sqft;
     private String FOAPAL_name;
     private String building_name;
-
+    private String room_color;
+    private String comment_box;
+    
+    public String getRoom_color() {
+        return room_color;
+    }
+    public void setRoom_color(String room_color) {
+        this.room_color = room_color;
+    }
+    
+    public String getComments() {
+        return comment_box;
+    }
+    
+    public void setComments(String comment_box) {
+        this.comment_box = comment_box;
+    }
+    
     public String getBuilding_name() {
         return building_name;
     }
