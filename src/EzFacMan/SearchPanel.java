@@ -15,6 +15,7 @@ import databaseTables.campus;
 import databaseTables.campusManager;
 import databaseTables.floors;
 import databaseTables.floorsManager;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.io.File;
@@ -200,12 +201,14 @@ public class SearchPanel extends javax.swing.JFrame {
             ezFac.buildingDropdown.setSelectedItem(buildingDrop.getSelectedItem());
             ezFac.floorDropdown.setSelectedItem(floorDrop.getSelectedItem());
             ezFac.showMap.doClick();
-            dispose();
+            this.dispose();
             mapdisplay.selectRoom(roomInput.getText());
             Rooms RoomsObject = RoomsManager.displayCertainRooms(roomInput.getText(), buildingDrop.getSelectedItem().toString());
 
             // System.out.println(buildingDrop.getSelectedItem().toString());
             if (RoomsObject != null) {
+                ezFac.Add.setEnabled(false);
+                ezFac.campusCode.setText(ezFac.dCampus);
                 ezFac.roomNum.setText(RoomsObject.getRoom_num());
                 ezFac.departmentCode.setText(RoomsObject.getFOAPAL_code().toString());
                 ezFac.roomType.setText(RoomsObject.getRoom_type_des());
@@ -213,14 +216,14 @@ public class SearchPanel extends javax.swing.JFrame {
                 ezFac.departmentName.setText(RoomsObject.getFOAPAL_name());
                 ezFac.buildingName.setText(RoomsObject.getBuilding_name());
                 ezFac.roomArea.setText(String.valueOf(RoomsObject.getRoom_area_sqft()));
-
+                ezFac.commentBox.setText(RoomsObject.getComments());
+                ezFac.colorPanel.setBackground(Color.decode("#" + RoomsObject.getRoom_color()));
                 ezFac.roomPopUp.setTitle("Room Information");
-
                 ezFac.roomPopUp.setVisible(true);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "There is no Information linked to this room", "Warning!", JOptionPane.WARNING_MESSAGE);
-            }
+            } else 
+                JOptionPane.showMessageDialog(null, "There is no room data exists. You can click on a room to add a data.", "No room data exists", JOptionPane.OK_OPTION);
+                    
+        
         } catch (SQLException ex) {
             Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

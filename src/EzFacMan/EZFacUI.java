@@ -84,7 +84,7 @@ public class EZFacUI extends javax.swing.JFrame {
 
         roomPopUp = new javax.swing.JFrame();
         roomInfoPopup = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        roomAreaLabel = new javax.swing.JLabel();
         roomTypedes = new javax.swing.JLabel();
         roomFOAPALName = new javax.swing.JLabel();
         roomFOAPAL = new javax.swing.JLabel();
@@ -135,15 +135,15 @@ public class EZFacUI extends javax.swing.JFrame {
         settingsButton = new javax.swing.JMenu();
         modDeptColor = new javax.swing.JMenuItem();
         resetDeptColors = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        searchBuutton = new javax.swing.JMenu();
+        searchByRoomNum = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         helpButton = new javax.swing.JMenu();
         userManualButton = new javax.swing.JMenuItem();
         aboutButton = new javax.swing.JMenuItem();
 
-        roomPopUp.setMinimumSize(new java.awt.Dimension(450, 420));
-        roomPopUp.setPreferredSize(new java.awt.Dimension(450, 420));
+        roomPopUp.setMinimumSize(new java.awt.Dimension(450, 425));
+        roomPopUp.setPreferredSize(new java.awt.Dimension(450, 425));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -158,7 +158,7 @@ public class EZFacUI extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel5.setText("Room Area: ");
+        roomAreaLabel.setText("Room Area: ");
 
         roomTypedes.setText("Room Type: ");
 
@@ -221,7 +221,7 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Comments");
+        jLabel1.setText("Comments:");
 
         commentBox.setColumns(20);
         commentBox.setRows(5);
@@ -268,27 +268,30 @@ public class EZFacUI extends javax.swing.JFrame {
                         .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(roomPopUpLayout.createSequentialGroup()
                                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(roomTypedes, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
+                                    .addComponent(roomAreaLabel)
+                                    .addComponent(roomTypedes, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(5, 5, 5)
                                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(roomType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(roomArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(roomPopUpLayout.createSequentialGroup()
-                                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(roomPopUpLayout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
                                         .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(roomBuildingName)
-                                            .addComponent(roomCampus)))
-                                    .addComponent(jLabel1)
-                                    .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(roomFOAPALName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(roomNumber, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(roomFOAPAL)
-                                    .addComponent(roomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(roomPopUpLayout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(roomCampus))
+                                            .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(roomFOAPALName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(roomNumber, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(roomFOAPAL)
+                                            .addComponent(roomFloor, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(5, 5, 5))
+                                    .addGroup(roomPopUpLayout.createSequentialGroup()
+                                        .addComponent(roomBuildingName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(departmentCode, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -308,13 +311,10 @@ public class EZFacUI extends javax.swing.JFrame {
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roomCampus, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campusCode, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(roomPopUpLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(roomBuildingName))
-                    .addGroup(roomPopUpLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(buildingName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buildingName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roomBuildingName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(floorName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,13 +337,13 @@ public class EZFacUI extends javax.swing.JFrame {
                     .addComponent(roomType, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(roomAreaLabel)
                     .addComponent(roomArea, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 19, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roomPopUpLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(colorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -351,7 +351,7 @@ public class EZFacUI extends javax.swing.JFrame {
                             .addComponent(updateChange)
                             .addComponent(Add)))
                     .addComponent(selectColorButton))
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         deptColorChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -381,7 +381,8 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         });
 
-        addNewMapFrame.setMinimumSize(new java.awt.Dimension(500, 400));
+        addNewMapFrame.setMinimumSize(new java.awt.Dimension(520, 400));
+        addNewMapFrame.setPreferredSize(new java.awt.Dimension(520, 400));
         addNewMapFrame.setLocationRelativeTo(null);
 
         addMapPDF.setText("Add a map (.pdf)");
@@ -421,47 +422,47 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMapFrameLayout.setHorizontalGroup(
             addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(pdfName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(360, 360, 360))
-            .addGroup(addNewMapFrameLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(cautionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(csvName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(341, 341, 341))
-            .addGroup(addNewMapFrameLayout.createSequentialGroup()
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(addMapCSV, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addMapPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(addMapPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cautionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(addNewMapFrameLayout.createSequentialGroup()
                         .addGap(142, 142, 142)
                         .addComponent(importButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53))
+            .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(csvName, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addNewMapFrameLayout.createSequentialGroup()
+                        .addGap(151, 151, 151)
+                        .addComponent(pdfName)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addNewMapFrameLayout.setVerticalGroup(
             addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addNewMapFrameLayout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(pdfName)
+                .addGap(68, 68, 68)
+                .addComponent(addMapCSV, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addMapCSV)
-                .addGap(18, 18, 18)
-                .addComponent(addMapPDF)
-                .addGap(23, 23, 23)
+                .addComponent(csvName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(addMapPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pdfName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cautionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(csvName)
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addGroup(addNewMapFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(importButton)
                     .addComponent(cancelButton))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         csvMapChooser.removeChoosableFileFilter(csvMapChooser.getAcceptAllFileFilter());
@@ -591,9 +592,9 @@ public class EZFacUI extends javax.swing.JFrame {
                     .addComponent(floorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(floorDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(showMap))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mapDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -638,20 +639,20 @@ public class EZFacUI extends javax.swing.JFrame {
 
         menuBar.add(settingsButton);
 
-        jMenu1.setText("Search");
+        searchBuutton.setText("Search");
 
-        jMenuItem1.setText("by Room Number");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        searchByRoomNum.setText("by Room Number");
+        searchByRoomNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                searchByRoomNumActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        searchBuutton.add(searchByRoomNum);
 
         jMenuItem2.setText("by Comment");
-        jMenu1.add(jMenuItem2);
+        searchBuutton.add(jMenuItem2);
 
-        menuBar.add(jMenu1);
+        menuBar.add(searchBuutton);
 
         helpButton.setText("Help");
 
@@ -1033,7 +1034,7 @@ public class EZFacUI extends javax.swing.JFrame {
         colorPanel.setBackground(newColor);
     }//GEN-LAST:event_selectColorButtonActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void searchByRoomNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByRoomNumActionPerformed
         SearchPanel S = null;
         try {
             S = new SearchPanel(this, this.mapDisplay);
@@ -1044,13 +1045,31 @@ public class EZFacUI extends javax.swing.JFrame {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         S.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_searchByRoomNumActionPerformed
 
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
-        this.roomPopUp.dispose();
+ 
     //    RoomsManager.updateRoomInfo(roomNum.getText(), floorName.getText(), buildingName.getText(), departmentCode.getText(),
       //          departmentName.getText(), roomType.getText(), roomArea.getText());
      //   roomPopUp.repaint();
+         try {
+            // TODO add your handling code here:
+            //      RoomsManager.addRoomInfo(String roomNum,
+            //        String buildingCode, String floorName, String departmentCode,
+            //      String departmentName, String roomType, String roomArea, String commentBox, String color) throws SQLException, ClassNotFoundException {
+            int buildingCode = RoomsManager.buildingNametoCode(buildingName.getText());
+            RoomsManager.addRoomInfo(roomNum.getText(), buildingCode, floorName.getText(), departmentCode.getText(),
+                    departmentName.getText(), roomType.getText(), roomArea.getText(), roomColor, commentBox.getText());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.mapDisplay.repaint();
+        this.mapDisplay.updateUI();
+        this.roomPopUp.dispose();
        
     }//GEN-LAST:event_updateChangeActionPerformed
 
@@ -1195,9 +1214,6 @@ public class EZFacUI extends javax.swing.JFrame {
     */
     private javax.swing.JButton importButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1231,6 +1247,7 @@ public class EZFacUI extends javax.swing.JFrame {
     */
     private javax.swing.JMenuItem resetDeptColors;
     public javax.swing.JTextField roomArea;
+    private javax.swing.JLabel roomAreaLabel;
     private javax.swing.JLabel roomBuildingName;
     private javax.swing.JLabel roomCampus;
     private javax.swing.JLabel roomFOAPAL;
@@ -1242,6 +1259,8 @@ public class EZFacUI extends javax.swing.JFrame {
     public javax.swing.JFrame roomPopUp;
     public javax.swing.JTextField roomType;
     private javax.swing.JLabel roomTypedes;
+    private javax.swing.JMenu searchBuutton;
+    private javax.swing.JMenuItem searchByRoomNum;
     private javax.swing.JButton selectColorButton;
     /**
     * The button for the settings menu.

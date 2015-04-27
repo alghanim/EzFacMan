@@ -72,16 +72,16 @@ public class RoomsManager {
             if (rs != null) {
                 rs.close();
             }
+            conn.close();
         }
     }
 
-    public static int buildingNametoCode(String buildingName) {
+    public static int buildingNametoCode(String buildingName) throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT building_code FROM team4.building where building_name= '" + buildingName +"'";
-            
-            Connection conn = null;
-            PreparedStatement pstmt = null;
-            ResultSet rs = null;
             Scanner s = new Scanner(System.in);
             
             conn = ConnectDB.getConnection();// creating the connection
@@ -101,6 +101,11 @@ public class RoomsManager {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            conn.close();
         }
     }
     
@@ -108,27 +113,9 @@ public class RoomsManager {
             String buildingName, String departmentCode,
             String departmentName, String roomType, String roomArea) throws SQLException, ClassNotFoundException {
 
-        String sql = "update Rooms set room_num = '" + roomNum + "', floor_name ='" + floorName + "'";
-
-        Connection conn = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-
-        conn = ConnectDB.getConnection();// creating the connection
-        stmt = conn.createStatement();// creating the statement that is already has its value
-        rs = stmt.executeQuery(sql); // excuting the statement
-
-    }
-
-    public static void addRoomInfo(String roomNum,
-            int buildingCode, String floorName, String departmentCode,
-            String departmentName, String roomType, String roomArea, String color, String commentBox) throws SQLException, ClassNotFoundException {
-
-        //=String sql = "INSERT INTO "
-        
-        String foapalQuery = "INSERT INTO department (FOAPAL_code,FOAPAL_name) "
+       String foapalQuery = "UPDATE department (FOAPAL_code,FOAPAL_name) "
                 + "VALUES ('" + departmentCode + "','" + departmentName + "') ON DUPLICATE KEY UPDATE FOAPAL_name =  '" + departmentName + "';";
-
+/*
         String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
                         + "room_type_des,room_area_sqft,roomcolor,comments)"
                         + "VALUES ('" + roomNum + "','" + buildingCode + "','" + floorName + "','" + departmentCode + "',"
@@ -143,6 +130,71 @@ public class RoomsManager {
         stmt.addBatch(foapalQuery); // excuting the statement
         stmt.addBatch(roomQuery); // excuting the statement
         stmt.executeBatch();
-
+        conn.close();*/
     }
+
+    public static void addRoomInfo(String roomNum,
+            int buildingCode, String floorName, String departmentCode,
+            String departmentName, String roomType, String roomArea, String color, String commentBox) throws SQLException, ClassNotFoundException {
+
+        //=String sql = "INSERT INTO "
+        
+        String foapalQuery = "INSERT INTO department (FOAPAL_code,FOAPAL_name) "
+                + "VALUES ('" + departmentCode + "','" + departmentName + "') ON DUPLICATE KEY UPDATE FOAPAL_name =  '" + departmentName + "'";
+
+        String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
+                        + "room_type_des,room_area_sqft,roomcolor,comments)"
+                        + "VALUES ('" + roomNum + "','" + buildingCode + "','" + floorName + "','" + departmentCode + "',"
+                        + "'" + roomType + "','" + roomArea + "','" + color + "','" + commentBox + "') ON DUPLICATE KEY UPDATE room_type_des = '" + roomType + "', room_area_sqft = '" + roomArea + "', roomcolor = '" + color + "',  comments = '" + commentBox + "'";
+        
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        conn = ConnectDB.getConnection();// creating the connection
+        stmt = conn.createStatement();// creating the statement that is already has its value       
+        stmt.addBatch(foapalQuery); // excuting the statement
+        stmt.addBatch(roomQuery); // excuting the statement
+        stmt.executeBatch();
+        conn.close();
+    }
+    
+    public static Rooms getRoomColor(String roomNum, String building) throws SQLException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            int building_code = buildingNametoCode(building);
+            String sql = "SELECT roomcolor from Rooms where room_num = '" + roomNum + "' and building_code = '" + building_code + "'";
+            Rooms r = new Rooms();
+       
+            Scanner s = new Scanner(System.in);
+            
+            conn = ConnectDB.getConnection();// creating the connection
+            pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
+
+            rs = pstmt.executeQuery(); // excuting the statement
+
+            if (rs.next()) {
+                r.setRoom_color(rs.getString("roomcolor"));
+            } else {
+                return null;
+            }
+            return r;
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            conn.close();
+        }
+        
+    }
+    
 }
