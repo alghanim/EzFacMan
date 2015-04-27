@@ -36,7 +36,7 @@ public class ConnectDB {
 
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager
-                .getConnection(ConnectionString, "tuc69409", "Pae9Cahz");
+                .getConnection(ConnectionString, "tud50428", "IJoovu9u");
     }
     
     public static boolean isValidConnection(Connection conn, String dbVendor) throws Exception {

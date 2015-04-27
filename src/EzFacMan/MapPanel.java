@@ -39,7 +39,7 @@ public class MapPanel extends JPanel implements Serializable {
     Dimension dim;
     int x1, x2, y1, y2, textX, textY;
     String selectedRoom = null;
-    String roomColor;
+    String roomColor = "49F41E";
     
     public MapPanel() {
         super();
@@ -130,7 +130,6 @@ public class MapPanel extends JPanel implements Serializable {
 
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();
-        String color = "#ffffff";
         Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);
         if (RoomsObject != null) {
             ez.Add.setEnabled(false);
@@ -299,12 +298,14 @@ public class MapPanel extends JPanel implements Serializable {
         for (Room room : rList.roomList) {
             try {
                 department departmentObject = departmentManager.getColor(room.roomNum , EZFacUI.dFloor , EZFacUI.dBuilding);
-                System.out.println(room.roomNum + EZFacUI.dFloor + EZFacUI.dBuilding);
-                if (departmentObject != null) {
+                //System.out.println(room.roomNum + EZFacUI.dFloor + EZFacUI.dBuilding);
+                Rooms roomObject = RoomsManager.getRoomColor(room.roomNum, EZFacUI.dBuilding);
+                if (roomObject != null) {
+                    room.color = roomObject.getRoom_color();
+                } else if (departmentObject != null) {
                     room.color = departmentObject.getFOAPAL_color();
                     roomColor = room.color;
-                }
-                else
+                } else
                     room.color = "FFFFFF";
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);

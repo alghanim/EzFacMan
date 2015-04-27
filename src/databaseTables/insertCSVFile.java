@@ -107,21 +107,21 @@ public class insertCSVFile {
                 }
 
                String campusQuery = "INSERT INTO campus (campus_code,campus_name) "
-                        + "VALUES ('" + titles[0] + "','" + campusname + "') ON DUPLICATE KEY UPDATE campus_name= '" + campusname + "';";
+                        + "VALUES ('" + titles[0] + "','" + campusname + "') ON DUPLICATE KEY UPDATE campus_name= '" + campusname + "'";
 
                 String buildingQuery = "INSERT INTO building (building_code,building_name,campus_code) "
-                        + "VALUES ('" + titles[1] + "','" + titles[2] + "','" + titles[0] + "') ON DUPLICATE KEY UPDATE building_name=  '" + titles[2] + "';";
+                        + "VALUES ('" + titles[1] + "','" + titles[2] + "','" + titles[0] + "') ON DUPLICATE KEY UPDATE building_name=  '" + titles[2] + "'";
 
                 String foapalQuery = "INSERT INTO department (FOAPAL_code,FOAPAL_name) "
-                        + "VALUES ('" + titles[5] + "','" + titles[6] + "') ON DUPLICATE KEY UPDATE FOAPAL_name=  '" + titles[6] + "';";
+                        + "VALUES ('" + titles[5] + "','" + titles[6] + "') ON DUPLICATE KEY UPDATE FOAPAL_name=  '" + titles[6] + "'";
 
                 String floorQuery = "INSERT INTO floors (floor_code,floor_name,building_code) "
-                        + "VALUES ('" + floorcode + "','" + titles[3] + "','" + titles[1] + "') ON DUPLICATE KEY UPDATE floor_name=  '" + titles[3] + "';";
+                        + "VALUES ('" + floorcode + "','" + titles[3] + "','" + titles[1] + "') ON DUPLICATE KEY UPDATE floor_name=  '" + titles[3] + "'";
 
                 String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
-                        + "room_type_des,room_area_sqft,comments)"
+                        + "room_type_des,room_area_sqft,roomcolor, comments)"
                         + "VALUES ('" + titles[4] + "','" + titles[1] + "','" + titles[3] + "','" + titles[5] + "',"
-                        + "'" + titles[7] + "','" + titles[8] + "','" + titles[9] + titles[10] + "') ON DUPLICATE KEY UPDATE FOAPAL_code = '" + titles[5] + "' room_type_des=  '" + titles[7] + "' room_area_sqft = '" + titles[8] + "';";
+                        + "'" + titles[7] + "','" + titles[8] + "','49F41E', '" + titles[9] + " " + titles[10] + "') ON DUPLICATE KEY UPDATE FOAPAL_code = '" + titles[5] + "', room_type_des=  '" + titles[7] + "', room_area_sqft = '" + titles[8] + "'";
 
                 Connection conn = null;
                 Statement stmt = null;
