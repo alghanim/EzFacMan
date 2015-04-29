@@ -12,34 +12,67 @@ public class Rooms {
     private String building_name;
     private String room_color;
     private String comment_box;
-    
+
+    /**
+     * Gets the room color
+     * @return room color
+     */
     public String getRoom_color() {
         return room_color;
     }
+
+    /**
+     * Sets the room color for the clicked room
+     * @param room_color
+     */
     public void setRoom_color(String room_color) {
         this.room_color = room_color;
     }
-    
+
+    /**
+     * return the comments for the selected room
+     * @return comment
+     */
     public String getComments() {
         return comment_box;
     }
-    
+
+    /**
+     * Set the comment for the selected room
+     * @param comment_box
+     */
     public void setComments(String comment_box) {
         this.comment_box = comment_box;
     }
-    
+
+    /**
+     * get the building for the selected room
+     * @return building name
+     */
     public String getBuilding_name() {
         return building_name;
     }
 
+    /**
+     * sets building Name
+     * @param building_name
+     */
     public void setBuilding_name(String building_name) {
         this.building_name = building_name;
     }
 
+    /**
+     * gets the department name
+     * @return department name
+     */
     public String getFOAPAL_name() {
         return FOAPAL_name;
     }
 
+    /**
+     * sets the department name
+     * @param FOAPAL_name
+     */
     public void setFOAPAL_name(String FOAPAL_name) {
         this.FOAPAL_name = FOAPAL_name;
     }

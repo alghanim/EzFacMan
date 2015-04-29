@@ -81,9 +81,9 @@ public class RoomsManager {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT building_code FROM team4.building where building_name= '" + buildingName +"'";
+            String sql = "SELECT building_code FROM team4.building where building_name= '" + buildingName + "'";
             Scanner s = new Scanner(System.in);
-            
+
             conn = ConnectDB.getConnection();// creating the connection
             pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
 
@@ -92,45 +92,53 @@ public class RoomsManager {
             if (rs.next()) {
 
                 return rs.getInt("building_code");
-            }else
+            } else {
                 return 0;
-            
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
             conn.close();
         }
     }
-    
-    public static void updateRoomInfo(String roomNum, String floorName,
+/**
+ * update Room information 
+ * @param roomNum
+ * @param buildingName
+ * @param departmentCode
+ * @param roomType
+ * @param roomArea
+ * @throws SQLException
+ * @throws ClassNotFoundException 
+ */
+    public static void updateRoomInfo(String roomNum,
             String buildingName, String departmentCode,
-            String departmentName, String roomType, String roomArea) throws SQLException, ClassNotFoundException {
+            String roomType, String roomArea) throws SQLException, ClassNotFoundException {
 
-       String foapalQuery = "UPDATE department (FOAPAL_code,FOAPAL_name) "
-                + "VALUES ('" + departmentCode + "','" + departmentName + "') ON DUPLICATE KEY UPDATE FOAPAL_name =  '" + departmentName + "';";
-/*
-        String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
-                        + "room_type_des,room_area_sqft,roomcolor,comments)"
-                        + "VALUES ('" + roomNum + "','" + buildingCode + "','" + floorName + "','" + departmentCode + "',"
-                        + "'" + roomType + "','" + roomArea + "','" + color + "','" + commentBox + "')";
-        
+        String sql = "UPDATE `team4`.`Rooms` SET `FOAPAL_code`='" + departmentCode + "', "
+                + "`room_type_des`='" + roomType + "', `room_area_sqft`='" + roomArea + "' "
+                + "WHERE `room_num`='" + roomNum + "' and`building_code`='" + buildingNametoCode(buildingName) + "'";
+
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
 
-        conn = ConnectDB.getConnection();// creating the connection
-        stmt = conn.createStatement();// creating the statement that is already has its value       
-        stmt.addBatch(foapalQuery); // excuting the statement
-        stmt.addBatch(roomQuery); // excuting the statement
-        stmt.executeBatch();
-        conn.close();*/
+        try {
+            conn = ConnectDB.getConnection();// creating the connection
+            pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
+            pstmt.executeUpdate(); // excuting the statement
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+
     }
 
     public static void addRoomInfo(String roomNum,
@@ -138,15 +146,14 @@ public class RoomsManager {
             String departmentName, String roomType, String roomArea, String color, String commentBox) throws SQLException, ClassNotFoundException {
 
         //=String sql = "INSERT INTO "
-        
         String foapalQuery = "INSERT INTO department (FOAPAL_code,FOAPAL_name) "
                 + "VALUES ('" + departmentCode + "','" + departmentName + "') ON DUPLICATE KEY UPDATE FOAPAL_name =  '" + departmentName + "'";
 
         String roomQuery = "INSERT INTO Rooms (room_num,building_code,floor_name,FOAPAL_code,"
-                        + "room_type_des,room_area_sqft,roomcolor,comments)"
-                        + "VALUES ('" + roomNum + "','" + buildingCode + "','" + floorName + "','" + departmentCode + "',"
-                        + "'" + roomType + "','" + roomArea + "','" + color + "','" + commentBox + "') ON DUPLICATE KEY UPDATE room_type_des = '" + roomType + "', room_area_sqft = '" + roomArea + "', roomcolor = '" + color + "',  comments = '" + commentBox + "'";
-        
+                + "room_type_des,room_area_sqft,roomcolor,comments)"
+                + "VALUES ('" + roomNum + "','" + buildingCode + "','" + floorName + "','" + departmentCode + "',"
+                + "'" + roomType + "','" + roomArea + "','" + color + "','" + commentBox + "') ON DUPLICATE KEY UPDATE room_type_des = '" + roomType + "', room_area_sqft = '" + roomArea + "', roomcolor = '" + color + "',  comments = '" + commentBox + "'";
+
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -158,7 +165,7 @@ public class RoomsManager {
         stmt.executeBatch();
         conn.close();
     }
-    
+
     public static Rooms getRoomColor(String roomNum, String building) throws SQLException {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -167,9 +174,9 @@ public class RoomsManager {
             int building_code = buildingNametoCode(building);
             String sql = "SELECT roomcolor from Rooms where room_num = '" + roomNum + "' and building_code = '" + building_code + "'";
             Rooms r = new Rooms();
-       
+
             Scanner s = new Scanner(System.in);
-            
+
             conn = ConnectDB.getConnection();// creating the connection
             pstmt = conn.prepareStatement(sql);// creating the statement that is already has its value
 
@@ -182,7 +189,7 @@ public class RoomsManager {
             }
             return r;
         } catch (SQLException ex) {
-            
+
             Logger.getLogger(RoomsManager.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         } catch (ClassNotFoundException ex) {
@@ -194,7 +201,7 @@ public class RoomsManager {
             }
             conn.close();
         }
-        
+
     }
-    
+
 }

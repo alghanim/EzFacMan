@@ -13,17 +13,23 @@ public class building {
     private int building_code;
     private String campus_name;
     private ArrayList allbuildings = new ArrayList<String>();
-
+/**
+ * gets all buildings from building table
+ * @return all buildings 
+ */
     public ArrayList getAllbuildings() {
         return allbuildings;
     }
-
+/**
+ * set all buildings to call them
+ * @param allbuildings 
+ */
     public void setAllbuildings(ArrayList allbuildings) {
         this.allbuildings = allbuildings;
     }
 
     /**
-     *
+     * get building name
      * @return Building name
      */
     public String getBuilding_name() {

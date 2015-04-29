@@ -127,7 +127,12 @@ public class MapPanel extends JPanel implements Serializable {
 
         return roomClicked;
     }
-
+/**
+ * Set all room info for the clicked room to the pop out window and display it 
+ * @param roomClicked
+ * @throws ClassNotFoundException
+ * @throws SQLException 
+ */
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();
         Rooms RoomsObject = RoomsManager.displayCertainRooms(roomClicked, EZFacUI.dBuilding);

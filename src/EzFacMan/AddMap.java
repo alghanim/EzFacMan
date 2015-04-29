@@ -30,6 +30,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author Ali
+ * Add map using the drop down menus to specify the floor 
  */
 public class AddMap extends javax.swing.JFrame {
 
@@ -44,11 +45,21 @@ public class AddMap extends javax.swing.JFrame {
     floors f = floorsManager.displayAllfloors();
     campus c = campusManager.displayAllCampuses();
     building b = buildingManager.displayAllBuildings();
-
+/**
+ * Initialize components and call the menu items
+ * @throws SQLException
+ * @throws ClassNotFoundException 
+ */
     public AddMap() throws SQLException, ClassNotFoundException {
 
         initComponents();
 
+        callDropMenus();
+    }
+/**
+ * Call the tables entries and list them as items in the drop down menu
+ */
+    private void callDropMenus() {
         floorDropdown.setEnabled(false);
         buildingDropdown.setEnabled(false);
         allfloors.addAll(f.getAllFloors());
@@ -109,6 +120,11 @@ public class AddMap extends javax.swing.JFrame {
         jLabel3.setText("Floor");
 
         campusDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Item" }));
+        campusDropdown.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                campusDropdownItemStateChanged(evt);
+            }
+        });
         campusDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campusDropdownActionPerformed(evt);
@@ -214,6 +230,124 @@ public class AddMap extends javax.swing.JFrame {
 
     private void campusDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropdownActionPerformed
 
+
+    }//GEN-LAST:event_campusDropdownActionPerformed
+
+    /**
+     * opens the file Chooser to get the map file
+     * @param evt 
+     */
+    private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
+        JOptionPane.showMessageDialog(null, "Make sure that you Added a spreadsheat corresponds"
+                + "to the map", "Information", JOptionPane.INFORMATION_MESSAGE);
+        //  System.out.println(i);
+        int returnVal1 = pdfMapChooser.showOpenDialog(AddMap.this);
+
+    }//GEN-LAST:event_addNewMapActionPerformed
+/**
+ * Disposes the Jframe
+ * @param evt 
+ */
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        AddMap.this.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+/**
+ * changes the label to the path name
+ * @param evt 
+ */
+    private void pdfNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfNamePropertyChange
+
+    }//GEN-LAST:event_pdfNamePropertyChange
+/**
+ * Send the file to the database
+ * @param evt 
+ */
+    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
+        PDFCustomFilter pdfFilter = new PDFCustomFilter();
+        if (pdfFilter.accept(selectedFile) != true) {
+            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
+        } //CSVCustomFilter csvFilter = new CSVCustomFilter();
+        //        File csvCurFile = null;
+        //        if (csvFilter.accept(csvCurFile) != true) {
+        //            JOptionPane.showMessageDialog(null, "The file you selected is not a CSV", "Error!", JOptionPane.OK_OPTION);
+        //        } 
+        else {
+            floorsManager fm = new floorsManager();
+            try {
+                fm.insertMap(selectedFile.getPath(), buildingDropdown.getSelectedItem().toString(),
+                        floorDropdown.getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_importButtonActionPerformed
+/**
+ * Controls the changes that happen when the user switch between files
+ * @param evt 
+ */
+    private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
+
+        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
+            pdfMapChooser = (JFileChooser) evt.getSource();
+            File oldFile = (File) evt.getOldValue();
+            File newFile = (File) evt.getNewValue();
+            // The selected file should always be the same as newFile
+            File curFile = pdfMapChooser.getSelectedFile();
+            selectedFile = curFile;
+            if (curFile != null) {
+                pdfName.setText(curFile.getName());
+                pdfName.setForeground(blue);
+            }
+        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
+                evt.getPropertyName())) {
+            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
+            File[] oldFiles = (File[]) evt.getOldValue();
+            File[] newFiles = (File[]) evt.getNewValue();
+
+            // Get list of selected files
+            // The selected files should always be the same as newFiles
+            File[] files = pdfMapChooser.getSelectedFiles();
+        }
+    }//GEN-LAST:event_pdfMapChooserPropertyChange
+/**
+ * Gets the buildings and add them to the drop-down menu
+ * @param evt 
+ */
+    private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
+
+        dBuilding = (String) buildingDropdown.getSelectedItem();
+        if (dBuilding != null) {
+            floors ff = null;
+            try {
+                floorDropdown.removeAllItems();
+
+                ff = floorsManager.display(dBuilding);
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            allfloors.removeAll(allfloors);
+            allfloors.addAll(ff.getAllFloors());
+
+            for (String s : allfloors) {
+                floorDropdown.addItem(s);
+
+            }
+
+        }
+        System.out.println(allfloors.toString());
+        floorDropdown.setEnabled(true);
+    }//GEN-LAST:event_buildingDropdownActionPerformed
+/**
+ * Gets the campuses and add them to the drop-down menu
+ * @param evt 
+ */
+    private void campusDropdownItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_campusDropdownItemStateChanged
         floorDropdown.setEnabled(false);
         dCampus = (String) campusDropdown.getSelectedItem();
         // String sqlString = "'" + dCampus;
@@ -241,100 +375,7 @@ public class AddMap extends javax.swing.JFrame {
             floorDropdown.setEnabled(false);
 
         }
-
-    }//GEN-LAST:event_campusDropdownActionPerformed
-
-    private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
-        JOptionPane.showMessageDialog(null, "Make sure that you Added a spreadsheat corresponds"
-                + "to the map", "Information", JOptionPane.INFORMATION_MESSAGE);
-        //  System.out.println(i);
-        int returnVal1 = pdfMapChooser.showOpenDialog(AddMap.this);
-
-    }//GEN-LAST:event_addNewMapActionPerformed
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        AddMap.this.dispose();
-    }//GEN-LAST:event_cancelButtonActionPerformed
-
-    private void pdfNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfNamePropertyChange
-
-    }//GEN-LAST:event_pdfNamePropertyChange
-
-    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        PDFCustomFilter pdfFilter = new PDFCustomFilter();
-        if (pdfFilter.accept(selectedFile) != true) {
-            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
-        } //CSVCustomFilter csvFilter = new CSVCustomFilter();
-        //        File csvCurFile = null;
-        //        if (csvFilter.accept(csvCurFile) != true) {
-        //            JOptionPane.showMessageDialog(null, "The file you selected is not a CSV", "Error!", JOptionPane.OK_OPTION);
-        //        } 
-        else {
-            floorsManager fm = new floorsManager();
-            try {
-                fm.insertMap(selectedFile.getPath(), buildingDropdown.getSelectedItem().toString(),
-                        floorDropdown.getSelectedItem().toString());
-            } catch (SQLException ex) {
-                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(AddMap.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_importButtonActionPerformed
-
-    private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
-
-        if (JFileChooser.SELECTED_FILE_CHANGED_PROPERTY.equals(evt.getPropertyName())) {
-            pdfMapChooser = (JFileChooser) evt.getSource();
-            File oldFile = (File) evt.getOldValue();
-            File newFile = (File) evt.getNewValue();
-            // The selected file should always be the same as newFile
-            File curFile = pdfMapChooser.getSelectedFile();
-            selectedFile = curFile;
-            if(curFile != null){
-            pdfName.setText(curFile.getName());
-            pdfName.setForeground(blue);
-            }
-        } else if (JFileChooser.SELECTED_FILES_CHANGED_PROPERTY.equals(
-                evt.getPropertyName())) {
-            JFileChooser pdfMapChooser = (JFileChooser) evt.getSource();
-            File[] oldFiles = (File[]) evt.getOldValue();
-            File[] newFiles = (File[]) evt.getNewValue();
-
-            // Get list of selected files
-            // The selected files should always be the same as newFiles
-            File[] files = pdfMapChooser.getSelectedFiles();
-        }
-    }//GEN-LAST:event_pdfMapChooserPropertyChange
-
-    private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
-
-        dBuilding = (String) buildingDropdown.getSelectedItem();
-        if (dBuilding != null) {
-            floors ff = null;
-            try {
-                floorDropdown.removeAllItems();
-
-                ff = floorsManager.display(dBuilding);
-
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            allfloors.removeAll(allfloors);
-            allfloors.addAll(ff.getAllFloors());
-
-            for (String s : allfloors) {
-                floorDropdown.addItem(s);
-
-            }
-
-        }
-        System.out.println(allfloors.toString());
-        floorDropdown.setEnabled(true);
-    }//GEN-LAST:event_buildingDropdownActionPerformed
+    }//GEN-LAST:event_campusDropdownItemStateChanged
 
     /**
      * @param args the command line arguments

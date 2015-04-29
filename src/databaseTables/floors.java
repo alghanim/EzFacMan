@@ -17,11 +17,17 @@ public class floors {
     private int building_code;
     private int floor_code;
     private ArrayList<String> allFloors = new ArrayList<String>();
-
+/**
+ * get all floors from floors table
+ * @return all floors
+ */
     public ArrayList<String> getAllFloors() {
         return allFloors;
     }
-
+/**
+ * set all floors to call them
+ * @param allFloors 
+ */
     public void setAllFloors(ArrayList<String> allFloors) {
         this.allFloors = allFloors;
     }

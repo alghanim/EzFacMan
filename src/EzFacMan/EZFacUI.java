@@ -1049,10 +1049,12 @@ public class EZFacUI extends javax.swing.JFrame {
 
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
  
-    //    RoomsManager.updateRoomInfo(roomNum.getText(), floorName.getText(), buildingName.getText(), departmentCode.getText(),
-      //          departmentName.getText(), roomType.getText(), roomArea.getText());
-     //   roomPopUp.repaint();
-         try {
+        try {
+            RoomsManager.updateRoomInfo(roomNum.getText(),  buildingName.getText(), departmentCode.getText(),
+                    roomType.getText(), roomArea.getText());
+   
+        roomPopUp.repaint();
+         
             // TODO add your handling code here:
             //      RoomsManager.addRoomInfo(String roomNum,
             //        String buildingCode, String floorName, String departmentCode,
