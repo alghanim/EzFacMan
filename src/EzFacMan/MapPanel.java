@@ -129,9 +129,9 @@ public class MapPanel extends JPanel implements Serializable {
     }
 /**
  * Set all room info for the clicked room to the pop out window and display it 
- * @param roomClicked
- * @throws ClassNotFoundException
- * @throws SQLException 
+ * @param roomClicked is the room that the user clicked on 
+ * @throws ClassNotFoundException if there's no connection
+ * @throws SQLException if there's no information
  */
     public void showRoomInfo(String roomClicked) throws ClassNotFoundException, SQLException {
         EZFacUI ez = new EZFacUI();

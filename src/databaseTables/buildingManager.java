@@ -1,18 +1,13 @@
 package databaseTables;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
+ * manage the SQL statements to retrieve the data
  *
  * @author Ali
  */
@@ -22,8 +17,9 @@ public class buildingManager {
      * Display all the buildings that are stored in the database under building
      * table
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @return all buildings
+     * @throws SQLException Error of SQL statement or not found information
+     * @throws ClassNotFoundException error if building class is not found
      */
     public static building displayAllBuildings() throws SQLException, ClassNotFoundException {
 
@@ -54,6 +50,13 @@ public class buildingManager {
         return b;
     }
 
+    /**
+     * Display all buildings of a certain campys
+     *
+     * @param dCampus the campus selected
+     * @return the buildings are in the campus selected
+     * @throws ClassNotFoundException if there's no connection
+     */
     public static building display(String dCampus) throws ClassNotFoundException {
         String sql;
         building b = new building();
@@ -72,7 +75,7 @@ public class buildingManager {
             conn = ConnectDB.getConnection();// creating the connection
             stmt = conn.createStatement();// creating the statement that is already has its value
             rs = stmt.executeQuery(sql); // excuting the statement
-            ArrayList list = new ArrayList<String>();
+            ArrayList list = new ArrayList<>();
             while (rs.next()) {
 
                 list.add(rs.getString("building_name"));

@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  * @author Mike Manalo
  * @author Nathan Jack
  * @author Nick Killion
- * @author Ali
+ * @author Ali Al-Ghanim
  */
 public class EZFacUI extends javax.swing.JFrame {
 
@@ -49,7 +49,7 @@ public class EZFacUI extends javax.swing.JFrame {
      * Creates new form NewJFrame
      *
      * @throws java.sql.SQLException Error in the SQL statement
-     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.ClassNotFoundException if there's no connection
      */
     public EZFacUI() throws SQLException, ClassNotFoundException {
         initComponents();
@@ -1126,9 +1126,7 @@ public class EZFacUI extends javax.swing.JFrame {
         this.roomPopUp.dispose();
     }//GEN-LAST:event_addRoomDataActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton Add;

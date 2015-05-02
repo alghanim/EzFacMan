@@ -2,13 +2,8 @@ package databaseTables;
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
+ * Genereate the getters and setters of the floors table
  * @author Ali
  */
 public class floors {
@@ -26,7 +21,7 @@ public class floors {
     }
 /**
  * set all floors to call them
- * @param allFloors 
+ * @param allFloors contains all floors in floor table
  */
     public void setAllFloors(ArrayList<String> allFloors) {
         this.allFloors = allFloors;
@@ -43,7 +38,7 @@ public class floors {
     /**
      * set the floor name to the database
      *
-     * @param floor_name
+     * @param floor_name contains floor name
      */
     public void setFloor_name(String floor_name) {
         this.floor_name = floor_name;
@@ -60,7 +55,7 @@ public class floors {
     /**
      * set the building code to the database
      *
-     * @param building_code
+     * @param building_code contains building number
      */
     public void setBuilding_code(int building_code) {
         this.building_code = building_code;
@@ -77,7 +72,7 @@ public class floors {
     /**
      * set the floor code to the database
      *
-     * @param floor_code
+     * @param floor_code contains floor number
      */
     public void setFloor_code(int floor_code) {
         this.floor_code = floor_code;

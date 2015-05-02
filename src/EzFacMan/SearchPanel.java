@@ -5,8 +5,6 @@
  */
 package EzFacMan;
 
-import static EzFacMan.EZFacUI.dBuilding;
-import ParseSVGData.SVGParser;
 import databaseTables.Rooms;
 import databaseTables.RoomsManager;
 import databaseTables.building;
@@ -16,9 +14,6 @@ import databaseTables.campusManager;
 import databaseTables.floors;
 import databaseTables.floorsManager;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -26,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
+ * Generate the search window
  *
  * @author ali
  */
@@ -193,7 +189,12 @@ public class SearchPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * gets all items and generate them in sql statement to get the room
+     * searched for
+     *
+     * @param evt the event when search button is pressed
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
 
         try {
@@ -220,10 +221,10 @@ public class SearchPanel extends javax.swing.JFrame {
                 ezFac.colorPanel.setBackground(Color.decode("#" + RoomsObject.getRoom_color()));
                 ezFac.roomPopUp.setTitle("Room Information");
                 ezFac.roomPopUp.setVisible(true);
-            } else 
+            } else {
                 JOptionPane.showMessageDialog(null, "There is no room data exists. You can click on a room to add a data.", "No room data exists", JOptionPane.OK_OPTION);
-                    
-        
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(SearchPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -231,11 +232,20 @@ public class SearchPanel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    /**
+     * exit the window
+     *
+     * @param evt the event when exit button clicked
+     */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
-
+    /**
+     * get all buildings from the chosen campus
+     *
+     * @param evt the event when you select an item from the drop down menu
+     */
     private void campusDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropActionPerformed
         // TODO add your handling code here:
         dCampus = (String) campusDrop.getSelectedItem();
@@ -266,7 +276,11 @@ public class SearchPanel extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_campusDropActionPerformed
-
+    /**
+     * gets all floors in selected building
+     *
+     * @param evt the event when a building chosen from the drop-down menu
+     */
     private void buildingDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropActionPerformed
         // TODO add your handling code here:
         dBuilding = (String) buildingDrop.getSelectedItem();

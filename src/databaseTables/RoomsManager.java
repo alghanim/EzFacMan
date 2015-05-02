@@ -1,6 +1,5 @@
 package databaseTables;
 
-import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +19,11 @@ public class RoomsManager {
     /**
      * Display the All rows and columns in Rooms table from the database
      *
-     * @param room
-     * @param building
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @return all room information in Rooms class
+     * @param room is the room number
+     * @param building is the building name
+     * @throws SQLException if the room or building not exist or doesn't match
+     * @throws ClassNotFoundException if there's no connection
      */
     public static Rooms displayCertainRooms(String room, String building) throws SQLException, ClassNotFoundException {
 
@@ -109,16 +109,18 @@ public class RoomsManager {
             conn.close();
         }
     }
-/**
- * update Room information 
- * @param roomNum
- * @param buildingName
- * @param departmentCode
- * @param roomType
- * @param roomArea
- * @throws SQLException
- * @throws ClassNotFoundException 
- */
+
+    /**
+     * update Room information
+     *
+     * @param roomNum is the room number
+     * @param buildingName is the building name
+     * @param departmentCode is the department code
+     * @param roomType is the room type
+     * @param roomArea is the room area
+     * @throws SQLException if the department doesn't exist 
+     * @throws ClassNotFoundException if there's no connection
+     */
     public static void updateRoomInfo(String roomNum,
             String buildingName, String departmentCode,
             String roomType, String roomArea) throws SQLException, ClassNotFoundException {

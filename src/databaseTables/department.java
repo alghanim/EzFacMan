@@ -21,7 +21,7 @@ public class department {
     /**
      * Set the department code the database
      *
-     * @param FOAPAL_code
+     * @param FOAPAL_code contains the department number
      */
     public void setFOAPAL_code(Long FOAPAL_code) {
         this.FOAPAL_code = FOAPAL_code;
@@ -38,7 +38,7 @@ public class department {
     /**
      * set the department name
      *
-     * @param FOAPAL_name
+     * @param FOAPAL_name contains the department name
      */
     public void setFOAPAL_name(String FOAPAL_name) {
         this.FOAPAL_name = FOAPAL_name;
@@ -55,7 +55,7 @@ public class department {
     /**
      * Set the department color to the database
      *
-     * @param FOAPAL_color
+     * @param FOAPAL_color contains the department color
      */
     public void setFOAPAL_color(String FOAPAL_color) {
         this.FOAPAL_color = FOAPAL_color;

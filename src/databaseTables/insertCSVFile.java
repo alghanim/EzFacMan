@@ -18,15 +18,16 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author nil7july
+ * Gets the spreadsheets add the data to the database
  */
 public class insertCSVFile {
 
     /**
-     * Display the All rows and columns in Rooms table from the database
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @param csvFile a spreadsheet file with .csv extension
+     * @throws SQLException if the columns in the file doesn't match with the
+     * database tables
+     * @throws ClassNotFoundException if there's no connection
      */
     public static void insertCSV(String csvFile) throws SQLException, ClassNotFoundException {
 
@@ -36,21 +37,21 @@ public class insertCSVFile {
 
         try {
             br = new BufferedReader(new FileReader(csvFile));
-   
+
             if ((line = br.readLine()) != null) {
                 String[] titles = line.split(cvsSplitBy);
                 //title[0]= campus, buildingcode, buldingname, floor, roomnumber, foapal, foapalname, roomtype, description, roomarea, actiondate, actiontype;
                 //Campus,Building #,Building Name,Floor ,4Room #,FOAPAL,FOAPAL Name,Room Type Description,Room Area (Square Feet),Action Date (MM/YY),Action Type (ADD/CHANGE)
-               
-                if (titles[0].equals("Campus") && titles[1].equals("Building #") && titles[2].equals("Building Name") &&
-                            titles[3].equals("Floor ") && titles[4].equals("Room #") && titles[5].equals("FOAPAL")
-                                    && titles[6].equals("FOAPAL Name") && titles[7].equals("Room Type Description") &&
-                                        titles[8].equals("Room Area (Square Feet)") && titles[9].equals("Action Date (MM/YY)")
-                                    && titles[10].equals("Action Type (ADD/CHANGE)")) {
-                   
+
+                if (titles[0].equals("Campus") && titles[1].equals("Building #") && titles[2].equals("Building Name")
+                        && titles[3].equals("Floor ") && titles[4].equals("Room #") && titles[5].equals("FOAPAL")
+                        && titles[6].equals("FOAPAL Name") && titles[7].equals("Room Type Description")
+                        && titles[8].equals("Room Area (Square Feet)") && titles[9].equals("Action Date (MM/YY)")
+                        && titles[10].equals("Action Type (ADD/CHANGE)")) {
+
                 } else {
-                     JOptionPane.showMessageDialog(null, "The csv file you selected is not in correct format", "Error!", JOptionPane.OK_OPTION);
-                     return;
+                    JOptionPane.showMessageDialog(null, "The csv file you selected is not in correct format", "Error!", JOptionPane.OK_OPTION);
+                    return;
                 }
             }
             while ((line = br.readLine()) != null) {
@@ -106,7 +107,7 @@ public class insertCSVFile {
                         break;
                 }
 
-               String campusQuery = "INSERT INTO campus (campus_code,campus_name) "
+                String campusQuery = "INSERT INTO campus (campus_code,campus_name) "
                         + "VALUES ('" + titles[0] + "','" + campusname + "') ON DUPLICATE KEY UPDATE campus_name= '" + campusname + "'";
 
                 String buildingQuery = "INSERT INTO building (building_code,building_name,campus_code) "

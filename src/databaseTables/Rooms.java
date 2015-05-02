@@ -1,5 +1,9 @@
 package databaseTables;
 
+/**
+ * generate the getters and setters for Rooms table
+ * @author Ali
+ */
 public class Rooms {
 
     private String room_num;
@@ -23,7 +27,7 @@ public class Rooms {
 
     /**
      * Sets the room color for the clicked room
-     * @param room_color
+     * @param room_color contains room color
      */
     public void setRoom_color(String room_color) {
         this.room_color = room_color;
@@ -39,7 +43,7 @@ public class Rooms {
 
     /**
      * Set the comment for the selected room
-     * @param comment_box
+     * @param comment_box contains comment for the room selected
      */
     public void setComments(String comment_box) {
         this.comment_box = comment_box;
@@ -55,7 +59,7 @@ public class Rooms {
 
     /**
      * sets building Name
-     * @param building_name
+     * @param building_name contains building name
      */
     public void setBuilding_name(String building_name) {
         this.building_name = building_name;
@@ -71,7 +75,7 @@ public class Rooms {
 
     /**
      * sets the department name
-     * @param FOAPAL_name
+     * @param FOAPAL_name contains department name
      */
     public void setFOAPAL_name(String FOAPAL_name) {
         this.FOAPAL_name = FOAPAL_name;
@@ -107,7 +111,7 @@ public class Rooms {
     /**
      * Set the building code and send it to the database
      *
-     * @param building_code
+     * @param building_code contains building number
      */
     public void setBuilding_code(int building_code) {
         this.building_code = building_code;
@@ -125,7 +129,7 @@ public class Rooms {
     /**
      * it takes the floor name and send it to the database
      *
-     * @param floor_name
+     * @param floor_name contains floor name
      */
     public void setFloor_name(String floor_name) {
         this.floor_name = floor_name;
@@ -142,7 +146,7 @@ public class Rooms {
     /**
      * it takes the FOAPAL (Department) code and send it to the database
      *
-     * @param FOAPAL_code
+     * @param FOAPAL_code contains department number
      */
     public void setFOAPAL_code(Long FOAPAL_code) {
         this.FOAPAL_code = FOAPAL_code;
@@ -156,10 +160,10 @@ public class Rooms {
         return room_type_des;
     }
 
-    /**
-     *
-     * @param room_type_des
-     */
+   /**
+    * set the room description to the assigned room
+    * @param room_type_des contains the room description 
+    */
     public void setRoom_type_des(String room_type_des) {
         this.room_type_des = room_type_des;
     }
@@ -173,9 +177,9 @@ public class Rooms {
     }
 
     /**
-     * it takes the room area and send it to the database
+     * it set the room area from the database
      *
-     * @param room_area_sqft
+     * @param room_area_sqft contains room area by square feet 
      */
     public void setRoom_area_sqft(int room_area_sqft) {
         this.room_area_sqft = room_area_sqft;

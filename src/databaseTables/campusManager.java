@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class campusManager {
 
     /**
-     * Display all rows and columns from Campus table
-     *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     *  
+     * @return all rows and columns from Campus table
+     * @throws SQLException if there is not campuses
+     * @throws ClassNotFoundException if the campus class is not found
      */
     public static campus displayAllCampuses() throws SQLException, ClassNotFoundException {
         campus c = new campus();

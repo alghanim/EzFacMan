@@ -167,7 +167,7 @@ public class Stitcher {
      * @param p2 Point 2 of Path 1
      * @param p3 Point 1 of Path 2
      * @param p4 Point 2 of Path 2
-     * @return 
+     * @return true or false if the line is over lapping 
      */
     public boolean checkLineOverlap(PointData p1, PointData p2, PointData p3, PointData p4) {
         return checkLineOverlapX(p1, p2, p3, p4);
@@ -180,7 +180,7 @@ public class Stitcher {
      * @param p2 Point 2 of Path 1
      * @param p3 Point 1 of Path 2
      * @param p4 Point 2 of Path 2
-     * @return 
+     * @return true or false if the line is overlapping 
      */
     public boolean checkLineOverlapY(PointData p1, PointData p2, PointData p3, PointData p4) {
         int path1MaxX = p1.x;
@@ -210,7 +210,7 @@ public class Stitcher {
      * @param p2 Point 2 of Path 1
      * @param p3 Point 1 of Path 2
      * @param p4 Point 2 of Path 2
-     * @return 
+     * @return true or false if the line is overlapping
      */
     public boolean checkLineOverlapX(PointData p1, PointData p2, PointData p3, PointData p4) {
         int path1MaxY = p1.y;
@@ -242,7 +242,7 @@ public class Stitcher {
      * @param path2 PathData for second path that needs stitching
      * @param p3 PointData for point 1 of path2's incident edge
      * @param p4 PointData for point 2 of path2's incident edge
-     * @return 
+     * @return true or false if the line is overlapping
      */
     private PathData stitchPaths(PathData path1, PointData p1, PointData p2,
             PathData path2, PointData p3, PointData p4) {

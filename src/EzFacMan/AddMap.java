@@ -47,8 +47,8 @@ public class AddMap extends javax.swing.JFrame {
     building b = buildingManager.displayAllBuildings();
 /**
  * Initialize components and call the menu items
- * @throws SQLException
- * @throws ClassNotFoundException 
+ * @throws SQLException if there's not data is returned
+ * @throws ClassNotFoundException if there's no connection
  */
     public AddMap() throws SQLException, ClassNotFoundException {
 
@@ -235,7 +235,7 @@ public class AddMap extends javax.swing.JFrame {
 
     /**
      * opens the file Chooser to get the map file
-     * @param evt 
+     * @param evt the event of adding a new map
      */
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
         JOptionPane.showMessageDialog(null, "Make sure that you Added a spreadsheat corresponds"
@@ -246,21 +246,21 @@ public class AddMap extends javax.swing.JFrame {
     }//GEN-LAST:event_addNewMapActionPerformed
 /**
  * Disposes the Jframe
- * @param evt 
+ * @param evt the event when cancel button is clicked
  */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         AddMap.this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 /**
  * changes the label to the path name
- * @param evt 
+ * @param evt the event when you choose a pdf file
  */
     private void pdfNamePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfNamePropertyChange
 
     }//GEN-LAST:event_pdfNamePropertyChange
 /**
  * Send the file to the database
- * @param evt 
+ * @param evt the event when import button is clicked
  */
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
         PDFCustomFilter pdfFilter = new PDFCustomFilter();
@@ -287,7 +287,7 @@ public class AddMap extends javax.swing.JFrame {
     }//GEN-LAST:event_importButtonActionPerformed
 /**
  * Controls the changes that happen when the user switch between files
- * @param evt 
+ * @param evt the event when pdf file is chosen 
  */
     private void pdfMapChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_pdfMapChooserPropertyChange
 
@@ -315,7 +315,7 @@ public class AddMap extends javax.swing.JFrame {
     }//GEN-LAST:event_pdfMapChooserPropertyChange
 /**
  * Gets the buildings and add them to the drop-down menu
- * @param evt 
+ * @param evt the event when a building choosed from the drop down menu
  */
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
 
@@ -345,7 +345,7 @@ public class AddMap extends javax.swing.JFrame {
     }//GEN-LAST:event_buildingDropdownActionPerformed
 /**
  * Gets the campuses and add them to the drop-down menu
- * @param evt 
+ * @param evt the event when a campus choosen from the drop down menu
  */
     private void campusDropdownItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_campusDropdownItemStateChanged
         floorDropdown.setEnabled(false);

@@ -2,11 +2,6 @@ package databaseTables;
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * Generate the getters and setters from Campus table
  *
@@ -37,7 +32,7 @@ public class campus {
     /**
      * set the campus name for the database
      *
-     * @param campus_name
+     * @param campus_name has the campus name 
      */
     public void setCampus_name(String campus_name) {
         this.campus_name = campus_name;
@@ -54,7 +49,7 @@ public class campus {
     /**
      * Set the campus code for the database
      *
-     * @param campus_code
+     * @param campus_code the campus number
      */
     public void setCampus_code(String campus_code) {
         this.campus_code = campus_code;

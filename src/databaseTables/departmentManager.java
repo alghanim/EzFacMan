@@ -17,8 +17,8 @@ public class departmentManager {
     /**
      * Display all rows and columns from Departments table
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @throws SQLException if there is no department exist
+     * @throws ClassNotFoundException when there's not connection
      */
     public static void displayAllDepartments() throws SQLException, ClassNotFoundException {
 
@@ -51,6 +51,7 @@ public class departmentManager {
             System.err.println("SQL State: " + ex.getSQLState());
         }
     }
+
     public static department getColor(String roomNum, String floor, String building) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT FOAPAL_color from department d "
@@ -58,7 +59,7 @@ public class departmentManager {
                 + "inner join building B on B.building_code = R.building_code "
                 + "where room_num = '" + roomNum + "' and building_name = '" + building + "' and "
                 + "floor_name = '" + floor + "'";
-  department d = new department();
+        department d = new department();
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -73,11 +74,7 @@ public class departmentManager {
 
             if (rs.next()) {
 
-                
-              
-
                 d.setFOAPAL_color(rs.getString("FOAPAL_color"));
-                
 
                 //return d;
             } else {

@@ -29,10 +29,10 @@ public class floorsManager {
     }
 
     /**
-     * Display all rows and columns from floors table
      *
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * @return all rows and columns from floors table
+     * @throws SQLException if there's no floors
+     * @throws ClassNotFoundException if there's no connection
      */
     public static floors displayAllfloors() throws SQLException, ClassNotFoundException {
         floors f = new floors();

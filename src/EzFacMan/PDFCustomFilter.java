@@ -10,8 +10,8 @@ import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
- *
- * @author David
+ * Customize the files shown to be only pdf extension
+ * @author Ali
  */
 public class PDFCustomFilter extends FileFilter {
         @Override

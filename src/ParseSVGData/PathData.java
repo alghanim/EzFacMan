@@ -78,7 +78,7 @@ public class PathData {
     
     /**
      * Constructor to be used by the MapPanel class. Constructs PathData object for the purpose of using the contains method.
-     * @param pd 
+     * @param pd is the path data 
      */
     public PathData(ArrayList<PointData> pd) {
         points = pd;
@@ -174,7 +174,7 @@ public class PathData {
     }
     
     /**
-     * Returns average of all points. Used as center to determine clockwise order
+     * @return average of all points. Used as center to determine clockwise order
      */
     private PointData getCenter() {
         int x = 0;
