@@ -38,7 +38,16 @@ public class ConnectDB {
         return DriverManager
                 .getConnection(ConnectionString, "tud50428", "IJoovu9u");
     }
-    
+     /**
+     * Tests if the connection is valid
+     * 
+     * @param conn
+     *          a JDBC connection object
+     * @param dbVendor
+     *          db vendor "mysql"
+     * @return true if the connection object is valid and false if not
+     * @throws Exception 
+     */
     public static boolean isValidConnection(Connection conn, String dbVendor) throws Exception {
 
         if (conn == null) {
@@ -55,7 +64,12 @@ public class ConnectDB {
         }
 
     }
-
+/**
+ * Tests if there is a connection to the database
+ * @param conn
+ *          a JDBC connection object
+ * @return true if a given connection object is valid and false if not
+ */
     public static boolean testConnection(Connection conn) {
         ResultSet rs = null;
         Statement stmt = null;
@@ -92,7 +106,11 @@ public class ConnectDB {
             }
         }
     }
-
+    /**
+     * Checks whether a user exists in the database
+     * 
+     * @return true if user exists; Otherwise return false 
+     */
     public static boolean checkifuserexists() {
         ResultSet rs = null;
         Statement stmt = null;
