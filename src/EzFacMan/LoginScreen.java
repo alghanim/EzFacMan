@@ -170,7 +170,12 @@ public class LoginScreen extends javax.swing.JFrame {
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
-
+/**
+ * Login to the database and grants access to the home screen
+ * 
+ * @param evt 
+ *          an event listener that is triggered when the login button is pressed
+ */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
         try {
@@ -184,7 +189,11 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_loginButtonActionPerformed
-
+/**
+ * Login to the database and grants access to the home screen
+ * @param evt 
+ *      an event listener that is triggered when the enter key is pressed
+ */
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -200,11 +209,23 @@ public class LoginScreen extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_passwordFieldKeyPressed
-
+/**
+ * Closes the Error box
+ * 
+ * @param evt 
+ *      an event listener that is triggered when the OK button is pressed
+ */
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
         ErrorBox.dispose();
     }//GEN-LAST:event_OkButtonActionPerformed
-
+/**
+ * Checks is there is a valid connection and if the username and password exists
+ * then opens the EzFac UI
+ * 
+ * @throws SQLException
+ * @throws ClassNotFoundException
+ * @throws Exception 
+ */
     private void login() throws SQLException, ClassNotFoundException, Exception {
         EZFacUI ez = new EZFacUI();
         Boolean test = true;
