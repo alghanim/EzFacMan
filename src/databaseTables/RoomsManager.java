@@ -205,5 +205,30 @@ public class RoomsManager {
         }
 
     }
+    
+public static ResultSet getByComment(String comment) throws SQLException, ClassNotFoundException {
+        String sql = "select Rooms.building_code,Rooms.room_num,Rooms.FOAPAL_code,room_type_des,\n"
+                + "room_area_sqft, roomcolor, comments,floor_name, b.building_name, department.FOAPAL_name, campus_name from Rooms\n"
+                + "inner join department on Rooms.FOAPAL_code = department.FOAPAL_code\n"
+                + "inner join building b on Rooms.building_code = b.building_code\n"
+                + "inner join campus c on c.campus_code = b.campus_code "
+                + "where comments like '%" + comment + "%'";
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectDB.getConnection();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+
+        }
+
+        return null;
+
+    }
 
 }

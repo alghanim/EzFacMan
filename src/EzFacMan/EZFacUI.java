@@ -32,7 +32,7 @@ import javax.swing.SwingUtilities;
  * @author Ali Al-Ghanim
  */
 public class EZFacUI extends javax.swing.JFrame {
-
+    
     File selectedFile = null;
     File csvCurFile = null;
     public ArrayList<String> allcampuses = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class EZFacUI extends javax.swing.JFrame {
     campus c = campusManager.displayAllCampuses();
     building b = buildingManager.displayAllBuildings();
     String roomColor = "49F41E";
-    
+
     /**
      * Creates new form NewJFrame
      *
@@ -59,7 +59,7 @@ public class EZFacUI extends javax.swing.JFrame {
         allfloors.addAll(f.getAllFloors());
         allcampuses.addAll(c.getAllcampuses());
         allbuildings.addAll(b.getAllbuildings());
-
+        
         for (String s : allfloors) {
             floorDropdown.addItem(s);
         }
@@ -71,7 +71,7 @@ public class EZFacUI extends javax.swing.JFrame {
         }
         buildingDropdown.setEnabled(false);
         floorDropdown.setEnabled(false);
-
+        
     }
 
     /**
@@ -670,6 +670,11 @@ public class EZFacUI extends javax.swing.JFrame {
         searchBuutton.add(searchByRoomNum);
 
         jMenuItem2.setText("by Comment");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         searchBuutton.add(jMenuItem2);
 
         menuBar.add(searchBuutton);
@@ -717,82 +722,82 @@ public class EZFacUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 /**
- * Displays a list of campuses for available floor maps
- * 
- * @param evt 
- *          an event listener that is triggered when the drop down box is clicked
- */
+     * Displays a list of campuses for available floor maps
+     *
+     * @param evt an event listener that is triggered when the drop down box is
+     * clicked
+     */
     private void campusDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campusDropdownActionPerformed
         floorDropdown.setEnabled(false);
         // String sqlString = "'" + dCampus;
 
         if (campusDropdown.getSelectedItem() != null) {
-
+            
             building bb = null;
             try {
                 buildingDropdown.removeAllItems();
-
+                
                 bb = buildingManager.display(campusDropdown.getSelectedItem().toString());
-
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
             allbuildings.removeAll(allbuildings);
             allbuildings.addAll(bb.getAllbuildings());
-
+            
             for (String s : allbuildings) {
                 buildingDropdown.addItem(s);
-
+                
             }
             buildingDropdown.setEnabled(true);
             floorDropdown.setEnabled(false);
-
+            
         }
 
     }//GEN-LAST:event_campusDropdownActionPerformed
-/**
- * Displays a list of floors for available floor maps
- * 
- * @param evt 
- *          an event listener that is triggered when the drop down box is clicked
- */
+    /**
+     * Displays a list of floors for available floor maps
+     *
+     * @param evt an event listener that is triggered when the drop down box is
+     * clicked
+     */
     private void floorDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorDropdownActionPerformed
-
         
+
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
-
+        
 
     }//GEN-LAST:event_mainPanelMouseClicked
-/**
- * Displays a list of buildings for available floor maps
- * 
- * @param evt 
- *          an event listener that is triggered when the drop down box is clicked
- */
+    /**
+     * Displays a list of buildings for available floor maps
+     *
+     * @param evt an event listener that is triggered when the drop down box is
+     * clicked
+     */
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
-
+        
         if (buildingDropdown.getSelectedItem() != null) {
             floors ff = null;
             try {
                 floorDropdown.removeAllItems();
-
+                
                 ff = floorsManager.display(buildingDropdown.getSelectedItem().toString());
-
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
             allfloors.removeAll(allfloors);
             allfloors.addAll(ff.getAllFloors());
-
+            
             for (String s : allfloors) {
                 floorDropdown.addItem(s);
-
+                
             }
-
+            
         }
         System.out.println(allfloors.toString());
         floorDropdown.setEnabled(true);
@@ -809,29 +814,55 @@ public class EZFacUI extends javax.swing.JFrame {
     private void resetDeptColorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDeptColorsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resetDeptColorsActionPerformed
-/**
- * Closes the program when the user presses yes and does nothing if pressed no
- * 
- * @param evt 
- *          an event listener that listens for the user to click yes
- */
+    /**
+     * Closes the program when the user presses yes and does nothing if pressed
+     * no
+     *
+     * @param evt an event listener that listens for the user to click yes
+     */
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         int q = JOptionPane.showConfirmDialog(null, "Are you sure?", "You are quiting the program!", JOptionPane.YES_NO_OPTION);
-
+        
         if (q == 0) {
             System.exit(0);
         }
 
     }//GEN-LAST:event_quitButtonActionPerformed
-/**
- * Opens the addNewMap window
- * 
- * @param evt 
- *      an event listener that listens for the user clicking on add new map
- */
+    /**
+     * Opens the addNewMap window
+     *
+     * @param evt an event listener that listens for the user clicking on add
+     * new map
+     */
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
         addNewMapFrame.setVisible(true);
     }//GEN-LAST:event_addNewMapActionPerformed
+    /**
+     * Creates and opens new color chooser after user clicks on Modify
+     * Department Color button.
+     * <p>
+     * Code adapted from:
+     * http://www.java2s.com/Tutorial/Java/0240__Swing/RemovingaColorChooserPanelfromaJColorChooserDialog.htm.
+     *
+     * @param evt an event listener that listens for user to click on Modify
+     * Department Color button
+     */
+    private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
+        deptColorChooser = new javax.swing.JColorChooser();
+        AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
+        for (int i = 0; i < oldPanels.length; i++) {
+            String clsName = oldPanels[i].getClass().getName();
+            if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
+                deptColorChooser.removeChooserPanel(oldPanels[i]);
+            }
+        }
+        Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
+        System.out.println(newColor);
+        
 
    /**
      * Opens the About .pdf using the desktop's default program.
@@ -841,7 +872,7 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt listens for the user to click the About menu option
      */
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-
+        
         File aboutFile = null;
         String os = System.getProperty("os.name").toLowerCase();
         String workingDir = System.getProperty("user.dir");
@@ -1013,13 +1044,13 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt listens for the user to click the User Manual menu option
      */
     private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
-
+        
         File file = null;
         String os = System.getProperty("os.name").toLowerCase();
         String workingDir = System.getProperty("user.dir");
         if (os.contains("win")) {
             file = new File(workingDir + "\\UserManualV1.doc");
-
+            
         } else if (os.contains("mac")) {
             file = new File(workingDir + "/UserManualV1.doc");
         } else {
@@ -1033,13 +1064,12 @@ public class EZFacUI extends javax.swing.JFrame {
             exception.printStackTrace();
         }
     }//GEN-LAST:event_userManualButtonActionPerformed
-/**
- * Opens the color chooser and selects a color of a room
- * 
- * @param evt
- *      an event listener that listens for a user to select a color and change 
- *      the room color depending on the chosen color.
- */
+    /**
+     * Opens the color chooser and selects a color of a room
+     *
+     * @param evt an event listener that listens for a user to select a color
+     * and change the room color depending on the chosen color.
+     */
     private void selectColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectColorButtonActionPerformed
         deptColorChooser = new javax.swing.JColorChooser();
         AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
@@ -1054,16 +1084,15 @@ public class EZFacUI extends javax.swing.JFrame {
             }
         }
         Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
-        roomColor =  String.format("%02x%02x%02x", newColor.getRed(), newColor.getGreen(), newColor.getBlue());
+        roomColor = String.format("%02x%02x%02x", newColor.getRed(), newColor.getGreen(), newColor.getBlue());
         colorPanel.setBackground(newColor);
     }//GEN-LAST:event_selectColorButtonActionPerformed
-/**
- * Opens the search panel when clicked
- * 
- * @param evt 
- *      an event listener that listens for the user to click the search by room
- *      action
- */
+    /**
+     * Opens the search panel when clicked
+     *
+     * @param evt an event listener that listens for the user to click the
+     * search by room action
+     */
     private void searchByRoomNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByRoomNumActionPerformed
         SearchPanel S = null;
         try {
@@ -1079,18 +1108,17 @@ public class EZFacUI extends javax.swing.JFrame {
     /**
      * Updates the room info fields, recreates the map display, closes the room
      * info pop up when completed
-     * 
-     * @param evt 
-     *      an event listener that updates the room details when clicked
+     *
+     * @param evt an event listener that updates the room details when clicked
      */
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
- 
+        
         try {
-            RoomsManager.updateRoomInfo(roomNum.getText(),  buildingName.getText(), departmentCode.getText(),
+            RoomsManager.updateRoomInfo(roomNum.getText(), buildingName.getText(), departmentCode.getText(),
                     roomType.getText(), roomArea.getText());
-   
-        roomPopUp.repaint();
-         
+            
+            roomPopUp.repaint();
+
             // TODO add your handling code here:
             //      RoomsManager.addRoomInfo(String roomNum,
             //        String buildingCode, String floorName, String departmentCode,
@@ -1108,16 +1136,15 @@ public class EZFacUI extends javax.swing.JFrame {
         this.mapDisplay.repaint();
         this.mapDisplay.updateUI();
         this.roomPopUp.dispose();
-       
+        
     }//GEN-LAST:event_updateChangeActionPerformed
-/**
- * Displays a floor map from the chosen drop down fields
- * 
- * @param evt 
- *      an event listener that listens for the user to click show map
- */
+    /**
+     * Displays a floor map from the chosen drop down fields
+     *
+     * @param evt an event listener that listens for the user to click show map
+     */
     private void showMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionPerformed
-
+        
         String os = System.getProperty("os.name").toLowerCase();
         final String workingDir = System.getProperty("user.dir");
 
@@ -1141,12 +1168,12 @@ public class EZFacUI extends javax.swing.JFrame {
             floorsManager fm = new floorsManager();
             dFloor = floorDropdown.getSelectedItem().toString();
             dBuilding = buildingDropdown.getSelectedItem().toString();
-
+            
             fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
             SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
             mapDisplay.setRoomList(parser.parse());                                    
             mapDisplay.setVisible(true);
-
+            
             mapDisplay.repaint();
             mapDisplay.updateUI();
                         Thread.sleep(10);
@@ -1164,14 +1191,13 @@ public class EZFacUI extends javax.swing.JFrame {
             t.start();
         }
        // jProgressBar1.
-      
+        
     }//GEN-LAST:event_showMapActionPerformed
     /**
      * Updates the room manager and displays the new floor
-     * 
-     * @param evt 
-     *      an event listener that listens for when the user clicks on add Room 
-     *      Data
+     *
+     * @param evt an event listener that listens for when the user clicks on add
+     * Room Data
      */
     private void addRoomDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomDataActionPerformed
         try {
@@ -1194,6 +1220,10 @@ public class EZFacUI extends javax.swing.JFrame {
         this.roomPopUp.dispose();
     }//GEN-LAST:event_addRoomDataActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        CommentSearch cs = new CommentSearch();
+        cs.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
