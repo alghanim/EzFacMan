@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  * User Interface class for EZ-Fac program.
@@ -118,6 +119,9 @@ public class EZFacUI extends javax.swing.JFrame {
         pdfName = new javax.swing.JLabel();
         csvName = new javax.swing.JLabel();
         csvMapChooser = new javax.swing.JFileChooser();
+        loadingScreen = new javax.swing.JDialog();
+        setLocationRelativeTo(null);
+        loadingLabel = new java.awt.Label();
         mainPanel = new javax.swing.JPanel();
         mapDisplay = new EzFacMan.MapPanel();
         campusDropdown = new javax.swing.JComboBox();
@@ -143,7 +147,6 @@ public class EZFacUI extends javax.swing.JFrame {
         aboutButton = new javax.swing.JMenuItem();
 
         roomPopUp.setMinimumSize(new java.awt.Dimension(450, 425));
-        roomPopUp.setPreferredSize(new java.awt.Dimension(450, 425));
 
         roomInfoPopup.setMinimumSize(new java.awt.Dimension(275, 225));
 
@@ -382,7 +385,6 @@ public class EZFacUI extends javax.swing.JFrame {
         });
 
         addNewMapFrame.setMinimumSize(new java.awt.Dimension(520, 400));
-        addNewMapFrame.setPreferredSize(new java.awt.Dimension(520, 400));
         addNewMapFrame.setLocationRelativeTo(null);
 
         addMapPDF.setText("Add a map (.pdf)");
@@ -479,6 +481,33 @@ public class EZFacUI extends javax.swing.JFrame {
                 csvMapChooserPropertyChange(evt);
             }
         });
+
+        loadingScreen.setAlwaysOnTop(true);
+        loadingScreen.setMaximumSize(new java.awt.Dimension(227, 90));
+        loadingScreen.setMinimumSize(new java.awt.Dimension(227, 90));
+        loadingScreen.setPreferredSize(new java.awt.Dimension(227, 90));
+
+        loadingLabel.setText("Loading Please Wait...");
+
+        javax.swing.GroupLayout loadingScreenLayout = new javax.swing.GroupLayout(loadingScreen.getContentPane());
+        loadingScreen.getContentPane().setLayout(loadingScreenLayout);
+        loadingScreenLayout.setHorizontalGroup(
+            loadingScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingScreenLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(loadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
+        );
+        loadingScreenLayout.setVerticalGroup(
+            loadingScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingScreenLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(loadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        loadingLabel.getAccessibleContext().setAccessibleName("");
+        loadingLabel.getAccessibleContext().setAccessibleDescription("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1126,7 +1155,7 @@ public class EZFacUI extends javax.swing.JFrame {
     private void showMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionPerformed
 
         String os = System.getProperty("os.name").toLowerCase();
-        String workingDir = System.getProperty("user.dir");
+        final String workingDir = System.getProperty("user.dir");
 
         File fExist = new File(workingDir + "\\newtest38.svg");
         if (fExist.exists()) {
@@ -1137,17 +1166,38 @@ public class EZFacUI extends javax.swing.JFrame {
         dBuilding = (String) buildingDropdown.getSelectedItem();
         
         if (floorDropdown.getSelectedItem() != null) {
+            loadingScreen.setLocationRelativeTo(null);
+            loadingScreen.setVisible(true);
+
+        
+        Thread t = new Thread() {
+                @Override
+                public void run() {
+                    try {
             floorsManager fm = new floorsManager();
             dFloor = floorDropdown.getSelectedItem().toString();
             dBuilding = buildingDropdown.getSelectedItem().toString();
 
             fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
             SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
-            mapDisplay.setRoomList(parser.parse());
+            mapDisplay.setRoomList(parser.parse());                                    
             mapDisplay.setVisible(true);
 
             mapDisplay.repaint();
             mapDisplay.updateUI();
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            loadingScreen.dispose();
+                            System.out.println("Finish");
+                        }
+                    });
+                }
+            };
+            t.start();
         }
        // jProgressBar1.
       
@@ -1271,6 +1321,8 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.Label loadingLabel;
+    private javax.swing.JDialog loadingScreen;
     /**
     * This is the panel for the main window.
     */
