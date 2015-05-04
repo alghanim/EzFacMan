@@ -585,13 +585,7 @@
     <Container class="javax.swing.JDialog" name="loadingScreen">
       <Properties>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[227, 90]"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[227, 90]"/>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[227, 90]"/>
         </Property>
       </Properties>
@@ -666,27 +660,6 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to exit the program.&#xa; */"/>
-              </AuxValues>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="settingsButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Settings"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button for the settings menu.&#xa; */"/>
-          </AuxValues>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="resetDeptColors">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Revert to Default Colors"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetDeptColorsActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to reset department colors. =&#xa; */"/>
               </AuxValues>
             </MenuItem>
           </SubComponents>

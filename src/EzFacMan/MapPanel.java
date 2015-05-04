@@ -24,6 +24,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -273,7 +274,7 @@ public class MapPanel extends JPanel implements Serializable {
         int diffY = dim.height - mapMaxY;
 
         //unnecessarily complex conditional... refactor later?
-        if (diffY > 0 && diffX > 0) {
+if (diffY > 0 && diffX > 0) {
             if (diffY > diffX) {
                 scale = dim.height / (double) mapMaxY;
             } else {
@@ -286,9 +287,9 @@ public class MapPanel extends JPanel implements Serializable {
                 scale = mapMaxX / (double) dim.width;
             }
         } else if (diffY > diffX) {
-            scale = dim.height / (double) mapMaxY;
+            scale = mapMaxX / (double) dim.width;
         } else if (diffY < diffX) {
-            scale = dim.width / (double) mapMaxX;
+            scale = mapMaxY / (double) dim.height;
         }
 
         scale *= 1.05;
@@ -322,4 +323,6 @@ public class MapPanel extends JPanel implements Serializable {
             isInitialized = true;
     
     }
+
+    
 }

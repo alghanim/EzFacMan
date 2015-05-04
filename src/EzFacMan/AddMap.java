@@ -7,16 +7,13 @@ package EzFacMan;
 
 import static EzFacMan.EZFacUI.dBuilding;
 import static EzFacMan.EZFacUI.dCampus;
-import ParseSVGData.SVGParser;
 import databaseTables.building;
 import databaseTables.buildingManager;
 import databaseTables.campus;
 import databaseTables.campusManager;
 import databaseTables.floors;
 import databaseTables.floorsManager;
-import java.awt.Color;
 import static java.awt.Color.blue;
-import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

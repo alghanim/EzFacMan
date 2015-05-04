@@ -73,4 +73,9 @@ public class buildingManagerTest {
 
     }
 
+    /**
+     * Test of displayAllBuildings method, of class buildingManager.
+     */
+    
+
 }

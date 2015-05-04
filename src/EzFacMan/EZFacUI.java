@@ -32,7 +32,7 @@ import javax.swing.SwingUtilities;
  * @author Ali Al-Ghanim
  */
 public class EZFacUI extends javax.swing.JFrame {
-    
+
     File selectedFile = null;
     File csvCurFile = null;
     public ArrayList<String> allcampuses = new ArrayList<String>();
@@ -59,7 +59,7 @@ public class EZFacUI extends javax.swing.JFrame {
         allfloors.addAll(f.getAllFloors());
         allcampuses.addAll(c.getAllcampuses());
         allbuildings.addAll(b.getAllbuildings());
-        
+
         for (String s : allfloors) {
             floorDropdown.addItem(s);
         }
@@ -71,7 +71,7 @@ public class EZFacUI extends javax.swing.JFrame {
         }
         buildingDropdown.setEnabled(false);
         floorDropdown.setEnabled(false);
-        
+
     }
 
     /**
@@ -136,8 +136,6 @@ public class EZFacUI extends javax.swing.JFrame {
         fileButton = new javax.swing.JMenu();
         addNewMap = new javax.swing.JMenuItem();
         quitButton = new javax.swing.JMenuItem();
-        settingsButton = new javax.swing.JMenu();
-        resetDeptColors = new javax.swing.JMenuItem();
         searchBuutton = new javax.swing.JMenu();
         searchByRoomNum = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -482,9 +480,7 @@ public class EZFacUI extends javax.swing.JFrame {
         });
 
         loadingScreen.setAlwaysOnTop(true);
-        loadingScreen.setMaximumSize(new java.awt.Dimension(227, 90));
         loadingScreen.setMinimumSize(new java.awt.Dimension(227, 90));
-        loadingScreen.setPreferredSize(new java.awt.Dimension(227, 90));
 
         loadingLabel.setText("Loading Please Wait...");
 
@@ -647,18 +643,6 @@ public class EZFacUI extends javax.swing.JFrame {
 
         menuBar.add(fileButton);
 
-        settingsButton.setText("Settings");
-
-        resetDeptColors.setText("Revert to Default Colors");
-        resetDeptColors.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetDeptColorsActionPerformed(evt);
-            }
-        });
-        settingsButton.add(resetDeptColors);
-
-        menuBar.add(settingsButton);
-
         searchBuutton.setText("Search");
 
         searchByRoomNum.setText("by Room Number");
@@ -732,27 +716,27 @@ public class EZFacUI extends javax.swing.JFrame {
         // String sqlString = "'" + dCampus;
 
         if (campusDropdown.getSelectedItem() != null) {
-            
+
             building bb = null;
             try {
                 buildingDropdown.removeAllItems();
-                
+
                 bb = buildingManager.display(campusDropdown.getSelectedItem().toString());
-                
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             allbuildings.removeAll(allbuildings);
             allbuildings.addAll(bb.getAllbuildings());
-            
+
             for (String s : allbuildings) {
                 buildingDropdown.addItem(s);
-                
+
             }
             buildingDropdown.setEnabled(true);
             floorDropdown.setEnabled(false);
-            
+
         }
 
     }//GEN-LAST:event_campusDropdownActionPerformed
@@ -763,12 +747,12 @@ public class EZFacUI extends javax.swing.JFrame {
      * clicked
      */
     private void floorDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_floorDropdownActionPerformed
-        
+
 
     }//GEN-LAST:event_floorDropdownActionPerformed
 
     private void mainPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainPanelMouseClicked
-        
+
 
     }//GEN-LAST:event_mainPanelMouseClicked
     /**
@@ -778,26 +762,26 @@ public class EZFacUI extends javax.swing.JFrame {
      * clicked
      */
     private void buildingDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buildingDropdownActionPerformed
-        
+
         if (buildingDropdown.getSelectedItem() != null) {
             floors ff = null;
             try {
                 floorDropdown.removeAllItems();
-                
+
                 ff = floorsManager.display(buildingDropdown.getSelectedItem().toString());
-                
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             allfloors.removeAll(allfloors);
             allfloors.addAll(ff.getAllFloors());
-            
+
             for (String s : allfloors) {
                 floorDropdown.addItem(s);
-                
+
             }
-            
+
         }
         System.out.println(allfloors.toString());
         floorDropdown.setEnabled(true);
@@ -810,10 +794,6 @@ public class EZFacUI extends javax.swing.JFrame {
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox4ActionPerformed
-
-    private void resetDeptColorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDeptColorsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resetDeptColorsActionPerformed
     /**
      * Closes the program when the user presses yes and does nothing if pressed
      * no
@@ -822,7 +802,7 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         int q = JOptionPane.showConfirmDialog(null, "Are you sure?", "You are quiting the program!", JOptionPane.YES_NO_OPTION);
-        
+
         if (q == 0) {
             System.exit(0);
         }
@@ -847,7 +827,7 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt an event listener that listens for user to click on Modify
      * Department Color button
      */
-    private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
+    private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {
         deptColorChooser = new javax.swing.JColorChooser();
         AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
         for (int i = 0; i < oldPanels.length; i++) {
@@ -862,9 +842,9 @@ public class EZFacUI extends javax.swing.JFrame {
         }
         Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
         System.out.println(newColor);
-        
+    }
 
-   /**
+    /**
      * Opens the About .pdf using the desktop's default program.
      * <p>
      * Code adapted from: http://www.javabeat.net/java-open-word-document/
@@ -872,7 +852,7 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt listens for the user to click the About menu option
      */
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutButtonActionPerformed
-        
+
         File aboutFile = null;
         String os = System.getProperty("os.name").toLowerCase();
         String workingDir = System.getProperty("user.dir");
@@ -932,21 +912,11 @@ public class EZFacUI extends javax.swing.JFrame {
      * the import button
      */
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-//        PDFCustomFilter pdfFilter = new PDFCustomFilter();
-//        if (pdfFilter.accept(selectedFile) != true) {
-//            JOptionPane.showMessageDialog(null, "The file you selected is not a PDF", "Error!", JOptionPane.OK_OPTION);
-//        }
+
         CSVCustomFilter csvFilter = new CSVCustomFilter();
         if (csvFilter.accept(csvCurFile) != true) {
             JOptionPane.showMessageDialog(null, "The file you selected is not a CSV", "Error!", JOptionPane.OK_OPTION);
         } else {
-//            SVGParser parser = new SVGParser(selectedFile.getPath());
-//            mapDisplay.setRoomList(parser.parse());
-//            mapDisplay.setVisible(true);
-//
-//            Graphics g = mapDisplay.getGraphics();
-//            g.setColor(Color.blue);
-//            mapDisplay.repaint();
 
             insertCSVFile insertcsv = new insertCSVFile();
             //CSV file to database
@@ -968,8 +938,7 @@ public class EZFacUI extends javax.swing.JFrame {
      */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         addNewMapFrame.dispatchEvent(new WindowEvent(addNewMapFrame, WindowEvent.WINDOW_CLOSING));
-        // pdfName.setText(null);
-        //   csvName.setText(null);
+
     }//GEN-LAST:event_cancelButtonActionPerformed
     /**
      * Changes pdfName label to correspond with the name of the .pdf that user
@@ -1044,13 +1013,13 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt listens for the user to click the User Manual menu option
      */
     private void userManualButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManualButtonActionPerformed
-        
+
         File file = null;
         String os = System.getProperty("os.name").toLowerCase();
         String workingDir = System.getProperty("user.dir");
         if (os.contains("win")) {
             file = new File(workingDir + "\\UserManualV1.doc");
-            
+
         } else if (os.contains("mac")) {
             file = new File(workingDir + "/UserManualV1.doc");
         } else {
@@ -1083,7 +1052,7 @@ public class EZFacUI extends javax.swing.JFrame {
                 deptColorChooser.removeChooserPanel(oldPanels[i]);
             }
         }
-        Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
+        Color newColor = deptColorChooser.showDialog(this, "Choose a Color", white);
         roomColor = String.format("%02x%02x%02x", newColor.getRed(), newColor.getGreen(), newColor.getBlue());
         colorPanel.setBackground(newColor);
     }//GEN-LAST:event_selectColorButtonActionPerformed
@@ -1112,31 +1081,26 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt an event listener that updates the room details when clicked
      */
     private void updateChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateChangeActionPerformed
-        
+
         try {
             RoomsManager.updateRoomInfo(roomNum.getText(), buildingName.getText(), departmentCode.getText(),
                     roomType.getText(), roomArea.getText());
-            
+
             roomPopUp.repaint();
 
-            // TODO add your handling code here:
-            //      RoomsManager.addRoomInfo(String roomNum,
-            //        String buildingCode, String floorName, String departmentCode,
-            //      String departmentName, String roomType, String roomArea, String commentBox, String color) throws SQLException, ClassNotFoundException {
             int buildingCode = RoomsManager.buildingNametoCode(buildingName.getText());
             RoomsManager.addRoomInfo(roomNum.getText(), buildingCode, floorName.getText(), departmentCode.getText(),
                     departmentName.getText(), roomType.getText(), roomArea.getText(), roomColor, commentBox.getText());
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.mapDisplay.repaint();
-        this.mapDisplay.updateUI();
         this.roomPopUp.dispose();
-        
+
     }//GEN-LAST:event_updateChangeActionPerformed
     /**
      * Displays a floor map from the chosen drop down fields
@@ -1144,38 +1108,37 @@ public class EZFacUI extends javax.swing.JFrame {
      * @param evt an event listener that listens for the user to click show map
      */
     private void showMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMapActionPerformed
-        
+
         String os = System.getProperty("os.name").toLowerCase();
         final String workingDir = System.getProperty("user.dir");
 
         File fExist = new File(workingDir + "\\newtest38.svg");
         if (fExist.exists()) {
             fExist.delete();
-        }        
-        
+        }
+
         dCampus = (String) campusDropdown.getSelectedItem();
         dBuilding = (String) buildingDropdown.getSelectedItem();
-        
+
         if (floorDropdown.getSelectedItem() != null) {
             loadingScreen.setLocationRelativeTo(null);
             loadingScreen.setVisible(true);
 
-        
-        Thread t = new Thread() {
+            Thread t = new Thread() {
                 @Override
                 public void run() {
                     try {
-            floorsManager fm = new floorsManager();
-            dFloor = floorDropdown.getSelectedItem().toString();
-            dBuilding = buildingDropdown.getSelectedItem().toString();
-            
-            fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
-            SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
-            mapDisplay.setRoomList(parser.parse());                                    
-            mapDisplay.setVisible(true);
-            
-            mapDisplay.repaint();
-            mapDisplay.updateUI();
+                        floorsManager fm = new floorsManager();
+                        dFloor = floorDropdown.getSelectedItem().toString();
+                        dBuilding = buildingDropdown.getSelectedItem().toString();
+
+                        fm.getPDFData(buildingDropdown.getSelectedItem().toString(), floorDropdown.getSelectedItem().toString());
+                        SVGParser parser = new SVGParser(workingDir + "\\newtest38.pdf");
+                        mapDisplay.setRoomList(parser.parse());
+                        mapDisplay.setVisible(true);
+
+                        mapDisplay.repaint();
+
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -1191,7 +1154,7 @@ public class EZFacUI extends javax.swing.JFrame {
             t.start();
         }
        // jProgressBar1.
-        
+
     }//GEN-LAST:event_showMapActionPerformed
     /**
      * Updates the room manager and displays the new floor
@@ -1208,13 +1171,13 @@ public class EZFacUI extends javax.swing.JFrame {
             int buildingCode = RoomsManager.buildingNametoCode(buildingName.getText());
             RoomsManager.addRoomInfo(roomNum.getText(), buildingCode, floorName.getText(), departmentCode.getText(),
                     departmentName.getText(), roomType.getText(), roomArea.getText(), roomColor, commentBox.getText());
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EZFacUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.mapDisplay.repaint();
         this.mapDisplay.updateUI();
         this.roomPopUp.dispose();
@@ -1338,10 +1301,6 @@ public class EZFacUI extends javax.swing.JFrame {
     * The button to exit the program.
     */
     private javax.swing.JMenuItem quitButton;
-    /**
-    * The button to reset department colors. =
-    */
-    private javax.swing.JMenuItem resetDeptColors;
     public javax.swing.JTextField roomArea;
     private javax.swing.JLabel roomAreaLabel;
     private javax.swing.JLabel roomBuildingName;
@@ -1358,10 +1317,6 @@ public class EZFacUI extends javax.swing.JFrame {
     private javax.swing.JMenu searchBuutton;
     private javax.swing.JMenuItem searchByRoomNum;
     private javax.swing.JButton selectColorButton;
-    /**
-    * The button for the settings menu.
-    */
-    private javax.swing.JMenu settingsButton;
     public javax.swing.JButton showMap;
     public javax.swing.JButton updateChange;
     /**
