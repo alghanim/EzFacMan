@@ -678,17 +678,6 @@
             <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button for the settings menu.&#xa; */"/>
           </AuxValues>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="modDeptColor">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Change Department Color"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modDeptColorActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_DeclarationPre" type="java.lang.String" value="/**&#xa; * The button to modify department colors.&#xa; */"/>
-              </AuxValues>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="resetDeptColors">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Revert to Default Colors"/>

@@ -137,7 +137,6 @@ public class EZFacUI extends javax.swing.JFrame {
         addNewMap = new javax.swing.JMenuItem();
         quitButton = new javax.swing.JMenuItem();
         settingsButton = new javax.swing.JMenu();
-        modDeptColor = new javax.swing.JMenuItem();
         resetDeptColors = new javax.swing.JMenuItem();
         searchBuutton = new javax.swing.JMenu();
         searchByRoomNum = new javax.swing.JMenuItem();
@@ -650,14 +649,6 @@ public class EZFacUI extends javax.swing.JFrame {
 
         settingsButton.setText("Settings");
 
-        modDeptColor.setText("Change Department Color");
-        modDeptColor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modDeptColorActionPerformed(evt);
-            }
-        });
-        settingsButton.add(modDeptColor);
-
         resetDeptColors.setText("Revert to Default Colors");
         resetDeptColors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -841,35 +832,8 @@ public class EZFacUI extends javax.swing.JFrame {
     private void addNewMapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewMapActionPerformed
         addNewMapFrame.setVisible(true);
     }//GEN-LAST:event_addNewMapActionPerformed
-    /**
-     * Creates and opens new color chooser after user clicks on Modify
-     * Department Color button.
-     * <p>
-     * Code adapted from:
-     * http://www.java2s.com/Tutorial/Java/0240__Swing/RemovingaColorChooserPanelfromaJColorChooserDialog.htm.
-     *
-     * @param evt an event listener that listens for user to click on Modify
-     * Department Color button
-     */
-    private void modDeptColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modDeptColorActionPerformed
-        deptColorChooser = new javax.swing.JColorChooser();
-        AbstractColorChooserPanel[] oldPanels = deptColorChooser.getChooserPanels();
-        for (int i = 0; i < oldPanels.length; i++) {
-            String clsName = oldPanels[i].getClass().getName();
-            if (clsName.equals("javax.swing.colorchooser.DefaultRGBChooserPanel")) {
-                deptColorChooser.removeChooserPanel(oldPanels[i]);
-            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSBChooserPanel")) {
-                deptColorChooser.removeChooserPanel(oldPanels[i]);
-            } else if (clsName.equals("javax.swing.colorchooser.DefaultHSYKChooserPanel")) {
-                deptColorChooser.removeChooserPanel(oldPanels[i]);
-            }
-        }
-        Color newColor = deptColorChooser.showDialog(this, "Choose a Department Color", white);
-        System.out.println(newColor);
-                
 
-    }//GEN-LAST:event_modDeptColorActionPerformed
-    /**
+   /**
      * Opens the About .pdf using the desktop's default program.
      * <p>
      * Code adapted from: http://www.javabeat.net/java-open-word-document/
@@ -1332,10 +1296,6 @@ public class EZFacUI extends javax.swing.JFrame {
     * The menu for the main window.
     */
     private javax.swing.JMenuBar menuBar;
-    /**
-    * The button to modify department colors.
-    */
-    private javax.swing.JMenuItem modDeptColor;
     /**
     * The file chooser that selects a .pdf.
     */
