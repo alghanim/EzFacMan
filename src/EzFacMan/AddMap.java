@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package EzFacMan;
 
 import static EzFacMan.EZFacUI.dBuilding;
@@ -25,15 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
- * @author Ali
  * Add map using the drop down menus to specify the floor 
+ * @author Ali
  */
 public class AddMap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddMap
-     */
+
     private EzFacMan.MapPanel mapDisplay;
     File selectedFile = null;
     public ArrayList<String> allcampuses = new ArrayList<String>();

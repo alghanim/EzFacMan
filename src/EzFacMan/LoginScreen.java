@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 
 /**
- *
+ * Jframe that Gets the user name and password to access the program
  * @author mikem_000
  */
 public class LoginScreen extends javax.swing.JFrame {

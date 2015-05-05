@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Search for a room using the comment column
  * @author Ali
  */
 public class CommentSearch extends javax.swing.JFrame {
@@ -23,7 +23,9 @@ public class CommentSearch extends javax.swing.JFrame {
     ResultSet rs;
     EZFacUI ezFac;
     MapPanel mapdisplay;
-
+/**
+ * initialize the components 
+ */
     public CommentSearch() {
         initComponents();
         previous.setEnabled(false);
@@ -283,6 +285,10 @@ public class CommentSearch extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * previous button
+     * @param evt when previous is clicked
+     */
     private void previousActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousActionPerformed
        try {
             if(rs.previous()){
@@ -295,7 +301,10 @@ public class CommentSearch extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_previousActionPerformed
-
+/**
+ * next button
+ * @param evt when next is clicked
+ */
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
          try {
             if(rs.next()){
@@ -312,7 +321,10 @@ public class CommentSearch extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_nextActionPerformed
-
+/**
+ * Search button
+ * @param evt when search is clicked
+ */
     private void SeatchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeatchBtnActionPerformed
 
         try {

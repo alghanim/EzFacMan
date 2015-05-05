@@ -36,17 +36,16 @@ public class ConnectDB {
 
         Class.forName("com.mysql.jdbc.Driver");
         return DriverManager
-                .getConnection(ConnectionString, "tud50428", "IJoovu9u");
+                .getConnection(LocalConnectionString, "tud50428", "IJoovu9u");
     }
-     /**
+
+    /**
      * Tests if the connection is valid
-     * 
-     * @param conn
-     *          a JDBC connection object
-     * @param dbVendor
-     *          db vendor "mysql"
+     *
+     * @param conn a JDBC connection object
+     * @param dbVendor db vendor "mysql"
      * @return true if the connection object is valid and false if not
-     * @throws Exception 
+     * @throws Exception
      */
     public static boolean isValidConnection(Connection conn, String dbVendor) throws Exception {
 
@@ -64,12 +63,13 @@ public class ConnectDB {
         }
 
     }
-/**
- * Tests if there is a connection to the database
- * @param conn
- *          a JDBC connection object
- * @return true if a given connection object is valid and false if not
- */
+
+    /**
+     * Tests if there is a connection to the database
+     *
+     * @param conn a JDBC connection object
+     * @return true if a given connection object is valid and false if not
+     */
     public static boolean testConnection(Connection conn) {
         ResultSet rs = null;
         Statement stmt = null;
@@ -106,10 +106,11 @@ public class ConnectDB {
             }
         }
     }
+
     /**
      * Checks whether a user exists in the database
-     * 
-     * @return true if user exists; Otherwise return false 
+     *
+     * @return true if user exists; Otherwise return false
      */
     public static boolean checkifuserexists() {
         ResultSet rs = null;
@@ -120,13 +121,10 @@ public class ConnectDB {
             if (stmt == null) {
                 return false;
             }
-            
-            //String username = LoginScreen.usernameField.getText();
-            //String username = "tud50428";
-            String username = "tuc69409";
-            String password = "Pae9Cahz";
-            //String password = new String(LoginScreen.passwordField.getPassword());
-            //String password = "IJoovu9u";
+
+            String username = LoginScreen.usernameField.getText();
+
+            String password = new String(LoginScreen.passwordField.getPassword());
 
             rs = stmt.executeQuery("SELECT accessnet FROM team4.users WHERE accessnet = '" + username + "' and password = '" + password + "'");
             if (rs == null) {
